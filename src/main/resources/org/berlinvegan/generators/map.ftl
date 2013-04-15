@@ -37,12 +37,12 @@
             });
             google.maps.event.addListener(markersArray[${i}], 'click', function () {
                 var infoStr = "<b>${restaurant.getName()}</b><br/><br/>${restaurant.getStreet()}, ${restaurant.getCityCode()} ${restaurant.getDistrict()}";
-                infoStr += "<br/><br/><b>${i18n.openTimes}:</b><br/><br/> ${restaurant.getOpenTimesHTML(language)}";
+                infoStr += "<br/><br/><b>Öffnungszeiten:</b><br/><br/> ${restaurant.getOpenTimesHTML(language)}";
 				<#if restaurant.getReviewURL()??>
-					infoStr += "<br/><br/><a href='${reviewbase}${restaurant.getReviewURL()}'>${restaurant.getName()} Restaurantskritik</a>";
+					infoStr += '<br/><br/><a href="${reviewbase}${restaurant.getReviewURL()}">${restaurant.getName()} Restaurantskritik</a>';
 				</#if>
 				<#if restaurant.getComment()??>
-					infoStr += "<br/><br/>${restaurant.getComment()}";
+					infoStr += '<br/><br/>${restaurant.getComment()}';
 				</#if>
 				infoStr = "<div>" + infoStr + "</div><br/>";
                 infowindow.setContent(infoStr);
