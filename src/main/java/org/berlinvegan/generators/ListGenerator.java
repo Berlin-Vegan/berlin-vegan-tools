@@ -43,7 +43,8 @@ public class ListGenerator extends WebsiteGenerator {
             // Set Directory for templates
             cfg.setClassForTemplateLoading(ListGenerator.class, "");
             // load template
-            Template template = cfg.getTemplate("list.ftl");
+            Template template = cfg.getTemplate("list.ftl","ISO-8859-1");
+            template.setOutputEncoding("ISO-8859-1");
             // data-model
             Map<String, Object> input = new HashMap<String, Object>();
             input.put("reviewbase", REVIEW_BASE_LOCATION_DE);
@@ -64,7 +65,6 @@ public class ListGenerator extends WebsiteGenerator {
             template.process(input, file);
             file.flush();
         } catch (Exception e) {
-            System.out.println(e.getMessage());
             e.printStackTrace();
 
         } finally {

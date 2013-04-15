@@ -49,7 +49,8 @@ public class MapGenerator extends WebsiteGenerator {
             // Set Directory for templates
             cfg.setClassForTemplateLoading(MapGenerator.class, "");
             // load template
-            Template template = cfg.getTemplate("map.ftl");
+            Template template = cfg.getTemplate("map.ftl","ISO-8859-1");
+            template.setOutputEncoding("ISO-8859-1");
 
             // data-model
             Map<String, Object> input = new HashMap<>();

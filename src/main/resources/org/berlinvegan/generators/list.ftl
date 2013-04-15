@@ -1,3 +1,4 @@
+<#ftl encoding="ISO-8859-1">
 <#-- @ftlvariable name="reviewbase" type="java.lang.String" -->
 <#-- @ftlvariable name="veganStar" type="java.lang.String" -->
 <#-- @ftlvariable name="restaurants" type="org.berlinvegan.generators.Restaurant[]" -->
@@ -61,19 +62,16 @@ Sortierung nach:
 <@listPart starvalue=2 />
     <h2>${veganStar} omnivor mit veganem Angebot, 'vegan' nicht deklariert</h2>
 <@listPart starvalue=1 />
-</div>
-
-<div id="geosort" style="display:none">
+</div><div id="geosort" style="display:none">
 <@renderDistrict districtName="Charlottenburg/Wilmersdorf"/>
     <@renderDistrict districtName="Friedrichshain"/>
     <@renderDistrict districtName="Lichtenberg"/>
     <@renderDistrict districtName="Mitte/Wedding"/>
-    <@renderDistrict districtName="NeukÃ¶lln"/>
+    <@renderDistrict districtName="Neukölln"/>
     <@renderDistrict districtName="Prenzlauer Berg"/>
     <@renderDistrict districtName="Steglitz/Zehlendorf"/>
-    <@renderDistrict districtName="Tempelhof/SchÃ¶neberg"/>
-</div>
-<div id="rankingsort" style="display:none"><br/>
+    <@renderDistrict districtName="Tempelhof/Schöneberg"/>
+</div><div id="rankingsort" style="display:none"><br/>
     <ul>
     <#list restaurants?sort_by(['rating', 'value'])?reverse as restaurant>
         <#if (restaurant.rating.number > 15) >

@@ -1,3 +1,4 @@
+<#ftl encoding="ISO-8859-1">
 <#-- @ftlvariable name="language" type="java.lang.String" -->
 <#-- @ftlvariable name="i18n" type="java.util.ResourceBundle" -->
 <#-- @ftlvariable name="openTimesI18N" type="java.lang.String" -->

@@ -26,6 +26,7 @@ public class FactsheetGenerator extends WebsiteGenerator {
             helpFormatter.printHelp("generatefactsheets", constructOptions());
         }
     }
+
     private void generateFactSheets(String language) throws Exception {
         ResourceBundle bundle = ResourceBundle.getBundle("i18n", new Locale(language));
         final ArrayList<Restaurant> restaurants = getRestaurantsfromServer();
@@ -36,7 +37,8 @@ public class FactsheetGenerator extends WebsiteGenerator {
             // Set Directory for templates
             cfg.setClassForTemplateLoading(FactsheetGenerator.class, "");
             // load template
-            Template template = cfg.getTemplate("factsheet.ftl");
+            Template template = cfg.getTemplate("factsheet.ftl", "ISO-8859-1");
+            template.setOutputEncoding("ISO-8859-1");
             // data-model
             Map<String, Object> input = new HashMap<>();
             input.put("i18n", bundle);
@@ -71,6 +73,7 @@ public class FactsheetGenerator extends WebsiteGenerator {
 
     /**
      * get branches(filialen) for restaurant
+     *
      * @param reviewURL
      * @param restaurants
      * @return

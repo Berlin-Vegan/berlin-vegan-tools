@@ -114,7 +114,6 @@ public class Generator {
     }
 
     protected String getLocationTextFromWebsite(String reviewUrl) throws IOException {
-        System.out.println("get " +reviewUrl);
         String text="";
         Document doc = Jsoup.connect(reviewUrl).get();
         Elements textElements = doc.select("#text p,#text ul");
@@ -128,7 +127,6 @@ public class Generator {
 
     //parse website and set value value and ranking number to restaurant
     static protected Rating getRatingFromWebsite(String reviewURL) throws IOException {
-        System.out.println(reviewURL);
         Pattern ratingNumberPattern = Pattern.compile(".*\\((.*) Bewertungen.*");
 
         Document doc = Jsoup.connect(reviewURL).timeout(6000).get();
@@ -145,7 +143,6 @@ public class Generator {
                 return new Rating(value,number);
             }
         } catch (NumberFormatException e) {
-            e.printStackTrace();
         }
         return null;
     }
