@@ -1,7 +1,7 @@
 About
 =====
-Repo contains some scripts to generate stuff for [Berlin Vegan](http://www.berlin-vegan.de) project
-Datasource are several Google Docs tables, which are converted to different output formats
+Repository contains some scripts to generate stuff for [Berlin Vegan](http://www.berlin-vegan.de) project.
+Datasource are several Google Docs tables, which are converted to different output formats.
 
 * Website - static pages (location list, map, factsheets)
 * JSON Files for the iOS/Android App
@@ -41,5 +41,6 @@ Used Software
     +- commons-cli:commons-cli:jar:1.2:compile
     \- org.apache.commons:commons-lang3:jar:3.1:compile
 
-
-
+License
+=======
+GPLv2
