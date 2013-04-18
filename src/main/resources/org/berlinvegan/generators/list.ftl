@@ -65,6 +65,7 @@ Sortierung nach:
 </div><div id="geosort" style="display:none">
 <@renderDistrict districtName="Charlottenburg/Wilmersdorf"/>
     <@renderDistrict districtName="Friedrichshain"/>
+    <@renderDistrict districtName="Kreuzberg"/>
     <@renderDistrict districtName="Lichtenberg"/>
     <@renderDistrict districtName="Mitte/Wedding"/>
     <@renderDistrict districtName="Neukölln"/>
