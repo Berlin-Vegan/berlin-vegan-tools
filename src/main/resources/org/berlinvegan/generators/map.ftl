@@ -23,26 +23,26 @@
         map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 	<#assign i=0>
 	<#list restaurants as restaurant>
-		<#if restaurant.getLatCoord()??>
-            latlng = new google.maps.LatLng(${restaurant.getLatCoord()},${restaurant.getLongCoord()});
+		<#if restaurant.latCoord??>
+            latlng = new google.maps.LatLng(${restaurant.latCoord},${restaurant.longCoord});
             markersArray[${i}] = new google.maps.Marker({
                 position: latlng,
                 map: map,
-                title: "${restaurant.getName()}",
-                bv_dog: "${restaurant.getDog()}",
-                bv_bio: "${restaurant.getOrganic()}",
-                bv_rollstuhl: "${restaurant.getHa()}",
-                bv_vegan: "${restaurant.getVegan()}",
-                bv_open: ["${restaurant.getOtMon()}","${restaurant.getOtTue()}","${restaurant.getOtWed()}","${restaurant.getOtThu()}","${restaurant.getOtFri()}","${restaurant.getOtSat()}","${restaurant.getOtSun()}"]
+                title: "${restaurant.name}",
+                bv_dog: "${restaurant.dog}",
+                bv_bio: "${restaurant.organic}",
+                bv_rollstuhl: "${restaurant.ha}",
+                bv_vegan: "${restaurant.vegan}",
+                bv_open: ["${restaurant.otMon}","${restaurant.otTue}","${restaurant.otWed}","${restaurant.otThu}","${restaurant.otFri}","${restaurant.otSat}","${restaurant.otSun}"]
             });
             google.maps.event.addListener(markersArray[${i}], 'click', function () {
-                var infoStr = "<b>${restaurant.getName()}</b><br/><br/>${restaurant.getStreet()}, ${restaurant.getCityCode()} ${restaurant.getDistrict()}";
+                var infoStr = "<b>${restaurant.name}</b><br/><br/>${restaurant.street}, ${restaurant.cityCode?c} ${restaurant.district}";
                 infoStr += "<br/><br/><b>Öffnungszeiten:</b><br/><br/> ${restaurant.getOpenTimesHTML(language)}";
-				<#if restaurant.getReviewURL()??>
-					infoStr += '<br/><br/><a href="${reviewbase}${restaurant.getReviewURL()}">${restaurant.getName()} Restaurantskritik</a>';
+				<#if restaurant.reviewURL??>
+					infoStr += '<br/><br/><a href="${reviewbase}${restaurant.reviewURL}">${restaurant.name} Restaurantskritik</a>';
 				</#if>
-				<#if restaurant.getComment()??>
-					infoStr += '<br/><br/>${restaurant.getComment()}';
+				<#if restaurant.comment??>
+					infoStr += '<br/><br/>${restaurant.comment}';
 				</#if>
 				infoStr = "<div>" + infoStr + "</div><br/>";
                 infowindow.setContent(infoStr);
