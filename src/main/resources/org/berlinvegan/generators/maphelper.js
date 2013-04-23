@@ -9,6 +9,12 @@ function updateMarkers(markersArray){
         if(document.getElementById("biocheckbox").checked && marker.bv_bio !="1"){
             showMarker=false;
         }
+        if(document.getElementById("wlancheckbox").checked && marker.bv_wlan !="1"){
+            showMarker=false;
+        }
+        if(document.getElementById("glutenfreecheckbox").checked && marker.bv_glutenFree !="1"){
+            showMarker=false;
+        }
         if(document.getElementById("rollstuhlcheckbox").checked && marker.bv_rollstuhl !="1"){
             showMarker=false;
         }

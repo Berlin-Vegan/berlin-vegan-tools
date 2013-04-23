@@ -27,9 +27,9 @@ ${branch1.getOpenTimesHTML("de")}
 <#if branch1.openComment??>
 <p>${branch1.openComment}</p>
 </#if>
-<#if branch1.vegan == 5 || branch1.dog != -1 || branch1.organic == 1 || branch1.ha != -1
+<#if branch1.vegan == 5 || branch1.dog != -1 || branch1.organic == 1 || branch1.glutenFree == 1 || branch1.ha != -1
 || branch1.childChair != -1 || branch1.catering == 1 || branch1.delivery == 1
-|| branch1.seat_in != -1 || branch1.seat_out != -1>
+|| branch1.seat_in != -1 || branch1.seat_out != -1 || branch1.wlan == 1>
 <h1>Sonstiges</h1>
 <ul>
 	<#if branch1.vegan == 5>
@@ -38,6 +38,9 @@ ${branch1.getOpenTimesHTML("de")}
 	<#if branch1.organic == 1>
         <li> Bio</li>
 	</#if>
+    <#if branch1.glutenFree == 1>
+        <li> glutenfreie Speisen</li>
+    </#if>
 
 	<#if branch1.ha != -1>
 		<#if branch1.ha == 1>
@@ -67,6 +70,9 @@ ${branch1.getOpenTimesHTML("de")}
             <li> kein Kindersitz vorhanden</li>
 		</#if>
 	</#if>
+    <#if branch1.wlan == 1>
+        <li> WLAN vorhanden</li>
+    </#if>
 	<#if branch1.catering == 1>
         <li> Catering</li>
 	</#if>
@@ -83,9 +89,7 @@ ${branch1.getOpenTimesHTML("de")}
 	</#if>
 </ul>
 </#if>
-<#if branch1.comment??>
-${branch1.comment}
-</#if>
+
 
 <script type="text/javascript">
     var textDiv = document.getElementById('text');
