@@ -4,39 +4,44 @@ import com.google.gdata.data.spreadsheet.*;
 import com.google.gdata.util.AuthenticationException;
 import com.google.gdata.util.ServiceException;
 import net.davidashen.text.Hyphenator;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
+import org.apache.commons.cli.HelpFormatter;
 
 import java.io.*;
 import java.util.*;
 
-public class ExtJsStoreGenerator extends Generator {
+public class ExtJsStoreGenerator extends WebsiteGenerator{
 
     public static final String REVIEW_DE_BASE_URL = "http://www.berlin-vegan.de/berlin/restaurantkritiken/";
     public static final String EXT_NAMESPACE_BVAPP = "Ext.namespace('BVApp','BVApp.data','BVApp.models');";
 
-    public ExtJsStoreGenerator(String username,String password) throws AuthenticationException {
-        super(username,password);
+    public ExtJsStoreGenerator() throws AuthenticationException {
     }
 
+
     public static void main(String[] args) throws Exception {
-        ExtJsStoreGenerator generator = new ExtJsStoreGenerator(args[0], args[1]);
-        generator.generateLocationDataStores();
-        generator.generateTextfilesJS();
+
+        if (args.length == 6) {  // 3 options with 1 value -> 6 cli args
+            parseOptions(args);
+            ExtJsStoreGenerator generator = new ExtJsStoreGenerator();
+            generator.generateLocationDataStores();
+            //generator.generateTextfilesJS();
+        } else {
+            final HelpFormatter helpFormatter = new HelpFormatter();
+            helpFormatter.printHelp("generateextjsstore", constructOptions());
+        }
+
     }
 
     private String hyphenate(String text, String language) throws IOException {
         Hyphenator h=new Hyphenator();
-        String hyphenBasePath = "generators" + File.separator + "lib" + File.separator + "hyphen" + File.separator;
-        FileInputStream fileInputStream;
+//        String hyphenBasePath = "generators" + File.separator + "lib" + File.separator + "hyphen" + File.separator;
+        InputStream fileInputStream;
         if(language.equals(LANG_DE)){
-            fileInputStream = new FileInputStream(hyphenBasePath + "dehyphx.tex");
+            fileInputStream = this.getClass().getClassLoader().getResourceAsStream("org/berlinvegan/generators/dehyphx.tex");
         }else {
-            fileInputStream = new FileInputStream(hyphenBasePath + "hyphen.tex");
+            fileInputStream = this.getClass().getClassLoader().getResourceAsStream("org/berlinvegan/generators/hyphen.tex");
         }
-        h.loadTable(new java.io.BufferedInputStream(fileInputStream));
+        h.loadTable(fileInputStream);
 
         text = h.hyphenate(text,4,3);
         text = text.replaceAll("\u00ad","&shy;");
@@ -87,8 +92,7 @@ public class ExtJsStoreGenerator extends Generator {
         for (String fileName : filesMap.keySet()) {
             builder.append("\nBVApp.models.Data[\"").append(fileName).append("\"] =\"").append(filesMap.get(fileName)).append("\";");
         }
-        String path = "src" + File.separator + "data" +File.separator;
-        writeTextToFile(builder.toString(),path + "Textfiles.js");
+        writeTextToFile(builder.toString(),outputDir + File.separator + "Textfiles.js");
     }
 
     private static String readFileAsString(String filePath) throws java.io.IOException{
@@ -111,22 +115,26 @@ public class ExtJsStoreGenerator extends Generator {
         List<ListEntry> cafeEntries = null;
         for (SpreadsheetEntry spreadsheet : getSpreadsheetEntries()) {
             String title = spreadsheet.getTitle().getPlainText();
-            if (title.equals(TABLE_RESTAURANTS)
-                    || title.equals(TABLE_SUBWAY)) {
-                restaurantEntries = addEntries(restaurantEntries, spreadsheet);
-            }else if (title.equals(TABLE_SHOPPING)
-                    || title.equals(TABLE_BACKWAREN)
-                    || title.equals(TABLE_BIO_REFORM)) {
-                shoppingEntries= addEntries(shoppingEntries, spreadsheet);
-            }else if(title.equals(TABLE_CAFES)){
-                cafeEntries = addEntries(cafeEntries, spreadsheet);
+            switch (title) {
+                case TABLE_RESTAURANTS:
+                case TABLE_SUBWAY:
+                    restaurantEntries = addEntries(restaurantEntries, spreadsheet);
+                    break;
+                case TABLE_SHOPPING:
+                case TABLE_BACKWAREN:
+                case TABLE_BIO_REFORM:
+                    shoppingEntries = addEntries(shoppingEntries, spreadsheet);
+                    break;
+                case TABLE_CAFES:
+                    cafeEntries = addEntries(cafeEntries, spreadsheet);
+                    break;
             }
 
         }
-        String path = "src" + File.separator + "data";
-        generateStore(restaurantEntries, "RestaurantStoreData", path);
-        generateStore(shoppingEntries, "ShopStoreData", path);
-        generateStore(cafeEntries, "CafeStoreData", path);
+
+        generateStore(restaurantEntries, "RestaurantStoreData", outputDir);
+        generateStore(shoppingEntries, "ShopStoreData", outputDir);
+        generateStore(cafeEntries, "CafeStoreData", outputDir);
     }
 
     private void generateStore(List<ListEntry> entries, String storeName, String path) throws IOException, ServiceException {
