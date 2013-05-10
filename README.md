@@ -44,3 +44,7 @@ Used Software
 License
 =======
 GPLv2
+
+Tests
+=======
+[![Build Status](https://drone.io/github.com/smeir/berlin-vegan-tools/status.png)](https://drone.io/github.com/smeir/berlin-vegan-tools/latest)
