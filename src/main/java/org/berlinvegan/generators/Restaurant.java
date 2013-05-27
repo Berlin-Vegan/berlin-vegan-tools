@@ -106,12 +106,10 @@ public class Restaurant {
         if (value == null) {
             return null;
         }
-        switch (value) {
-            case "0":
-                return false;
-            case "1":
-                return true;
-
+        if(value.equals("0")) {
+            return false;
+        }else if (value.equals("1")) {
+            return true;
         }
         return null;
     }

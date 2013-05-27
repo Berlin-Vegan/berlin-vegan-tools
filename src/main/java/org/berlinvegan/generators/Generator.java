@@ -66,7 +66,7 @@ public class Generator {
     }
 
     public ArrayList<Restaurant> getRestaurantsfromServer() throws Exception {
-        final ArrayList<Restaurant> restaurants = new ArrayList<>();
+        final ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
         final List<SpreadsheetEntry> spreadsheetEntries = getSpreadsheetEntries();
         for (SpreadsheetEntry entry : spreadsheetEntries) {
             if (entry.getTitle().getPlainText().equals(Generator.TABLE_RESTAURANTS)) {
@@ -80,7 +80,7 @@ public class Generator {
         }
         // init districts
         for (Restaurant restaurant : restaurants) {
-            ArrayList<String> districts = new ArrayList<>();
+            ArrayList<String> districts = new ArrayList<String>();
             String reviewURL = restaurant.getReviewURL();
             if (reviewURL != null) {
                 for (Restaurant rest : restaurants) {
@@ -126,13 +126,13 @@ public class Generator {
     }
 
     //parse website and set value value and ranking number to restaurant
-    static protected Rating getRatingFromWebsite(String reviewURL) throws IOException {
+    static protected Rating getRatingFromWebsite(String reviewURL) {
         Pattern ratingNumberPattern = Pattern.compile(".*\\((.*) Bewertungen.*");
 
-        Document doc = Jsoup.connect(reviewURL).timeout(6000).get();
-        Elements valueElem = doc.select(".ranking b");
 
         try {
+            Document doc = Jsoup.connect(reviewURL).timeout(6000).get();
+            Elements valueElem = doc.select(".ranking b");
             float value = Float.parseFloat(valueElem.text());
 
             Elements numberElem = doc.select(".ranking");
@@ -142,8 +142,10 @@ public class Generator {
                 int number = Integer.parseInt(matcher.group(1));
                 return new Rating(value,number);
             }
-        } catch (NumberFormatException e) {
+        } catch (Exception e) {
+            System.out.println(e);
         }
+
         return null;
     }
 }

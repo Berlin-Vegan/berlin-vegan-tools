@@ -84,8 +84,8 @@ public class ListGenerator extends WebsiteGenerator {
      * @return
      */
     private ArrayList<Restaurant> getUniqueRestaurants(ArrayList<Restaurant> restaurants) {
-        ArrayList<Restaurant> result = new ArrayList<>();
-        HashSet<String> restaurantsDone = new HashSet<>();
+        ArrayList<Restaurant> result = new ArrayList<Restaurant>();
+        HashSet<String> restaurantsDone = new HashSet<String>();
         for (Restaurant restaurant : restaurants) {
             String reviewURL = restaurant.getReviewURL();
             if (!StringUtils.isEmpty(reviewURL) && !restaurantsDone.contains(reviewURL)) {

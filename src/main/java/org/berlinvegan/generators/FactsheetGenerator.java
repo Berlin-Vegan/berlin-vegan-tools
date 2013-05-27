@@ -40,10 +40,10 @@ public class FactsheetGenerator extends WebsiteGenerator {
             Template template = cfg.getTemplate("factsheet.ftl", "ISO-8859-1");
             template.setOutputEncoding("ISO-8859-1");
             // data-model
-            Map<String, Object> input = new HashMap<>();
+            Map<String, Object> input = new HashMap<String, Object>();
             input.put("i18n", bundle);
             input.put("language", language);
-            HashSet<String> restaurantsDone = new HashSet<>();
+            HashSet<String> restaurantsDone = new HashSet<String>();
             for (Restaurant restaurant : restaurants) {
                 String reviewURL = restaurant.getReviewURL();
                 if (!StringUtils.isEmpty(reviewURL) && !restaurantsDone.contains(reviewURL)) {
@@ -79,7 +79,7 @@ public class FactsheetGenerator extends WebsiteGenerator {
      * @return
      */
     private ArrayList<Restaurant> getBranches(String reviewURL, ArrayList<Restaurant> restaurants) {
-        ArrayList<Restaurant> list = new ArrayList<>();
+        ArrayList<Restaurant> list = new ArrayList<Restaurant>();
         for (Restaurant restaurant : restaurants) {
             if (StringUtils.isNotEmpty(restaurant.getReviewURL()) && restaurant.getReviewURL().equals(reviewURL)) {
                 list.add(restaurant);

@@ -115,21 +115,14 @@ public class ExtJsStoreGenerator extends WebsiteGenerator{
         List<ListEntry> cafeEntries = null;
         for (SpreadsheetEntry spreadsheet : getSpreadsheetEntries()) {
             String title = spreadsheet.getTitle().getPlainText();
-            switch (title) {
-                case TABLE_RESTAURANTS:
-                case TABLE_SUBWAY:
-                    restaurantEntries = addEntries(restaurantEntries, spreadsheet);
-                    break;
-                case TABLE_SHOPPING:
-                case TABLE_BACKWAREN:
-                case TABLE_BIO_REFORM:
-                    shoppingEntries = addEntries(shoppingEntries, spreadsheet);
-                    break;
-                case TABLE_CAFES:
-                    cafeEntries = addEntries(cafeEntries, spreadsheet);
-                    break;
+            if (title.equalsIgnoreCase(TABLE_RESTAURANTS) || title.equalsIgnoreCase(TABLE_SUBWAY)) {
+                restaurantEntries = addEntries(restaurantEntries, spreadsheet);
+            }else if (title.equalsIgnoreCase(TABLE_SHOPPING) || title.equalsIgnoreCase(TABLE_BACKWAREN)
+                    || title.equalsIgnoreCase(TABLE_BIO_REFORM)) {
+                shoppingEntries = addEntries(shoppingEntries, spreadsheet);
+            }else if (title.equalsIgnoreCase(TABLE_CAFES)) {
+                cafeEntries = addEntries(cafeEntries, spreadsheet);
             }
-
         }
 
         generateStore(restaurantEntries, "RestaurantStoreData", outputDir);

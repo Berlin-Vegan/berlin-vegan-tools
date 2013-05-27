@@ -53,7 +53,7 @@ public class MapGenerator extends WebsiteGenerator {
             template.setOutputEncoding("ISO-8859-1");
 
             // data-model
-            Map<String, Object> input = new HashMap<>();
+            Map<String, Object> input = new HashMap<String, Object>();
             input.put("reviewbase", REVIEW_BASE_LOCATION_DE);
             input.put("i18n", bundle);
             input.put("language", language);
