@@ -41,7 +41,7 @@
                 var infoStr = "<b>${restaurant.name}</b><br/><br/>${restaurant.street}, ${restaurant.cityCode?c} ${restaurant.district}";
                 infoStr += "<br/><br/><b>Öffnungszeiten:</b><br/><br/> ${restaurant.getOpenTimesHTML(language)}";
                 <#if restaurant.reviewURL??>
-                    infoStr += '<br/><a href="${reviewbase}${restaurant.reviewURL}">${restaurant.name} Restaurantskritik</a>';
+                    infoStr += '<br/><a href="${reviewbase}${restaurant.reviewURL}">${restaurant.name} Restaurantkritik</a>';
                 <#else>
                     <#if restaurant.comment??>
                         infoStr += '<br/><br/>${restaurant.comment}';
