@@ -142,8 +142,8 @@ public class Generator {
                 int number = Integer.parseInt(matcher.group(1));
                 return new Rating(value,number);
             }
-        } catch (Exception e) {
-            System.out.println(e);
+        } catch (Exception ignored) {
+
         }
 
         return null;

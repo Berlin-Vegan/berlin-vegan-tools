@@ -42,7 +42,7 @@ public class Restaurant {
     String comment;
     int wlan;
     int glutenFree;
-    private final String[] tags;
+    private String[] tags=null;
 
     private Rating rating;
     private ArrayList<String> districts;
@@ -81,7 +81,9 @@ public class Restaurant {
         seat_out = getIntValue(elements, "sitzplaetzeaussen");
         comment = elements.getValue("zusaetzlicherkommentarfuerkarte");
         final String tagStr = elements.getValue("tagsbittenurimbisscaferestaurantundeiscafeverwenden");
-        tags = tagStr.split(",");
+        if (tagStr!=null) {
+            tags = tagStr.split(",");
+        }
         wlan = getIntValue(elements, "wlan");
         glutenFree = getIntValue(elements, "glutenfrei");
         rating = new Rating(0, 0);
