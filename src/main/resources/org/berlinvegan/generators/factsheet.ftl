@@ -45,7 +45,7 @@ ${branch1.getOpenTimesHTML("de")}
 	<#if branch1.ha != -1>
 		<#if branch1.ha == 1>
             <li> Rollstuhl geeignet</li>
-			<#if branch1.ha_wc != -1>
+			<#if branch1.ha_wc == 1>
                 <li> WC Rollstuhl geeignet</li>
 			<#else>
                 <li> WC Rollstuhl ungeeignet</li>
