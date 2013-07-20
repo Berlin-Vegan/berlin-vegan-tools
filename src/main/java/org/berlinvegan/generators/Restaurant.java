@@ -458,7 +458,7 @@ public class Restaurant {
                             String str = String.format(OPEN_TIME_ONE_DAY, weekdaysNames[i], openTimes[i] + " Uhr");
                             result.append(str);
                         }
-                    } else { // es gibt zusammenh�ngende Tage
+                    } else { // es gibt zusammenhaengende Tage
                         if (openTimes[i].isEmpty()) {
                             String str = String.format(OPEN_TIME_MORE_DAYS, weekdaysNames[equalStart], weekdaysNames[i], "geschlossen");
                             result.append(str);
