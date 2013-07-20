@@ -63,15 +63,20 @@ Sortierung nach:
     <h2>${veganStar} omnivor mit veganem Angebot, 'vegan' nicht deklariert</h2>
 <@listPart starvalue=1 />
 </div><div id="geosort" style="display:none">
-<@renderDistrict districtName="Charlottenburg/Wilmersdorf"/>
+<@renderDistrict districtName="Charlottenburg"/>
     <@renderDistrict districtName="Friedrichshain"/>
     <@renderDistrict districtName="Kreuzberg"/>
     <@renderDistrict districtName="Lichtenberg"/>
-    <@renderDistrict districtName="Mitte/Wedding"/>
+    <@renderDistrict districtName="Mitte"/>
     <@renderDistrict districtName="Neukölln"/>
     <@renderDistrict districtName="Prenzlauer Berg"/>
-    <@renderDistrict districtName="Steglitz/Zehlendorf"/>
-    <@renderDistrict districtName="Tempelhof/Schöneberg"/>
+    <@renderDistrict districtName="Schöneberg"/>
+    <@renderDistrict districtName="Steglitz"/>
+    <@renderDistrict districtName="Wilmersdorf"/>
+    <@renderDistrict districtName="Wedding"/>
+    <@renderDistrict districtName="Zehlendorf"/>
+
+
 </div><div id="rankingsort" style="display:none"><br/>
     <ul>
     <#list restaurants?sort_by(['rating', 'value'])?reverse as restaurant>

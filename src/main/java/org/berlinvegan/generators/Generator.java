@@ -39,9 +39,12 @@ public class Generator {
     protected FeedURLFactory factory;
 
     public Generator(String username, String password) throws AuthenticationException {
-        factory = FeedURLFactory.getDefault();
-        service = new SpreadsheetService("generator");
-        service.setUserCredentials(username, password);
+        if (username != null) {
+            factory = FeedURLFactory.getDefault();
+            service = new SpreadsheetService("generator");
+            service.setUserCredentials(username, password);
+        }
+
     }
 
     public List<SpreadsheetEntry> getSpreadsheetEntries() throws Exception {
@@ -65,7 +68,7 @@ public class Generator {
         return entries;
     }
 
-    public ArrayList<Restaurant> getRestaurantsfromServer() throws Exception {
+    public ArrayList<Restaurant> getRestaurantsFromServer() throws Exception {
         final ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
         final List<SpreadsheetEntry> spreadsheetEntries = getSpreadsheetEntries();
         for (SpreadsheetEntry entry : spreadsheetEntries) {

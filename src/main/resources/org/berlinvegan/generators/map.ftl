@@ -5,6 +5,7 @@
 <#-- @ftlvariable name="reviewbase" type="java.lang.String" -->
 <#-- @ftlvariable name="restaurants" type="org.berlinvegan.generators.Restaurant[]" -->
 <#-- @ftlvariable name="restaurant" type="org.berlinvegan.generators.Restaurant" -->
+<#-- @ftlvariable name="districts" type="java.lang.String[]" -->
 <script type='text/javascript' src='http://maps.google.com/maps/api/js?sensor=false'></script>
 <script type='text/javascript' src='http://www.berlin-vegan.de/custom/maphelper.js'></script>
 <script type='text/javascript'>
@@ -35,7 +36,8 @@
                 bv_wlan: "${restaurant.wlan}",
                 bv_rollstuhl: "${restaurant.ha}",
                 bv_vegan: "${restaurant.vegan}",
-                bv_open: ["${restaurant.otMon}", "${restaurant.otTue}", "${restaurant.otWed}", "${restaurant.otThu}", "${restaurant.otFri}", "${restaurant.otSat}", "${restaurant.otSun}"]
+                bv_open: ["${restaurant.otMon}", "${restaurant.otTue}", "${restaurant.otWed}", "${restaurant.otThu}", "${restaurant.otFri}", "${restaurant.otSat}", "${restaurant.otSun}"],
+                bv_district: "${restaurant.district}"
             });
             google.maps.event.addListener(markersArray[${i}], 'click', function () {
                 var infoStr = "<b>${restaurant.name}</b><br/><br/>${restaurant.street}, ${restaurant.cityCode?c} ${restaurant.district}";
@@ -65,6 +67,12 @@
 <input id="rollstuhlcheckbox" onChange="updateMarkers(markersArray);" type="checkbox">Rollstuhl geeignet</input>
 <input id="dogcheckbox" onChange="updateMarkers(markersArray);" type="checkbox">Hunde erlaubt</input>
 <input id="wlancheckbox" onChange="updateMarkers(markersArray);" type="checkbox">WLAN</input>
+<select id="districtselect" name="district" size="1" onChange="updateMarkers(markersArray);">
+    <option>Alle Bezirke</option>
+    <#list districts as district>
+        <option>${district}</option>
+    </#list>
+</select>
 
 <div id="map_canvas" style="margin-top:5px;line-height:1.0em; width:850px; height:630px"></div>
 Die Karte umfasst <b>${restaurants?size}</b> Restaurants/Bistros/Cafes

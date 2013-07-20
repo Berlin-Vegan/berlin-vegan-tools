@@ -29,7 +29,7 @@ public class FactsheetGenerator extends WebsiteGenerator {
 
     private void generateFactSheets(String language) throws Exception {
         ResourceBundle bundle = ResourceBundle.getBundle("i18n", new Locale(language));
-        final ArrayList<Restaurant> restaurants = getRestaurantsfromServer();
+        final ArrayList<Restaurant> restaurants = getRestaurantsFromServer();
         // Configuration
         Writer file = null;
         Configuration cfg = new Configuration();

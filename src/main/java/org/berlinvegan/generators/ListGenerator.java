@@ -34,7 +34,7 @@ public class ListGenerator extends WebsiteGenerator {
 
     private void generateList(String language) throws Exception {
         ResourceBundle bundle = ResourceBundle.getBundle("i18n", new Locale(language));
-        final ArrayList<Restaurant> restaurants = getRestaurantsfromServer();
+        final ArrayList<Restaurant> restaurants = getRestaurantsFromServer();
 
         // Configuration
         Writer file = null;

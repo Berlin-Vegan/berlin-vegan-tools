@@ -11,24 +11,24 @@ public class Restaurant {
     public static final String OPEN_TIME_MORE_DAYS = "<b>%s-%s</b> %s<br/>";
 
     String name;
-    String reviewURL;
-    String street;
+    String reviewURL="";
+    String street="";
     int cityCode;
-    String district;
+    String district="";
     String latCoord;
     String longCoord;
-    String bvg;
-    String telephone;
-    String openComment;
-    String website;
-    String email;
-    String otMon; // open times monday
-    String otTue;
-    String otWed;
-    String otThu;
-    String otFri;
-    String otSat;
-    String otSun;
+    String bvg="";
+    String telephone="";
+    String openComment="";
+    String website="";
+    String email="";
+    String otMon =""; // open times monday
+    String otTue ="";
+    String otWed ="";
+    String otThu ="";
+    String otFri ="";
+    String otSat ="";
+    String otSun ="";
     int vegan;
     int ha; // handicapped accessible
     int ha_wc;
@@ -46,6 +46,14 @@ public class Restaurant {
 
     private Rating rating;
     private ArrayList<String> districts;
+
+    public Restaurant(String name, String district, String latCoord, String longCoord, int vegan) {
+        this.name = name;
+        this.district = district;
+        this.latCoord = latCoord;
+        this.longCoord = longCoord;
+        this.vegan = vegan;
+    }
 
     public Restaurant(ListEntry entry) {
         final CustomElementCollection elements = entry.getCustomElements();

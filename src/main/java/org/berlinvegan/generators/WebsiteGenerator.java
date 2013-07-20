@@ -18,6 +18,9 @@ public class WebsiteGenerator extends Generator {
     public static final String OUTPUT_DIR_OPTION = "o";
     public static final String WEBSITE_DE = "http://www.berlin-vegan.de";
     public static final String REVIEW_BASE_LOCATION_DE = "/berlin/restaurantkritiken/";
+
+
+
     protected static String outputDir;
     private static String userName;
     private static String password;
@@ -53,5 +56,8 @@ public class WebsiteGenerator extends Generator {
         options.addOption(PASSWORD_OPTION, true, "password");
         options.addOption(OUTPUT_DIR_OPTION, true, "output directory");
         return options;
+    }
+    public static void setOutputDir(String outputDir) {
+        WebsiteGenerator.outputDir = outputDir;
     }
 }

@@ -3,11 +3,7 @@ package org.berlinvegan.generators;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.Writer;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import org.apache.commons.cli.HelpFormatter;
 
@@ -37,10 +33,19 @@ public class MapGenerator extends WebsiteGenerator {
 
     }
 
-    private void generateMap(String language) throws Exception {
+    public void generateMap(String language) throws Exception {
+        generateMap(language, getRestaurantsFromServer());
+    }
+
+    public void generateMap(String language, ArrayList<Restaurant> restaurants) throws Exception {
         ResourceBundle bundle = ResourceBundle.getBundle("i18n", new Locale(language));
 
-        final ArrayList<Restaurant> restaurants = getRestaurantsfromServer();
+        final HashSet<String> districts = new HashSet<String>();
+        for (Restaurant restaurant : restaurants) {
+            if (!restaurant.getDistrict().equalsIgnoreCase("")) {
+                districts.add(restaurant.getDistrict());
+            }
+        }
         // Configuration
         Writer file = null;
         Configuration cfg = new Configuration();
@@ -58,6 +63,7 @@ public class MapGenerator extends WebsiteGenerator {
             input.put("i18n", bundle);
             input.put("language", language);
             input.put("restaurants", restaurants);
+            input.put("districts", districts);
 
 
             // File output
