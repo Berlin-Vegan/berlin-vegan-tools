@@ -16,7 +16,8 @@ public class MapGeneratorTest {
     @Test
     public void testGenerateMap() throws Exception {
         final MapGenerator generator = new MapGenerator();
-        WebsiteGenerator.setOutputDir(tempFolder.getRoot().getAbsolutePath());
+        final String outputDir = tempFolder.getRoot().getAbsolutePath();
+        WebsiteGenerator.setOutputDir(outputDir);
         final ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
         Restaurant restaurant = new Restaurant("name1", "Kreuzberg", "52.49905", "13.42999", 2);
         restaurants.add(restaurant);

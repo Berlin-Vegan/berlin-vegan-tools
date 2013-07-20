@@ -59,7 +59,12 @@
     </#list>
     }
 </script>
-
+Bezirke: <select id="districtselect" name="district" size="1" onChange="updateMarkers(markersArray);">
+    <option>Alle Bezirke</option>
+<#list districts as district>
+    <option>${district}</option>
+</#list>
+</select><br/>
 <input id="opencheckbox" onChange="updateMarkers(markersArray);" type="checkbox">jetzt geöffnet</input>
 <input id="vegandeclarecheckbox" onChange="updateMarkers(markersArray);" type="checkbox">vegan deklariert</input>
 <input id="biocheckbox" onChange="updateMarkers(markersArray);" type="checkbox">Bio</input>
@@ -67,12 +72,7 @@
 <input id="rollstuhlcheckbox" onChange="updateMarkers(markersArray);" type="checkbox">Rollstuhl geeignet</input>
 <input id="dogcheckbox" onChange="updateMarkers(markersArray);" type="checkbox">Hunde erlaubt</input>
 <input id="wlancheckbox" onChange="updateMarkers(markersArray);" type="checkbox">WLAN</input>
-<select id="districtselect" name="district" size="1" onChange="updateMarkers(markersArray);">
-    <option>Alle Bezirke</option>
-    <#list districts as district>
-        <option>${district}</option>
-    </#list>
-</select>
+
 
 <div id="map_canvas" style="margin-top:5px;line-height:1.0em; width:850px; height:630px"></div>
 Die Karte umfasst <b>${restaurants?size}</b> Restaurants/Bistros/Cafes
