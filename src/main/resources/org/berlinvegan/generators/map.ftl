@@ -7,7 +7,7 @@
 <#-- @ftlvariable name="restaurant" type="org.berlinvegan.generators.Restaurant" -->
 <#-- @ftlvariable name="districts" type="java.lang.String[]" -->
 <script type='text/javascript' src='http://maps.google.com/maps/api/js?sensor=false'></script>
-<script type='text/javascript' src='http://www.berlin-vegan.de/custom/maphelper.js'></script>
+<script type='text/javascript' src='http://www.berlin-vegan.de/custom/maphelper.js?version=1'></script>
 <script type='text/javascript'>
 
     var infowindow = new google.maps.InfoWindow({maxWidth: 350});
