@@ -61,7 +61,7 @@
 </script>
 Bezirke: <select id="districtselect" name="district" size="1" onChange="updateMarkers(markersArray);">
     <option>Alle Bezirke</option>
-<#list districts as district>
+<#list districts?sort as district>
     <option>${district}</option>
 </#list>
 </select><br/>
