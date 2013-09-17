@@ -30,7 +30,6 @@ public class Generator {
     public static final String LANG_DE = "de";
     public static final String LANG_EN = "en";
     public static final String TABLE_RESTAURANTS = "Restaurants";
-    public static final String TABLE_SUBWAY = "Subway";
     public static final String TABLE_SHOPPING = "Shopping";
     public static final String TABLE_BACKWAREN = "Backwaren";
     public static final String TABLE_BIO_REFORM = "BioReform";
