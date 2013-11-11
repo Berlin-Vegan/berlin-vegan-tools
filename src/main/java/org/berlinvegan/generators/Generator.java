@@ -72,8 +72,7 @@ public class Generator {
         final List<SpreadsheetEntry> spreadsheetEntries = getSpreadsheetEntries();
         for (SpreadsheetEntry entry : spreadsheetEntries) {
             if (entry.getTitle().getPlainText().equals(Generator.TABLE_RESTAURANTS)) {
-                List<ListEntry> entryList = null;
-                entryList = addEntries(entryList, entry);
+                List<ListEntry> entryList = addEntries(null, entry);
                 for (ListEntry listEntry : entryList) {
                     final Restaurant restaurant = new Restaurant(listEntry);
                     restaurants.add(restaurant);

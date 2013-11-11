@@ -24,7 +24,7 @@ public class ExtJsStoreGenerator extends WebsiteGenerator{
             parseOptions(args);
             ExtJsStoreGenerator generator = new ExtJsStoreGenerator();
             generator.generateLocationDataStores();
-            //generator.generateTextfilesJS();
+            generator.generateTextfilesJS();
         } else {
             final HelpFormatter helpFormatter = new HelpFormatter();
             helpFormatter.printHelp("generateextjsstore", constructOptions());
@@ -69,23 +69,26 @@ public class ExtJsStoreGenerator extends WebsiteGenerator{
             filesMap.put(path,text);
         }
         // scrape data from website for all locations
-        List<ListEntry> restaurantEntries = null;
-        for (SpreadsheetEntry spreadsheet : getSpreadsheetEntries()) {
-            if (spreadsheet.getTitle().getPlainText().equals(TABLE_RESTAURANTS)) {
-                restaurantEntries = addEntries(restaurantEntries, spreadsheet);
-            }
-        }
-        if (restaurantEntries != null) {
-            for (ListEntry restaurantEntry : restaurantEntries) {
-                String reviewurl = restaurantEntry.getCustomElements().getValue("reviewurl");
-                if (reviewurl != null && !reviewurl.isEmpty()) {
-                    String locationText = getLocationTextFromWebsite(REVIEW_DE_BASE_URL + reviewurl);
+
+        final ArrayList<Restaurant> restaurants = getRestaurantsFromServer();
+        if (restaurants != null) {
+            for (Restaurant restaurant : restaurants) {
+                String reviewURL = restaurant.getReviewURL();
+                if (reviewURL != null && !reviewURL.isEmpty()) {
+                    String locationText = getLocationTextFromWebsite(REVIEW_DE_BASE_URL + reviewURL);
                     locationText = textEncode(locationText);
                     locationText = hyphenate(locationText,LANG_DE);
-                    filesMap.put("reviews/de/" + reviewurl + ".html",locationText);
+                    filesMap.put("reviews/de/" + reviewURL + ".html",locationText);
+                }else{ // no review available, take the short comment, doesn't work at the moment
+                    /*final String comment = restaurant.getComment();
+                    if (comment != null) {
+                        filesMap.put("reviews/de/" +  + ".html",comment);
+                    }
+                    */
                 }
             }
         }
+
         StringBuilder builder = new StringBuilder();
         builder.append(EXT_NAMESPACE_BVAPP);
         builder.append("BVApp.models.Data= [];");
