@@ -17,7 +17,7 @@ public class FactsheetGenerator extends WebsiteGenerator {
     }
 
     public static void main(String[] args) throws Exception {
-        if (args.length == 6) {  // 3 options with 1 value -> 6 cli args
+        if (args.length == 6 || args.length == 8) {  // 3 or 4 options with 1 value
             parseOptions(args);
             FactsheetGenerator generator = new FactsheetGenerator();
             generator.generateFactSheets("de");
@@ -30,6 +30,57 @@ public class FactsheetGenerator extends WebsiteGenerator {
     private void generateFactSheets(String language) throws Exception {
         ResourceBundle bundle = ResourceBundle.getBundle("i18n", new Locale(language));
         final ArrayList<Restaurant> restaurants = getRestaurantsFromServer();
+        generateFactSheets(language, bundle, restaurants);
+        if (!StringUtils.isEmpty(outputDirV2)) {
+            generateFactSheetsV2(language, bundle, restaurants);
+        }
+
+
+    }
+
+    private void generateFactSheetsV2(String language, ResourceBundle bundle, ArrayList<Restaurant> restaurants) {
+        // Configuration
+        Writer file = null;
+        Configuration cfg = new Configuration();
+        try {
+            // Set Directory for templates
+            cfg.setClassForTemplateLoading(FactsheetGenerator.class, "");
+            // load template
+            Template template = cfg.getTemplate("factsheet_v2.ftl", "ISO-8859-1");
+            template.setOutputEncoding("ISO-8859-1");
+            // data-model
+            Map<String, Object> input = new HashMap<String, Object>();
+            input.put("i18n", bundle);
+            input.put("language", language);
+            HashSet<String> restaurantsDone = new HashSet<String>();
+            for (Restaurant restaurant : restaurants) {
+                String reviewURL = restaurant.getReviewURL();
+                if (!StringUtils.isEmpty(reviewURL) && !restaurantsDone.contains(reviewURL)) {
+                    ArrayList<Restaurant> restaurantBranches = getBranches(reviewURL, restaurants);
+                    input.put("branches", restaurantBranches);
+                    // File output
+                    file = new FileWriter(new File(outputDirV2 + File.separator + reviewURL + ".html"));
+                    template.process(input, file);
+                    file.flush();
+                    restaurantsDone.add(reviewURL);
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+
+        } finally {
+            if (file != null) {
+                try {
+                    file.close();
+                } catch (Exception ignored) {
+                }
+            }
+        }
+
+    }
+
+    private void generateFactSheets(String language, ResourceBundle bundle, ArrayList<Restaurant> restaurants) {
         // Configuration
         Writer file = null;
         Configuration cfg = new Configuration();
@@ -68,7 +119,6 @@ public class FactsheetGenerator extends WebsiteGenerator {
                 }
             }
         }
-
     }
 
     /**

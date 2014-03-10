@@ -22,7 +22,7 @@ public class ListGenerator extends WebsiteGenerator {
     }
 
     public static void main(String[] args) throws Exception {
-        if (args.length == 6) {  // 3 options with 1 value -> 6 cli args
+        if (args.length == 6 || args.length == 8) {  // 3 or 4 options with 1 value
             parseOptions(args);
             ListGenerator generator = new ListGenerator();
             generator.generateList("de");
@@ -35,12 +35,56 @@ public class ListGenerator extends WebsiteGenerator {
     private void generateList(String language) throws Exception {
         ResourceBundle bundle = ResourceBundle.getBundle("i18n", new Locale(language));
         final ArrayList<Restaurant> restaurants = getRestaurantsFromServer();
+        generateList(language, bundle, restaurants);
+        if (!StringUtils.isEmpty(outputDirV2)) {
+            generateListV2(language, bundle, restaurants);
+        }
 
+
+    }
+
+    private void generateListV2(String language, ResourceBundle bundle, ArrayList<Restaurant> restaurants) {
         // Configuration
         Writer file = null;
-        Configuration cfg = new Configuration();
         try {
             // Set Directory for templates
+            Configuration cfg = new Configuration();
+            cfg.setClassForTemplateLoading(ListGenerator.class, "");
+            // load template
+            Template template = cfg.getTemplate("list_v2.ftl","ISO-8859-1");
+            template.setOutputEncoding("ISO-8859-1");
+            // data-model
+            Map<String, Object> input = new HashMap<String, Object>();
+            input.put("reviewbase", REVIEW_BASE_LOCATION_DE_V2);
+            input.put("i18n", bundle);
+            input.put("language", language);
+            ArrayList<Restaurant> uniqueRestaurants = getUniqueRestaurants(restaurants);
+            input.put("restaurants", uniqueRestaurants);
+
+            // File output
+            file = new FileWriter(new File(outputDirV2 + File.separator + "list.html"));
+            template.process(input, file);
+            file.flush();
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        } finally {
+            if (file != null) {
+                try {
+                    file.close();
+                } catch (Exception ignored) {
+                }
+            }
+        }
+
+    }
+
+    private void generateList(String language, ResourceBundle bundle, ArrayList<Restaurant> restaurants) {
+        // Configuration
+        Writer file = null;
+        try {
+            // Set Directory for templates
+            Configuration cfg = new Configuration();
             cfg.setClassForTemplateLoading(ListGenerator.class, "");
             // load template
             Template template = cfg.getTemplate("list.ftl","ISO-8859-1");
@@ -75,7 +119,6 @@ public class ListGenerator extends WebsiteGenerator {
                 }
             }
         }
-
     }
 
     /***
