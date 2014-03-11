@@ -1,8 +1,8 @@
 package org.berlinvegan.generators;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.Writer;
+import java.io.*;
+import java.nio.charset.Charset;
+import java.nio.charset.CharsetEncoder;
 import java.util.*;
 
 import org.apache.commons.cli.HelpFormatter;
@@ -52,7 +52,7 @@ public class MapGenerator extends WebsiteGenerator {
             }
         }
         // Configuration
-        Writer file = null;
+        Writer fileWriter = null;
         Configuration cfg = new Configuration();
 
         try {
@@ -69,19 +69,19 @@ public class MapGenerator extends WebsiteGenerator {
             // load template
 
             Template template = cfg.getTemplate("map_v2.ftl", "ISO-8859-1");
-            template.setOutputEncoding("ISO-8859-1");
-            file = new FileWriter(new File(outputDirV2 + File.separator + "map.html"));
-            template.process(input, file);
-            file.flush();
+            template.setOutputEncoding("UTF-8");
+            fileWriter = getUTF8Writer(outputDirV2 + File.separator + "map.html");
+            template.process(input, fileWriter);
+            fileWriter.flush();
 
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
 
         } finally {
-            if (file != null) {
+            if (fileWriter != null) {
                 try {
-                    file.close();
+                    fileWriter.close();
                 } catch (Exception ignored) {
                 }
             }

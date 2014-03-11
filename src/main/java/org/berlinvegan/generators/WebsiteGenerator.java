@@ -8,9 +8,15 @@ import org.apache.commons.cli.PosixParser;
 
 import com.google.gdata.util.AuthenticationException;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
+import java.nio.charset.Charset;
+import java.nio.charset.CharsetEncoder;
+
 /**
- * @author <a href="mailto:sandy.meier@inubit.com">Sandy Meier</a>
- * @since 7.0
+ * @author <a href="mailto:smeier@tapnic.com">Sandy Meier</a>
  */
 public class WebsiteGenerator extends Generator {
     public static final String USER_OPTION = "u";
@@ -68,5 +74,11 @@ public class WebsiteGenerator extends Generator {
     }
     public static void setOutputDir(String outputDir) {
         WebsiteGenerator.outputDir = outputDir;
+    }
+
+    protected OutputStreamWriter getUTF8Writer(String filePath) throws FileNotFoundException {
+        final File file = new File(filePath);
+        final CharsetEncoder encoder = Charset.forName("UTF-8").newEncoder();
+        return new OutputStreamWriter(new FileOutputStream(file), encoder);
     }
 }

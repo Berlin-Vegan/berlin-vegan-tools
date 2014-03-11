@@ -40,14 +40,14 @@ public class FactsheetGenerator extends WebsiteGenerator {
 
     private void generateFactSheetsV2(String language, ResourceBundle bundle, ArrayList<Restaurant> restaurants) {
         // Configuration
-        Writer file = null;
+        Writer fileWriter = null;
         Configuration cfg = new Configuration();
         try {
             // Set Directory for templates
             cfg.setClassForTemplateLoading(FactsheetGenerator.class, "");
             // load template
             Template template = cfg.getTemplate("factsheet_v2.ftl", "ISO-8859-1");
-            template.setOutputEncoding("ISO-8859-1");
+            template.setOutputEncoding("UTF-8");
             // data-model
             Map<String, Object> input = new HashMap<String, Object>();
             input.put("i18n", bundle);
@@ -59,9 +59,9 @@ public class FactsheetGenerator extends WebsiteGenerator {
                     ArrayList<Restaurant> restaurantBranches = getBranches(reviewURL, restaurants);
                     input.put("branches", restaurantBranches);
                     // File output
-                    file = new FileWriter(new File(outputDirV2 + File.separator + reviewURL + ".html"));
-                    template.process(input, file);
-                    file.flush();
+                    fileWriter = getUTF8Writer(outputDirV2 + File.separator + reviewURL + ".html");
+                    template.process(input, fileWriter);
+                    fileWriter.flush();
                     restaurantsDone.add(reviewURL);
                 }
             }
@@ -70,9 +70,9 @@ public class FactsheetGenerator extends WebsiteGenerator {
             e.printStackTrace();
 
         } finally {
-            if (file != null) {
+            if (fileWriter != null) {
                 try {
-                    file.close();
+                    fileWriter.close();
                 } catch (Exception ignored) {
                 }
             }

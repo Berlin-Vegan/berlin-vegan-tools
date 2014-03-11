@@ -45,7 +45,7 @@ public class ListGenerator extends WebsiteGenerator {
 
     private void generateListV2(String language, ResourceBundle bundle, ArrayList<Restaurant> restaurants) {
         // Configuration
-        Writer file = null;
+        Writer fileWriter = null;
         try {
             // Set Directory for templates
             Configuration cfg = new Configuration();
@@ -62,16 +62,16 @@ public class ListGenerator extends WebsiteGenerator {
             input.put("restaurants", uniqueRestaurants);
 
             // File output
-            file = new FileWriter(new File(outputDirV2 + File.separator + "list.html"));
-            template.process(input, file);
-            file.flush();
+            fileWriter = getUTF8Writer(outputDirV2 + File.separator + "list.html");
+            template.process(input, fileWriter);
+            fileWriter.flush();
         } catch (Exception e) {
             e.printStackTrace();
 
         } finally {
-            if (file != null) {
+            if (fileWriter != null) {
                 try {
-                    file.close();
+                    fileWriter.close();
                 } catch (Exception ignored) {
                 }
             }
