@@ -5,7 +5,7 @@
 <#assign branch1 = branches[0]>
 <script type='text/javascript'>var disqus_identifier = '${branch1.reviewURL}';</script>
 
-<h1 class='csc-firstHeader'>Adresse</h1>
+<h4 class='address'>Adresse</h4>
 <#list branches as branch>
 <p>${branch.street}<br/>${branch.cityCode?c} ${branch.district}
 	<#if branch.bvg??>
@@ -18,11 +18,11 @@
 
 </#list>
 <#if branch1.website??>
-<h1>Internet</h1>
+<h4 class="internet">Internet</h4>
 <p><a target='_blank' href='http://${branch1.website}'>${branch1.website}</a></p>
 </#if>
 
-<h1>Öffnungszeiten</h1>
+<h4 class="openingTime">Öffnungszeiten</h4>
 ${branch1.getOpenTimesHTML("de")}
 <#if branch1.openComment??>
 <p>${branch1.openComment}</p>
@@ -30,7 +30,7 @@ ${branch1.getOpenTimesHTML("de")}
 <#if branch1.vegan == 5 || branch1.dog != -1 || branch1.organic == 1 || branch1.glutenFree == 1 || branch1.ha != -1
 || branch1.childChair != -1 || branch1.catering == 1 || branch1.delivery == 1
 || branch1.seat_in != -1 || branch1.seat_out != -1 || branch1.wlan == 1>
-<h1>Sonstiges</h1>
+<h4 class="misc">Sonstiges</h4>
 <ul>
 	<#if branch1.vegan == 5>
         <li> 100% vegan</li>

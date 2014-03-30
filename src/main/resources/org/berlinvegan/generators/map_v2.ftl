@@ -64,9 +64,8 @@ Bezirk: <select id="districtselect" name="district" size="1" onChange="updateMar
 <#list districts?sort as district>
     <option>${district}</option>
 </#list>
-</select><br/>
+</select>
 <input id="opencheckbox" onChange="updateMarkers(markersArray);" type="checkbox">jetzt geöffnet</input>
-<input id="vegandeclarecheckbox" onChange="updateMarkers(markersArray);" type="checkbox">vegan deklariert</input>
 <input id="biocheckbox" onChange="updateMarkers(markersArray);" type="checkbox">Bio</input>
 <input id="glutenfreecheckbox" onChange="updateMarkers(markersArray);" type="checkbox">glutenfreie Speisen</input>
 <input id="rollstuhlcheckbox" onChange="updateMarkers(markersArray);" type="checkbox">Rollstuhl geeignet</input>

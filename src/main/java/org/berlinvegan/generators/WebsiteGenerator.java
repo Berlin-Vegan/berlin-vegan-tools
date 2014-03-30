@@ -22,15 +22,9 @@ public class WebsiteGenerator extends Generator {
     public static final String USER_OPTION = "u";
     public static final String PASSWORD_OPTION = "p";
     public static final String OUTPUT_DIR_OPTION = "o";
-    public static final String OUTPUT2_DIR_OPTION = "o2";
     public static final String WEBSITE_DE = "http://www.berlin-vegan.de";
-    public static final String REVIEW_BASE_LOCATION_DE = "/berlin/restaurantkritiken/";
-    public static final String REVIEW_BASE_LOCATION_DE_V2 = "/service/gastronomie/kritiken/";
-
-
-
+    public static final String REVIEW_BASE_LOCATION_DE = "/essen-und-trinken/kritiken/";
     protected static String outputDir;
-    protected static String outputDirV2;
     private static String userName;
     private static String password;
 
@@ -53,9 +47,6 @@ public class WebsiteGenerator extends Generator {
             if (commandLine.hasOption(OUTPUT_DIR_OPTION)) {
                 outputDir = commandLine.getOptionValue(OUTPUT_DIR_OPTION);
             }
-            if (commandLine.hasOption(OUTPUT2_DIR_OPTION)) {
-                outputDirV2 = commandLine.getOptionValue(OUTPUT2_DIR_OPTION);
-            }
 
 
         } catch (ParseException parseException){
@@ -69,7 +60,6 @@ public class WebsiteGenerator extends Generator {
         options.addOption(USER_OPTION, true, "user name");
         options.addOption(PASSWORD_OPTION, true, "password");
         options.addOption(OUTPUT_DIR_OPTION, true, "output directory");
-        options.addOption(OUTPUT2_DIR_OPTION, true, "output directory v2");
         return options;
     }
     public static void setOutputDir(String outputDir) {

@@ -23,9 +23,18 @@
     <#list restaurants as restaurant>
         <#if restaurant.districts?seq_contains(districtName)>
             <li><a href="${reviewbase}${restaurant.reviewURL}">${restaurant.name}</a>
-                <#list 1..restaurant.vegan as i>
+                <#if restaurant.vegan == 5>
+                ${veganStar}${veganStar}${veganStar}
+                </#if>
+                <#if restaurant.vegan == 4>
+                ${veganStar}${veganStar}
+                </#if>
+                <#if restaurant.vegan == 3>
+                ${veganStar}${veganStar}
+                </#if>
+                <#if restaurant.vegan == 2>
                 ${veganStar}
-                </#list>
+                </#if>
             </li>
         </#if>
     </#list>
@@ -33,22 +42,17 @@
 </#macro>
 
 
-<script src="http://www.berlin-vegan.de/fileadmin/vorlagen/v2/jquery.min.js" type="text/javascript"></script>
-
 <#assign veganStar = '<img src="http://www.berlin-vegan.de/fileadmin/vorlagen/images/stern.gif">'>
 
 <div id="vegansort">
-    <h2>${veganStar}${veganStar}${veganStar}${veganStar}${veganStar} 100% vegan</h2>
+    <h2>${veganStar}${veganStar}${veganStar} Vegan</h2>
 <@listPart starvalue=5 />
-    <h2>${veganStar}${veganStar}${veganStar}${veganStar} vegetarisch-vegan, 'vegan' deklariert</h2>
+    <h2>${veganStar}${veganStar} Vegetarisch (vegan deklariert)</h2>
 <@listPart starvalue=4 />
-    <h2>${veganStar}${veganStar}${veganStar} vegetarisch-vegan, 'vegan' nicht deklariert</h2>
-<@listPart starvalue=3 />
-    <h2>${veganStar}${veganStar} omnivor mit veganem Angebot, 'vegan' deklariert</h2>
+    <h2>${veganStar} Omnivor (vegan deklariert)</h2>
 <@listPart starvalue=2 />
-    <h2>${veganStar} omnivor mit veganem Angebot, 'vegan' nicht deklariert</h2>
-<@listPart starvalue=1 />
-</div><div id="geosort" style="display:none">
+</div>
+<div id="geosort" style="display:none">
 <@renderDistrict districtName="Charlottenburg"/>
     <@renderDistrict districtName="Friedrichshain"/>
     <@renderDistrict districtName="Kreuzberg"/>
@@ -58,7 +62,6 @@
     <@renderDistrict districtName="Prenzlauer Berg"/>
     <@renderDistrict districtName="Schöneberg"/>
     <@renderDistrict districtName="Steglitz"/>
-    <@renderDistrict districtName="Wilmersdorf"/>
     <@renderDistrict districtName="Wedding"/>
     <@renderDistrict districtName="Zehlendorf"/>
 

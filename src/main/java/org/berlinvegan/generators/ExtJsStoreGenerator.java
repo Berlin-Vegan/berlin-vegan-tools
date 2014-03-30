@@ -95,7 +95,7 @@ public class ExtJsStoreGenerator extends WebsiteGenerator{
         for (String fileName : filesMap.keySet()) {
             builder.append("\nBVApp.models.Data[\"").append(fileName).append("\"] =\"").append(filesMap.get(fileName)).append("\";");
         }
-        writeTextToFile(builder.toString(),outputDir + File.separator + "Textfiles.js");
+        writeTextToFile(builder.toString(), outputDir + File.separator + "Textfiles.js");
     }
 
     private static String readFileAsString(String filePath) throws java.io.IOException{
