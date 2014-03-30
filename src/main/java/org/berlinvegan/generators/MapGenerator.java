@@ -47,8 +47,9 @@ public class MapGenerator extends WebsiteGenerator {
 
         final HashSet<String> districts = new HashSet<String>();
         for (Restaurant restaurant : restaurants) {
-            if (!restaurant.getDistrict().equalsIgnoreCase("")) {
-                districts.add(restaurant.getDistrict());
+            final String district = restaurant.getDistrict();
+            if (!district.equalsIgnoreCase("")) {
+                districts.add(district);
             }
         }
         // Configuration
@@ -95,8 +96,9 @@ public class MapGenerator extends WebsiteGenerator {
 
         final HashSet<String> districts = new HashSet<String>();
         for (Restaurant restaurant : restaurants) {
-            if (!restaurant.getDistrict().equalsIgnoreCase("")) {
-                districts.add(restaurant.getDistrict());
+            final String district = restaurant.getDistrict();
+            if (district != null && !district.equalsIgnoreCase("")) {
+                districts.add(district);
             }
         }
         // Configuration
