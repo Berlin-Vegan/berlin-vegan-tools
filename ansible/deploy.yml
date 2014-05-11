@@ -1,0 +1,15 @@
+---
+# requirements: installed java > 1.6 and maven > 3.0
+- hosts: all
+  remote_user: deploy
+  vars:
+    app_repo: https://github.com/smeir/berlin-vegan-tools.git
+    app_name: berlin-vegan-tools
+    user_home: "/home/deploy"
+    app_root: "{{user_home}}/{{app_name}}"
+
+  tasks:
+    - name: clone app repository
+      git: repo={{app_repo}} dest={{app_root}} accept_hostkey=yes
+    - name: build assemly with maven
+      command: mvn assembly:assembly -DdescriptorId=jar-with-dependencies chdir={{app_root}}
