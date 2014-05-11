@@ -24,7 +24,7 @@ public class ExtJsStoreGenerator extends WebsiteGenerator{
             parseOptions(args);
             ExtJsStoreGenerator generator = new ExtJsStoreGenerator();
             generator.generateLocationDataStores();
-            generator.generateTextfilesJS();
+            //generator.generateTextfilesJS(); TODO scraping doesn't work at the moment
         } else {
             final HelpFormatter helpFormatter = new HelpFormatter();
             helpFormatter.printHelp("generateextjsstore", constructOptions());
