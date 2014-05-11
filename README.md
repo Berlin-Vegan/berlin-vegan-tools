@@ -12,6 +12,12 @@ Build & Run
     mvn assembly:assembly -DdescriptorId=jar-with-dependencies
     ./generate.sh
 
+Deployment
+===========
+Deployment is done with ansible
+
+ansible-playbook ansible/deploy.yml -i ansible/stage
+
 Used Software
 =============
 
