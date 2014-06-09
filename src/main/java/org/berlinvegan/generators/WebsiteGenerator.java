@@ -32,7 +32,7 @@ public class WebsiteGenerator extends Generator {
         super(userName, password);
     }
 
-    protected static void parseOptions(String[] args) {
+    protected static void parseOptions(String[] args) throws Exception {
         final CommandLineParser cmdLinePosixParser = new PosixParser();
         final Options posixOptions = constructOptions();
         CommandLine commandLine;
@@ -48,6 +48,13 @@ public class WebsiteGenerator extends Generator {
                 outputDir = commandLine.getOptionValue(OUTPUT_DIR_OPTION);
             }
 
+            // if username,password is not set on commandline, try to read from env vars
+            if (userName == null) {
+                userName = Environment.getGoogleUserName();
+            }
+            if (password == null) {
+                password = Environment.getGooglePassword();
+            }
 
         } catch (ParseException parseException){
             System.err.println(parseException.getMessage());

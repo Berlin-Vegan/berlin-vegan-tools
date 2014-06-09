@@ -67,6 +67,7 @@ public class Generator {
         return entries;
     }
 
+    /* search the Berlin Vegan Google Docs for Table "Restaurant", download and parse the entries*/
     public ArrayList<Restaurant> getRestaurantsFromServer() throws Exception {
         final ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
         final List<SpreadsheetEntry> spreadsheetEntries = getSpreadsheetEntries();
@@ -79,7 +80,7 @@ public class Generator {
                 }
             }
         }
-        // init districts
+        // init districts, a restaurant with more then one filiale is located in several districts
         for (Restaurant restaurant : restaurants) {
             ArrayList<String> districts = new ArrayList<String>();
             String reviewURL = restaurant.getReviewURL();

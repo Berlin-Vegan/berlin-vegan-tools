@@ -1,11 +1,20 @@
 About
 =====
 Repository contains some scripts to generate stuff for [Berlin Vegan](http://www.berlin-vegan.de) project.
-Datasource are several Google Docs tables, which are converted to different output formats.
+Datasource are several Google Docs tables (https://developers.google.com/google-apps/spreadsheets/) , which are converted to different output formats.
 
 * Website - static pages (location list, map, factsheets)
 * JSON Files for the iOS/Android App
 * KML file to import to Google Maps
+
+Main Components
+===============
+FactsheetGenerator : generates the Factsheet for every restaurant
+MapGenerator: generates the Berlin Vegan Map, including JavaScript
+ListGenerator: generates the Restaurantlist
+ExtJsStoreGenerator: generates the json files for the Berlin Vegan App
+KMLGenerator: file to import to Google Maps
+
 
 Build & Run
 ===========

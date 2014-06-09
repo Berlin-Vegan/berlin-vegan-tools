@@ -16,12 +16,13 @@ import org.apache.commons.lang3.StringUtils;
 public class MapGenerator extends WebsiteGenerator {
 
     public MapGenerator() throws AuthenticationException {
+        super();
     }
 
 
     public static void main(String[] args) throws Exception {
 
-        if (args.length == 6) {  // 3 options with 1 value
+        if (args.length >= 2) {  // output parameter with value
             parseOptions(args);
             MapGenerator generator = new MapGenerator();
             generator.generateMap("de");
