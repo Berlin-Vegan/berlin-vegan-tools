@@ -19,7 +19,6 @@ public class MapGenerator extends WebsiteGenerator {
         super();
     }
 
-
     public static void main(String[] args) throws Exception {
 
         if (args.length >= 2) {  // output parameter with value

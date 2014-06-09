@@ -7,6 +7,7 @@ Datasource are several Google Docs tables (https://developers.google.com/google-
 * JSON Files for the iOS/Android App
 * KML file to import to Google Maps
 
+
 Main Components
 ===============
 FactsheetGenerator : generates the Factsheet for every restaurant

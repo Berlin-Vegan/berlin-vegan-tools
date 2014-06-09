@@ -1,15 +1,18 @@
 package org.berlinvegan.generators;
 
 import com.google.gson.Gson;
-import org.junit.Ignore;
+import com.google.gson.reflect.TypeToken;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Map;
 
 /**
  * Date: 20.07.13
@@ -18,6 +21,16 @@ import java.util.Map;
 public class MapGeneratorTest {
     @Rule
     public TemporaryFolder tempFolder = new TemporaryFolder();
+
+    @Test
+    public void testGenerateCompleteMap() throws Exception {
+        ArrayList<Restaurant> restaurants = getLocalRestaurantsDB();
+        final MapGenerator generator = new MapGenerator();
+        WebsiteGenerator.setOutputDir(TestUtil.getTempDir());
+        generator.generateMap("de", restaurants);
+        System.out.println("map generated: " + TestUtil.getTempDir() + "/map.html");
+    }
+
     @Test
     public void testGenerateMap() throws Exception {
         final MapGenerator generator = new MapGenerator();
@@ -31,13 +44,13 @@ public class MapGeneratorTest {
         generator.generateMap("de", restaurants);
     }
 
-    private ArrayList<String> constructParameters() {
-        final String outputDir = tempFolder.getRoot().getAbsolutePath();
-        final ArrayList<String> parameters = new ArrayList<String>();
-        parameters.add(WebsiteGenerator.OUTPUT_DIR_OPTION);
-        parameters.add(outputDir);
-        return parameters;
-    }
 
+
+    private ArrayList<Restaurant> getLocalRestaurantsDB() throws URISyntaxException, IOException {
+        final URL url = getClass().getResource("restaurant_db.json");
+        final Path path = Paths.get(url.toURI());
+        final String json = new String(Files.readAllBytes(path));
+        return new Gson().fromJson(json, new TypeToken<ArrayList<Restaurant>>() {}.getType());
+    }
 
 }
