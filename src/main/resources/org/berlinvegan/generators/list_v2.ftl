@@ -55,7 +55,7 @@
 <div id="geosort" style="display:none">
 <@renderDistrict districtName="Charlottenburg"/>
     <@renderDistrict districtName="Friedrichshain"/>
-    <@renderDistrict districtName="Köpenik"/>
+    <@renderDistrict districtName="Köpenick"/>
     <@renderDistrict districtName="Kreuzberg"/>
     <@renderDistrict districtName="Lichtenberg"/>
     <@renderDistrict districtName="Mitte"/>
