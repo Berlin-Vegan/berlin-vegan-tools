@@ -64,6 +64,7 @@
     <@renderDistrict districtName="Schöneberg"/>
     <@renderDistrict districtName="Steglitz"/>
     <@renderDistrict districtName="Wedding"/>
+    <@renderDistrict districtName="Wilmersdorf"/>
     <@renderDistrict districtName="Zehlendorf"/>
 
 
