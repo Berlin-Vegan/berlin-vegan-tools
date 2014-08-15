@@ -118,11 +118,11 @@ public class Generator {
     protected String getLocationTextFromWebsite(String reviewUrl) throws IOException {
         String text="";
         Document doc = Jsoup.connect(reviewUrl).get();
-        Elements textElements = doc.select("#text p,#text ul");
+        Elements textElements = doc.select("div.entry-content");
         for (Element textElement : textElements) {
-            if(!textElement.html().startsWith("<a href")){ // ignore back link
+            //if(!textElement.html().startsWith("<a href")){ // ignore back link
                 text += textElement.text() + "<br/><br/>";
-            }
+            //}
         }
         return text;
     }
