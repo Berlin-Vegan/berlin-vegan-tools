@@ -107,7 +107,7 @@ public class Generator {
 //        output.close();
     }
 
-    protected String textEncode(String text) {
+    static public String textEncode(String text) {
         text = text.replaceAll("\"", "\\\\\"");
         text = text.replaceAll("\n", "");
         text = text.replaceAll("\r", "");
