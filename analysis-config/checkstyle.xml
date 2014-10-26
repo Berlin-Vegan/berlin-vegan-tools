@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE module PUBLIC
+    "-//Puppy Crawl//DTD Check Configuration 1.2//EN"
+    "http://www.puppycrawl.com/dtds/configuration_1_2.dtd">
+
+<!-- Not a useful set of checks yet. Just a proof of concept to make sure the configuration is fine. -->
+
+<module name="Checker">
+    <property name="severity" value="${checkstyle.javadoc.severity}" default="warning"/>
+    <module name="FileTabCharacter">
+        <property name="eachLine" value="true"/>
+    </module>
+</module>

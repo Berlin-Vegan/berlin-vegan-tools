@@ -75,6 +75,26 @@
                     <target>1.7</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>2.13</version>
+                <executions>
+                    <execution>
+                        <phase>test</phase>
+                        <configuration>
+                            <configLocation>analysis-config/checkstyle.xml</configLocation>
+                            <violationSeverity>warning</violationSeverity>
+                            <sourceDirectory>${basedir}/src</sourceDirectory>
+                            <includes>**\/*</includes>
+                            <resourceincludes>**\/*</resourceincludes>
+                        </configuration>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+              </executions>
+            </plugin>
         </plugins>
         <resources>
             <resource>

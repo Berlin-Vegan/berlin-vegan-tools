@@ -41,3 +41,7 @@ atlassian-ide-plugin.xml
 ## Maven plugin
 
 /target/
+
+## Checkstyle plugin
+
+/.checkstyle
