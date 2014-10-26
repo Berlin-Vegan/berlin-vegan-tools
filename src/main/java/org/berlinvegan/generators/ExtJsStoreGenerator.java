@@ -11,7 +11,7 @@ import java.util.*;
 
 public class ExtJsStoreGenerator extends WebsiteGenerator{
 
-    public static final String REVIEW_DE_BASE_URL = "http://www.berlin-vegan.de/berlin/restaurantkritiken/";
+    public static final String REVIEW_DE_BASE_URL = "http://www.berlin-vegan.de/essen-und-trinken/kritiken/";
     public static final String EXT_NAMESPACE_BVAPP = "Ext.namespace('BVApp','BVApp.data','BVApp.models');";
 
     public ExtJsStoreGenerator() throws AuthenticationException {
@@ -24,7 +24,7 @@ public class ExtJsStoreGenerator extends WebsiteGenerator{
             parseOptions(args);
             ExtJsStoreGenerator generator = new ExtJsStoreGenerator();
             generator.generateLocationDataStores();
-            //generator.generateTextfilesJS(); TODO scraping doesn't work at the moment
+            generator.generateTextfilesJS();
         } else {
             final HelpFormatter helpFormatter = new HelpFormatter();
             helpFormatter.printHelp("generateextjsstore", constructOptions());
@@ -79,12 +79,13 @@ public class ExtJsStoreGenerator extends WebsiteGenerator{
                     locationText = textEncode(locationText);
                     locationText = hyphenate(locationText,LANG_DE);
                     filesMap.put("reviews/de/" + reviewURL + ".html",locationText);
-                }else{ // no review available, take the short comment, doesn't work at the moment
-                    /*final String comment = restaurant.getComment();
+                }else{ // no review available, take the short comment, just set the reviewURL to restaurant name
+                    String comment = restaurant.getComment();
                     if (comment != null) {
-                        filesMap.put("reviews/de/" +  + ".html",comment);
+                        comment = textEncode(comment);
+                        filesMap.put("reviews/de/" + restaurant.getName() + ".html",comment);
                     }
-                    */
+
                 }
             }
         }
@@ -128,6 +129,15 @@ public class ExtJsStoreGenerator extends WebsiteGenerator{
             }
         }
 
+        // if no review available,just set restaurant name, app will then use short comment, see generateTextfilesJS()
+        if (restaurantEntries != null) {
+            for (ListEntry entry : restaurantEntries) {
+                final Restaurant restaurant = new Restaurant(entry);
+                if (restaurant.getReviewURL() == null || restaurant.getReviewURL().isEmpty()) {
+                    entry.getCustomElements().setValueLocal("reviewurl",restaurant.getName());
+                }
+            }
+        }
         generateStore(restaurantEntries, "RestaurantStoreData", outputDir);
         generateStore(shoppingEntries, "ShopStoreData", outputDir);
         generateStore(cafeEntries, "CafeStoreData", outputDir);

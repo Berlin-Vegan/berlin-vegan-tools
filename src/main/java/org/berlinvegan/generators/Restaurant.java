@@ -60,7 +60,7 @@ public class Restaurant {
         //printColumnHeaderNames(elements);
         name = elements.getValue("name");
         reviewURL = elements.getValue("reviewurl");
-        street = elements.getValue("strasse");
+        street = Generator.textEncode(elements.getValue("strasse"));
         cityCode = Integer.parseInt(elements.getValue("postleitzahl"));
         district = elements.getValue("stadtbezirk");
         latCoord = elements.getValue("lat");

@@ -55,6 +55,7 @@
 <div id="geosort" style="display:none">
 <@renderDistrict districtName="Charlottenburg"/>
     <@renderDistrict districtName="Friedrichshain"/>
+    <@renderDistrict districtName="Köpenick"/>
     <@renderDistrict districtName="Kreuzberg"/>
     <@renderDistrict districtName="Lichtenberg"/>
     <@renderDistrict districtName="Mitte"/>
@@ -63,6 +64,7 @@
     <@renderDistrict districtName="Schöneberg"/>
     <@renderDistrict districtName="Steglitz"/>
     <@renderDistrict districtName="Wedding"/>
+    <@renderDistrict districtName="Wilmersdorf"/>
     <@renderDistrict districtName="Zehlendorf"/>
 
 
