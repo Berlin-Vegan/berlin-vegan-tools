@@ -8,13 +8,13 @@
 <h4 class='address'>Adresse</h4>
 <#list branches as branch>
 <p>${branch.street}<br/>${branch.cityCode?c} ${branch.district}
-	<#if branch.bvg??>
+    <#if branch.bvg??>
         <br/>${branch.bvg}
-	</#if>
+    </#if>
 </p>
-	<#if branch.telephone??>
+    <#if branch.telephone??>
     <p>Tel.: ${branch.telephone}</p>
-	</#if>
+    </#if>
 
 </#list>
 <#if branch1.website??>
@@ -32,61 +32,61 @@ ${branch1.getOpenTimesHTML("de")}
 || branch1.seat_in != -1 || branch1.seat_out != -1 || branch1.wlan == 1>
 <h4 class="misc">Sonstiges</h4>
 <ul>
-	<#if branch1.vegan == 5>
+    <#if branch1.vegan == 5>
         <li> 100% vegan</li>
-	</#if>
-	<#if branch1.organic == 1>
+    </#if>
+    <#if branch1.organic == 1>
         <li> Bio</li>
-	</#if>
+    </#if>
     <#if branch1.glutenFree == 1>
         <li> glutenfreie Speisen</li>
     </#if>
 
-	<#if branch1.ha != -1>
-		<#if branch1.ha == 1>
+    <#if branch1.ha != -1>
+        <#if branch1.ha == 1>
             <li> Rollstuhl geeignet</li>
-			<#if branch1.ha_wc == 1>
+            <#if branch1.ha_wc == 1>
                 <li> WC Rollstuhl geeignet</li>
-			<#else>
+            <#else>
                 <li> WC Rollstuhl ungeeignet</li>
-			</#if>
-		<#else>
+            </#if>
+        <#else>
             <li> Rollstuhl ungeeignet</li>
-		</#if>
+        </#if>
 
-	</#if>
+    </#if>
 
-	<#if branch1.dog != -1>
-		<#if branch1.dog == 1>
+    <#if branch1.dog != -1>
+        <#if branch1.dog == 1>
             <li> Hunde erlaubt</li>
-		<#else>
+        <#else>
             <li> Hunde nicht erlaubt</li>
-		</#if>
-	</#if>
-	<#if branch1.childChair != -1>
-		<#if branch1.childChair == 1>
+        </#if>
+    </#if>
+    <#if branch1.childChair != -1>
+        <#if branch1.childChair == 1>
             <li> Kindersitz vorhanden</li>
-		<#else>
+        <#else>
             <li> kein Kindersitz vorhanden</li>
-		</#if>
-	</#if>
+        </#if>
+    </#if>
     <#if branch1.wlan == 1>
         <li> WLAN vorhanden</li>
     </#if>
-	<#if branch1.catering == 1>
+    <#if branch1.catering == 1>
         <li> Catering</li>
-	</#if>
-	<#if branch1.delivery == 1>
+    </#if>
+    <#if branch1.delivery == 1>
         <li> Lieferservice</li>
-	</#if>
-	<#if branch1.seat_in != -1>
+    </#if>
+    <#if branch1.seat_in != -1>
         <li> Sitzpl‰tze innen: ${branch1.seat_in}</li>
-	</#if>
-	<#if branch1.seat_out != -1>
+    </#if>
+    <#if branch1.seat_out != -1>
         <li> Sitzpl‰tze auﬂen: ${branch1.seat_out}</li>
-	</#if>
-	<#if branch1.seat_out != -1>
-	</#if>
+    </#if>
+    <#if branch1.seat_out != -1>
+    </#if>
 </ul>
 </#if>
 
