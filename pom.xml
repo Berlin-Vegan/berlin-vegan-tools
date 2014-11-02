@@ -87,7 +87,7 @@
                             <violationSeverity>warning</violationSeverity>
                             <sourceDirectory>${basedir}/src</sourceDirectory>
                             <includes>**\/*</includes>
-                            <resourceincludes>**\/*</resourceincludes>
+                            <resourceIncludes>**\/*</resourceIncludes>
                         </configuration>
                         <goals>
                             <goal>check</goal>
