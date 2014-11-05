@@ -64,3 +64,15 @@ GPLv2
 Tests
 =======
 [![Build Status](https://drone.io/github.com/smeir/berlin-vegan-tools/status.png)](https://drone.io/github.com/smeir/berlin-vegan-tools/latest)
+
+Static Analysis
+===============
+
+Checkstyle violations can be suppressed with the annotation SuppressWarnings or with a special comment starting with NOCHECKSTYLE.
+
+Example for module (i.e. rule) "LocalVariableName":
+
+@SuppressWarnings("checkstyle:localvariablename")
+int MY_INTEGER = 1; //NOCHECKSTYLE LocalVariableName
+
+Note the casing and the missing space between // and NOCHECKSTYLE.
