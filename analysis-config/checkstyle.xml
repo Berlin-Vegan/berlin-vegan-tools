@@ -25,7 +25,6 @@
 
     <!-- Miscellaneous -->
     <module name="NewlineAtEndOfFile">
-        <property name="lineSeparator" value="crlf"/>
         <property name="fileExtensions" value="java"/>
     </module>
     <!--<module name="Translation"/>-->
