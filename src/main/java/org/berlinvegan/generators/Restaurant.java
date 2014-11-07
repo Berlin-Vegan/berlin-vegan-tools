@@ -11,24 +11,24 @@ public class Restaurant {
     public static final String OPEN_TIME_MORE_DAYS = "<b>%s-%s</b> %s<br/>";
 
     String name;
-    String reviewURL="";
-    String street="";
+    String reviewURL = "";
+    String street = "";
     int cityCode;
-    String district="";
+    String district = "";
     String latCoord;
     String longCoord;
-    String bvg="";
-    String telephone="";
-    String openComment="";
-    String website="";
-    String email="";
-    String otMon =""; // open times monday
-    String otTue ="";
-    String otWed ="";
-    String otThu ="";
-    String otFri ="";
-    String otSat ="";
-    String otSun ="";
+    String bvg = "";
+    String telephone = "";
+    String openComment = "";
+    String website = "";
+    String email = "";
+    String otMon = ""; // open times monday
+    String otTue = "";
+    String otWed = "";
+    String otThu = "";
+    String otFri = "";
+    String otSat = "";
+    String otSun = "";
     int vegan;
     int ha; // handicapped accessible
     int ha_wc;
@@ -42,7 +42,7 @@ public class Restaurant {
     String comment;
     int wlan;
     int glutenFree;
-    private String[] tags=null;
+    private String[] tags = null;
 
     private Rating rating;
     private ArrayList<String> districts;
@@ -89,7 +89,7 @@ public class Restaurant {
         seat_out = getIntValue(elements, "sitzplaetzeaussen");
         comment = elements.getValue("zusaetzlicherkommentarfuerkarte");
         final String tagStr = elements.getValue("tagsbittenurimbisscaferestaurantundeiscafeverwenden");
-        if (tagStr!=null) {
+        if (tagStr != null) {
             tags = tagStr.split(",");
         }
         wlan = getIntValue(elements, "wlan");
@@ -116,9 +116,9 @@ public class Restaurant {
         if (value == null) {
             return null;
         }
-        if(value.equals("0")) {
+        if (value.equals("0")) {
             return false;
-        }else if (value.equals("1")) {
+        } else if (value.equals("1")) {
             return true;
         }
         return null;
@@ -445,7 +445,7 @@ public class Restaurant {
             .isEmpty() || !openTimes[6].isEmpty()) {
             int equalStart = -1;
             for (int i = 0; i <= 6; i++) {
-                if (i<6 && openTimes[i].equalsIgnoreCase(openTimes[i + 1])) { // nachfolger identisch, mach weiter
+                if (i < 6 && openTimes[i].equalsIgnoreCase(openTimes[i + 1])) { // nachfolger identisch, mach weiter
                     if (equalStart == -1) {
                         equalStart = i;
                     }

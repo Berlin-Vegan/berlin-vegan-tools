@@ -116,7 +116,7 @@ public class Generator {
     }
 
     protected String getLocationTextFromWebsite(String reviewUrl) throws IOException {
-        String text="";
+        String text = "";
         Document doc = Jsoup.connect(reviewUrl).get();
         Elements textElements = doc.select("div.entry-content > p");
         for (Element textElement : textElements) {
@@ -140,7 +140,7 @@ public class Generator {
             Matcher matcher = ratingNumberPattern.matcher(numberStr);
             if (matcher.matches()) {
                 int number = Integer.parseInt(matcher.group(1));
-                return new Rating(value,number);
+                return new Rating(value, number);
             }
         } catch (Exception ignored) {
 

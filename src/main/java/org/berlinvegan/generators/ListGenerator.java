@@ -49,7 +49,7 @@ public class ListGenerator extends WebsiteGenerator {
             Configuration cfg = new Configuration();
             cfg.setClassForTemplateLoading(ListGenerator.class, "");
             // load template
-            Template template = cfg.getTemplate("list_v2.ftl","ISO-8859-1");
+            Template template = cfg.getTemplate("list_v2.ftl", "ISO-8859-1");
             template.setOutputEncoding("ISO-8859-1");
             // data-model
             Map<String, Object> input = new HashMap<String, Object>();

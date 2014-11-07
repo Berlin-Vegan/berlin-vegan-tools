@@ -11,13 +11,14 @@ import java.util.List;
  * Time: 19:52
  */
 public class KMLGenerator extends Generator {
-    public static final String XML_HEAD ="<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
-    public static final String KML_START ="<kml xmlns=\"http://www.opengis.net/kml/2.2\"><Document>";
+    public static final String XML_HEAD = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
+    public static final String KML_START = "<kml xmlns=\"http://www.opengis.net/kml/2.2\"><Document>";
     public static final String KML_END = "</Document></kml>";
 
     public KMLGenerator(String username, String password) throws AuthenticationException {
         super(username, password);
     }
+    
     public static void main(String[] args) throws Exception {
         KMLGenerator generator = new KMLGenerator(args[0], args[1]);
         generator.generateKML();
@@ -27,7 +28,7 @@ public class KMLGenerator extends Generator {
         List<ListEntry> restaurantEntries = null;
         for (SpreadsheetEntry spreadsheet : getSpreadsheetEntries()) {
             String title = spreadsheet.getTitle().getPlainText();
-            if (title.equals("Restaurants")){
+            if (title.equals("Restaurants")) {
                 restaurantEntries = addEntries(restaurantEntries, spreadsheet);
                 final String kmlDocument = getKMLDocument(restaurantEntries);
                 writeTextToFile(kmlDocument, "veganmap.kml");
@@ -40,7 +41,7 @@ public class KMLGenerator extends Generator {
         builder.append(XML_HEAD);
 
         builder.append(KML_START);
-        int i=0;
+        int i = 0;
         for (ListEntry entry : entries) {
             String latPos = entry.getCustomElements().getValue("lat");
             String longPos = entry.getCustomElements().getValue("long");
@@ -61,7 +62,7 @@ public class KMLGenerator extends Generator {
     private String getDescription(ListEntry entry) {
         StringBuilder desc = new StringBuilder();
         int vegan = Integer.parseInt(entry.getCustomElements().getValue("veganfreundlich"));
-        switch (vegan){
+        switch (vegan) {
             case 1:
                 desc.append("omnivor, vegan nicht deklariert");
                 break;
@@ -100,6 +101,7 @@ public class KMLGenerator extends Generator {
 
 
 }
+
 class PlaceMark {
     String name;
     String description;
@@ -112,6 +114,7 @@ class PlaceMark {
         this.latPos = latPos;
         this.longPos = longPos;
     }
+    
     public String toKMLFormat() {
         final StringBuilder builder = new StringBuilder();
         builder.append("<Placemark>\n");

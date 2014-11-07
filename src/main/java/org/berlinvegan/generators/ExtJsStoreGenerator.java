@@ -9,7 +9,7 @@ import org.apache.commons.cli.HelpFormatter;
 import java.io.*;
 import java.util.*;
 
-public class ExtJsStoreGenerator extends WebsiteGenerator{
+public class ExtJsStoreGenerator extends WebsiteGenerator {
 
     public static final String REVIEW_DE_BASE_URL = "http://www.berlin-vegan.de/essen-und-trinken/kritiken/";
     public static final String EXT_NAMESPACE_BVAPP = "Ext.namespace('BVApp','BVApp.data','BVApp.models');";
@@ -33,40 +33,40 @@ public class ExtJsStoreGenerator extends WebsiteGenerator{
     }
 
     private String hyphenate(String text, String language) throws IOException {
-        Hyphenator h=new Hyphenator();
+        Hyphenator h = new Hyphenator();
 //        String hyphenBasePath = "generators" + File.separator + "lib" + File.separator + "hyphen" + File.separator;
         InputStream fileInputStream;
-        if(language.equals(LANG_DE)){
+        if (language.equals(LANG_DE)) {
             fileInputStream = this.getClass().getClassLoader().getResourceAsStream("org/berlinvegan/generators/dehyphx.tex");
-        }else {
+        } else {
             fileInputStream = this.getClass().getClassLoader().getResourceAsStream("org/berlinvegan/generators/hyphen.tex");
         }
         h.loadTable(fileInputStream);
 
-        text = h.hyphenate(text,4,3);
-        text = text.replaceAll("\u00ad","&shy;");
+        text = h.hyphenate(text, 4, 3);
+        text = text.replaceAll("\u00ad", "&shy;");
         return text;
     }
 
-    private void generateTextfilesJS() throws Exception{
+    private void generateTextfilesJS() throws Exception {
         // first read the files from disk
         // <path,content>
-        HashMap<String,String> filesMap = new HashMap<String,String>();
-        String textFilesBase = "data" + File.separator ;
+        HashMap<String, String> filesMap = new HashMap<String, String>();
+        String textFilesBase = "data" + File.separator;
         List<File> files = getFileListing(new File(textFilesBase));
         for (File file : files) {
             String text = readFileAsString(file.getPath());
             text = textEncode(text);
             String path = file.getPath();
-            path = path.replaceAll("\\\\","/"); // normalize path seperator
-            path = path.replaceAll("data/","");
+            path = path.replaceAll("\\\\", "/"); // normalize path seperator
+            path = path.replaceAll("data/", "");
             //hyphenate
             if (path.contains("/de/")) {
-                text = hyphenate(text,LANG_DE);
-            }else if (path.contains("/en/")) {
-                text = hyphenate(text,LANG_EN);
+                text = hyphenate(text, LANG_DE);
+            } else if (path.contains("/en/")) {
+                text = hyphenate(text, LANG_EN);
             }
-            filesMap.put(path,text);
+            filesMap.put(path, text);
         }
         // scrape data from website for all locations
 
@@ -77,13 +77,13 @@ public class ExtJsStoreGenerator extends WebsiteGenerator{
                 if (reviewURL != null && !reviewURL.isEmpty()) {
                     String locationText = getLocationTextFromWebsite(REVIEW_DE_BASE_URL + reviewURL);
                     locationText = textEncode(locationText);
-                    locationText = hyphenate(locationText,LANG_DE);
-                    filesMap.put("reviews/de/" + reviewURL + ".html",locationText);
-                }else{ // no review available, take the short comment, just set the reviewURL to restaurant name
+                    locationText = hyphenate(locationText, LANG_DE);
+                    filesMap.put("reviews/de/" + reviewURL + ".html", locationText);
+                } else { // no review available, take the short comment, just set the reviewURL to restaurant name
                     String comment = restaurant.getComment();
                     if (comment != null) {
                         comment = textEncode(comment);
-                        filesMap.put("reviews/de/" + restaurant.getName() + ".html",comment);
+                        filesMap.put("reviews/de/" + restaurant.getName() + ".html", comment);
                     }
 
                 }
@@ -99,12 +99,12 @@ public class ExtJsStoreGenerator extends WebsiteGenerator{
         writeTextToFile(builder.toString(), outputDir + File.separator + "Textfiles.js");
     }
 
-    private static String readFileAsString(String filePath) throws java.io.IOException{
+    private static String readFileAsString(String filePath) throws java.io.IOException {
         StringBuilder fileData = new StringBuilder(1000);
         BufferedReader reader = new BufferedReader(new FileReader(filePath));
         char[] buf = new char[1024];
         int numRead;
-        while((numRead=reader.read(buf)) != -1){
+        while ((numRead = reader.read(buf)) != -1) {
             String readData = String.valueOf(buf, 0, numRead);
             fileData.append(readData);
             buf = new char[1024];
@@ -121,10 +121,10 @@ public class ExtJsStoreGenerator extends WebsiteGenerator{
             String title = spreadsheet.getTitle().getPlainText();
             if (title.equalsIgnoreCase(TABLE_RESTAURANTS)) {
                 restaurantEntries = addEntries(restaurantEntries, spreadsheet);
-            }else if (title.equalsIgnoreCase(TABLE_SHOPPING) || title.equalsIgnoreCase(TABLE_BACKWAREN)
+            } else if (title.equalsIgnoreCase(TABLE_SHOPPING) || title.equalsIgnoreCase(TABLE_BACKWAREN)
                     || title.equalsIgnoreCase(TABLE_BIO_REFORM)) {
                 shoppingEntries = addEntries(shoppingEntries, spreadsheet);
-            }else if (title.equalsIgnoreCase(TABLE_CAFES)) {
+            } else if (title.equalsIgnoreCase(TABLE_CAFES)) {
                 cafeEntries = addEntries(cafeEntries, spreadsheet);
             }
         }
@@ -134,7 +134,7 @@ public class ExtJsStoreGenerator extends WebsiteGenerator{
             for (ListEntry entry : restaurantEntries) {
                 final Restaurant restaurant = new Restaurant(entry);
                 if (restaurant.getReviewURL() == null || restaurant.getReviewURL().isEmpty()) {
-                    entry.getCustomElements().setValueLocal("reviewurl",restaurant.getName());
+                    entry.getCustomElements().setValueLocal("reviewurl", restaurant.getName());
                 }
             }
         }
@@ -156,9 +156,9 @@ public class ExtJsStoreGenerator extends WebsiteGenerator{
                 String tag = (String) iterColum.next();
                 String value = entry.getCustomElements().getValue(tag);
                 if (value != null) {
-                    value = value.replaceAll("\\n","\\\\n");
-                    value = value.replaceAll("\"","'");
-                }else {
+                    value = value.replaceAll("\\n", "\\\\n");
+                    value = value.replaceAll("\"", "'");
+                } else {
                     value = "";
                 }
                 outStr.append("\"").append(value).append("\"");
@@ -172,7 +172,7 @@ public class ExtJsStoreGenerator extends WebsiteGenerator{
             }
         }
         outStr.append("\n];");
-        writeTextToFile(outStr.toString(),path + File.separator + storeName + ".js");
+        writeTextToFile(outStr.toString(), path + File.separator + storeName + ".js");
     }
 
     private List<File> getFileListing(File startDir) throws FileNotFoundException {
@@ -183,11 +183,11 @@ public class ExtJsStoreGenerator extends WebsiteGenerator{
             filesDirs = Arrays.asList(filesAndDirs);
         }
         if (filesDirs != null) {
-            for(File file : filesDirs) {
-                if(file.getPath().contains(".html")){
+            for (File file : filesDirs) {
+                if (file.getPath().contains(".html")) {
                     result.add(file);
                 }
-                if ( ! file.isFile() ) { // if directory
+                if (!file.isFile()) { // if directory
                     List<File> deeperList = getFileListing(file);
                     result.addAll(deeperList);
                 }

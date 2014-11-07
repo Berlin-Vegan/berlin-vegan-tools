@@ -37,7 +37,7 @@ public class WebsiteGenerator extends Generator {
         final Options posixOptions = constructOptions();
         CommandLine commandLine;
         try {
-            commandLine = cmdLinePosixParser.parse(posixOptions,args);
+            commandLine = cmdLinePosixParser.parse(posixOptions, args);
             if (commandLine.hasOption(USER_OPTION)) {
                 userName = commandLine.getOptionValue(USER_OPTION);
             }
@@ -56,7 +56,7 @@ public class WebsiteGenerator extends Generator {
                 password = Environment.getGooglePassword();
             }
 
-        } catch (ParseException parseException){
+        } catch (ParseException parseException) {
             System.err.println(parseException.getMessage());
         }
 
@@ -69,6 +69,7 @@ public class WebsiteGenerator extends Generator {
         options.addOption(OUTPUT_DIR_OPTION, true, "output directory");
         return options;
     }
+    
     public static void setOutputDir(String outputDir) {
         WebsiteGenerator.outputDir = outputDir;
     }
