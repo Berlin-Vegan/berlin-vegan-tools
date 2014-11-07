@@ -154,7 +154,7 @@
         <!--<module name="UncommentedMain"/>-->
         <module name="UpperEll"/>
         <module name="ArrayTypeStyle"/>
-        <!--<module name="Indentation"/>-->
+        <module name="Indentation"/>
         <module name="OuterTypeFilename"/>
         <!--<module name="AvoidEscapedUnicodeCharacters"/>-->
 

@@ -120,7 +120,7 @@ public class Generator {
         Document doc = Jsoup.connect(reviewUrl).get();
         Elements textElements = doc.select("div.entry-content > p");
         for (Element textElement : textElements) {
-                text += textElement.text() + "<br/><br/>";
+            text += textElement.text() + "<br/><br/>";
         }
         return text;
     }

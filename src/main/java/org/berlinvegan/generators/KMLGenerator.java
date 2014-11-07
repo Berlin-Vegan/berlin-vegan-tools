@@ -47,9 +47,9 @@ public class KMLGenerator extends Generator {
             String longPos = entry.getCustomElements().getValue("long");
             String name = textEncode(entry.getCustomElements().getValue("name"));
             //if (i < 5) {
-                final PlaceMark placeMark = new PlaceMark(name, getDescription(entry), latPos, longPos);
-                builder.append(placeMark.toKMLFormat());
-                i++;
+            final PlaceMark placeMark = new PlaceMark(name, getDescription(entry), latPos, longPos);
+            builder.append(placeMark.toKMLFormat());
+            i++;
             //}
 
         }
