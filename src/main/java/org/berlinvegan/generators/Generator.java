@@ -107,7 +107,7 @@ public class Generator {
 //        output.close();
     }
 
-    static public String textEncode(String text) {
+    public static String textEncode(String text) {
         text = text.replaceAll("\"", "\\\\\"");
         text = text.replaceAll("\n", "");
         text = text.replaceAll("\r", "");
@@ -126,7 +126,7 @@ public class Generator {
     }
 
     //parse website and set value value and ranking number to restaurant
-    static protected Rating getRatingFromWebsite(String reviewURL) {
+    protected static Rating getRatingFromWebsite(String reviewURL) {
         Pattern ratingNumberPattern = Pattern.compile(".*\\((.*) Bewertungen.*");
 
 

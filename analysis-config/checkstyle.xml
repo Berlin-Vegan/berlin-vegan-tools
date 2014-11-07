@@ -159,7 +159,7 @@
         <!--<module name="AvoidEscapedUnicodeCharacters"/>-->
 
         <!-- Modifiers -->
-        <!--<module name="ModifierOrder"/>-->
+        <module name="ModifierOrder"/>
         <module name="RedundantModifier"/>
 
         <!-- Naming Conventions -->
