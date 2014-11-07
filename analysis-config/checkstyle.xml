@@ -4,7 +4,7 @@
     "http://www.puppycrawl.com/dtds/configuration_1_3.dtd">
 
 <!-- 
-    Many modules (i.e. rules/checks) are commented out.
+    Many modules (i.e. rules) are commented out.
     Most of them because the code violates them and it has to be fixed before we can enable them.
 -->
 	
@@ -24,7 +24,10 @@
     </module>
 
     <!-- Miscellaneous -->
-    <!--<module name="NewlineAtEndOfFile"/>-->
+    <module name="NewlineAtEndOfFile">
+        <property name="lineSeparator" value="crlf"/>
+        <property name="fileExtensions" value="java"/>
+    </module>
     <!--<module name="Translation"/>-->
     <module name="UniqueProperties"/>
 
