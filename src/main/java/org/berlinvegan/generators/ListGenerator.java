@@ -33,7 +33,7 @@ public class ListGenerator extends WebsiteGenerator {
 
     private void generateList(String language) throws Exception {
         ResourceBundle bundle = ResourceBundle.getBundle("i18n", new Locale(language));
-        final ArrayList<Restaurant> restaurants = getRestaurantsFromServer();
+        final List<Restaurant> restaurants = getRestaurantsFromServer();
         if (!StringUtils.isEmpty(outputDir)) {
             generateListV2(language, bundle, restaurants);
         }
@@ -41,7 +41,7 @@ public class ListGenerator extends WebsiteGenerator {
 
     }
 
-    private void generateListV2(String language, ResourceBundle bundle, ArrayList<Restaurant> restaurants) {
+    private void generateListV2(String language, ResourceBundle bundle, List<Restaurant> restaurants) {
         // Configuration
         Writer fileWriter = null;
         try {
@@ -56,7 +56,7 @@ public class ListGenerator extends WebsiteGenerator {
             input.put("reviewbase", REVIEW_BASE_LOCATION_DE);
             input.put("i18n", bundle);
             input.put("language", language);
-            ArrayList<Restaurant> uniqueRestaurants = getUniqueRestaurants(restaurants);
+            List<Restaurant> uniqueRestaurants = getUniqueRestaurants(restaurants);
             input.put("restaurants", uniqueRestaurants);
 
             // File output
@@ -83,7 +83,7 @@ public class ListGenerator extends WebsiteGenerator {
      * @param restaurants
      * @return
      */
-    private ArrayList<Restaurant> getUniqueRestaurants(ArrayList<Restaurant> restaurants) {
+    private List<Restaurant> getUniqueRestaurants(List<Restaurant> restaurants) {
         ArrayList<Restaurant> result = new ArrayList<Restaurant>();
         HashSet<String> restaurantsDone = new HashSet<String>();
         for (Restaurant restaurant : restaurants) {

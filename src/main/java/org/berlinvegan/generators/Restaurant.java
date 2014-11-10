@@ -45,7 +45,7 @@ public class Restaurant {
     private String[] tags = null;
 
     private Rating rating;
-    private ArrayList<String> districts;
+    private List<String> districts;
 
     public Restaurant(String name, String district, String latCoord, String longCoord, int vegan) {
         this.name = name;
@@ -405,11 +405,11 @@ public class Restaurant {
 
 
 
-    public ArrayList<String> getDistricts() {
+    public List<String> getDistricts() {
         return districts;
     }
 
-    public void setDistricts(ArrayList<String> districts) {
+    public void setDistricts(List<String> districts) {
         this.districts = districts;
     }
 

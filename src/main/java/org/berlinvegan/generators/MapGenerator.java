@@ -39,7 +39,7 @@ public class MapGenerator extends WebsiteGenerator {
         }
     }
 
-    public void generateMap(String language, ArrayList<Restaurant> restaurants) {
+    public void generateMap(String language, List<Restaurant> restaurants) {
         ResourceBundle bundle = ResourceBundle.getBundle("i18n", new Locale(language));
 
         final HashSet<String> districts = new HashSet<String>();

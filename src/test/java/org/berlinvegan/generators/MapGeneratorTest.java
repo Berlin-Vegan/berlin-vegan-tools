@@ -2,6 +2,7 @@ package org.berlinvegan.generators;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -13,6 +14,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Date: 20.07.13
@@ -25,7 +27,7 @@ public class MapGeneratorTest {
 
     @Test
     public void testGenerateCompleteMap() throws Exception {
-        ArrayList<Restaurant> restaurants = getLocalRestaurantsDB();
+        List<Restaurant> restaurants = getLocalRestaurantsDB();
         final MapGenerator generator = new MapGenerator();
         WebsiteGenerator.setOutputDir(TestUtil.getTempDir());
         generator.generateMap("de", restaurants);
@@ -47,7 +49,7 @@ public class MapGeneratorTest {
 
 
 
-    private ArrayList<Restaurant> getLocalRestaurantsDB() throws URISyntaxException, IOException {
+    private List<Restaurant> getLocalRestaurantsDB() throws URISyntaxException, IOException {
         final URL url = getClass().getResource("restaurant_db.json");
         final Path path = Paths.get(url.toURI());
         final String json = new String(Files.readAllBytes(path));

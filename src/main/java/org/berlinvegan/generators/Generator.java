@@ -68,7 +68,7 @@ public class Generator {
     }
 
     /* search the Berlin Vegan Google Docs for Table "Restaurant", download and parse the entries*/
-    public ArrayList<Restaurant> getRestaurantsFromServer() throws Exception {
+    public List<Restaurant> getRestaurantsFromServer() throws Exception {
         final ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
         final List<SpreadsheetEntry> spreadsheetEntries = getSpreadsheetEntries();
         for (SpreadsheetEntry entry : spreadsheetEntries) {

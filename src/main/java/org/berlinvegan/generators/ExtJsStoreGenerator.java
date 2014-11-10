@@ -70,7 +70,7 @@ public class ExtJsStoreGenerator extends WebsiteGenerator {
         }
         // scrape data from website for all locations
 
-        final ArrayList<Restaurant> restaurants = getRestaurantsFromServer();
+        final List<Restaurant> restaurants = getRestaurantsFromServer();
         if (restaurants != null) {
             for (Restaurant restaurant : restaurants) {
                 String reviewURL = restaurant.getReviewURL();

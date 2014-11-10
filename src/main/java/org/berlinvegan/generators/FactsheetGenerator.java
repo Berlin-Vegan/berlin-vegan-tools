@@ -28,7 +28,7 @@ public class FactsheetGenerator extends WebsiteGenerator {
 
     private void generateFactSheets(String language) throws Exception {
         ResourceBundle bundle = ResourceBundle.getBundle("i18n", new Locale(language));
-        final ArrayList<Restaurant> restaurants = getRestaurantsFromServer();
+        final List<Restaurant> restaurants = getRestaurantsFromServer();
         if (!StringUtils.isEmpty(outputDir)) {
             generateFactSheets(language, bundle, restaurants);
         }
@@ -36,7 +36,7 @@ public class FactsheetGenerator extends WebsiteGenerator {
 
     }
 
-    private void generateFactSheets(String language, ResourceBundle bundle, ArrayList<Restaurant> restaurants) {
+    private void generateFactSheets(String language, ResourceBundle bundle, List<Restaurant> restaurants) {
         // Configuration
         Writer fileWriter = null;
         Configuration cfg = new Configuration();
@@ -54,7 +54,7 @@ public class FactsheetGenerator extends WebsiteGenerator {
             for (Restaurant restaurant : restaurants) {
                 String reviewURL = restaurant.getReviewURL();
                 if (!StringUtils.isEmpty(reviewURL) && !restaurantsDone.contains(reviewURL)) {
-                    ArrayList<Restaurant> restaurantBranches = getBranches(reviewURL, restaurants);
+                    List<Restaurant> restaurantBranches = getBranches(reviewURL, restaurants);
                     input.put("branches", restaurantBranches);
                     // File output
                     fileWriter = getUTF8Writer(outputDir + File.separator + reviewURL + ".html");
@@ -86,7 +86,7 @@ public class FactsheetGenerator extends WebsiteGenerator {
      * @param restaurants
      * @return
      */
-    private ArrayList<Restaurant> getBranches(String reviewURL, ArrayList<Restaurant> restaurants) {
+    private List<Restaurant> getBranches(String reviewURL, List<Restaurant> restaurants) {
         ArrayList<Restaurant> list = new ArrayList<Restaurant>();
         for (Restaurant restaurant : restaurants) {
             if (StringUtils.isNotEmpty(restaurant.getReviewURL()) && restaurant.getReviewURL().equals(reviewURL)) {

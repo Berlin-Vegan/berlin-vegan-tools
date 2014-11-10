@@ -112,9 +112,10 @@
         <module name="IllegalThrows"/>
         <module name="PackageDeclaration"/>
         <module name="JUnitTestCase"/>
-        <!--<module name="IllegalType">
+        <module name="IllegalType">
             <property name="ignoredMethodNames" value=""/>
-        </module>-->
+            <property name="tokens" value="PARAMETER_DEF, METHOD_DEF"/>
+        </module>
         <module name="DeclarationOrder"/>
         <!--<module name="ParameterAssignment"/>-->
         <!--<module name="ExplicitInitialization"/>-->
@@ -125,7 +126,7 @@
         <!--<module name="RequireThis"/>-->
         <module name="UnnecessaryParentheses"/>
         <module name="OneStatementPerLine"/>
-        <!--<module name="OverloadMethodsDeclarationOrder"/>-->
+        <!--<module name="OverloadMethodsDeclarationOrder"/> Not yet supported by maven-checkstyle-plugin -->
 
         <!-- Imports -->
         <!--<module name="AvoidStarImport"/>-->
@@ -191,7 +192,7 @@
         <!-- Size Violations -->
         <!--<module name="ExecutableStatementCount"/>-->
         <!--<module name="LineLength">
-            <property name="max" value="105"/>
+            <property name="max" value="108"/>
         </module>-->
         <module name="MethodLength"/>
         <module name="AnonInnerLength">
