@@ -118,7 +118,7 @@
         </module>
         <module name="DeclarationOrder"/>
         <!--<module name="ParameterAssignment"/>-->
-        <!--<module name="ExplicitInitialization"/>-->
+        <module name="ExplicitInitialization"/>
         <module name="DefaultComesLast"/>
         <module name="FallThrough"/>
         <!--<module name="MultipleStringLiterals"/>-->

@@ -42,7 +42,7 @@ public class Restaurant {
     private String comment;
     private int wlan;
     private int glutenFree;
-    private String[] tags = null;
+    private String[] tags;
 
     private Rating rating;
     private List<String> districts;
