@@ -47,10 +47,15 @@
         <module name="MissingDeprecated"/>
         <module name="MissingOverride"/>
         <module name="PackageAnnotation"/>
-        <!--<module name="AnnotationLocation"/>-->
+        <!--<module name="AnnotationLocation"/> Not yet supported by maven-checkstyle-plugin-->
 
         <!-- Blocks checks -->
-        <!--<module name="EmptyBlock"/>-->
+        <module name="EmptyBlock">
+            <!-- Allowing empty catch -->
+            <property name="tokens" 
+                      value="LITERAL_DO, LITERAL_ELSE, LITERAL_FINALLY, LITERAL_IF, LITERAL_FOR, LITERAL_TRY, LITERAL_WHILE, INSTANCE_INIT, STATIC_INIT, LITERAL_SWITCH"
+            />
+        </module>
         <module name="LeftCurly"/>
         <module name="NeedBraces"/>
         <module name="RightCurly"/>
