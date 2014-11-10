@@ -183,7 +183,7 @@
         <module name="MethodTypeParameterName">
             <property name="format" value="^([A-Z]|T[A-Z][a-zA-Z0-9]*)$"/>
         </module>
-        <!--<module name="InterfaceTypeParameterName">
+        <!--<module name="InterfaceTypeParameterName"> Not yet supported by maven-checkstyle-plugin
             <property name="format" value="^([A-Z]|T[A-Z][a-zA-Z0-9]*)$"/>
         </module>-->
         <module name="PackageName"/>
