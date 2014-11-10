@@ -198,7 +198,7 @@
             <property name="max" value="50"/>
         </module>
         <module name="ParameterNumber"/>
-        <!--<module name="OuterTypeNumber"/>-->
+        <module name="OuterTypeNumber"/>
         <module name="MethodCount">
             <property name="maxTotal" value="80"/>
             <property name="maxPrivate" value="80"/>
@@ -214,17 +214,26 @@
         <module name="MethodParamPad"/>
         <module name="NoWhitespaceAfter"/>
         <module name="NoWhitespaceBefore"/>
-        <!--<module name="OperatorWrap"/>-->
+        <module name="OperatorWrap">
+            <!-- Default tokens except PLUS -->
+            <property name="tokens" value="BAND, BOR, BSR, BXOR, COLON, DIV, EQUAL, GE, GT, LAND, LE, LITERAL_INSTANCEOF, LOR, LT, MINUS, MOD, NOT_EQUAL, QUESTION, SL, SR, STAR"/>
+        </module>
         <module name="ParenPad"/>
         <module name="TypecastParenPad"/>
         <module name="WhitespaceAfter"/>
         <!--<module name="WhitespaceAround">
-            <property name="allowEmptyTypes" value="true"/> Desired property, but not yet supported by maven-checkstyle-plugin
+            <property name="allowEmptyTypes" value="true"/> Desired property not yet supported by maven-checkstyle-plugin
         </module>-->
-        <!--<module name="EmptyLineSeparator"> Desired module, but not yet supported by maven-checkstyle-plugin
+        <!--<module name="EmptyLineSeparator"> Not yet supported by maven-checkstyle-plugin
             <property name="allowNoEmptyLineBetweenFields" value="true"/>
         </module>-->
-        <!--<module name="SeparatorWrap"/>-->
-
+        <!--<module name="SeparatorWrap"> Not yet supported by maven-checkstyle-plugin
+            <property name="tokens" value="COMMA"/>
+            <property name="option" value="eol"/>
+        </module>
+        <module name="SeparatorWrap">
+            <property name="tokens" value="DOT"/>
+            <property name="option" value="nl"/>
+        </module>-->
     </module>
 </module>
