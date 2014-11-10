@@ -103,10 +103,10 @@ public class KMLGenerator extends Generator {
 }
 
 class PlaceMark {
-    String name;
-    String description;
-    String latPos;
-    String longPos;
+    private String name;
+    private String description;
+    private String latPos;
+    private String longPos;
 
     PlaceMark(String name, String description, String latPos, String longPos) {
         this.name = name;

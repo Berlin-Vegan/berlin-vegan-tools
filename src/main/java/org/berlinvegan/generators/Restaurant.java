@@ -10,38 +10,38 @@ public class Restaurant {
     public static final String OPEN_TIME_ONE_DAY = "<b>%s</b> %s<br/>";
     public static final String OPEN_TIME_MORE_DAYS = "<b>%s-%s</b> %s<br/>";
 
-    String name;
-    String reviewURL = "";
-    String street = "";
-    int cityCode;
-    String district = "";
-    String latCoord;
-    String longCoord;
-    String bvg = "";
-    String telephone = "";
-    String openComment = "";
-    String website = "";
-    String email = "";
-    String otMon = ""; // open times monday
-    String otTue = "";
-    String otWed = "";
-    String otThu = "";
-    String otFri = "";
-    String otSat = "";
-    String otSun = "";
-    int vegan;
-    int ha; // handicapped accessible
-    int ha_wc;
-    int dog;
-    int childChair;
-    int catering;
-    int delivery;
-    int organic;
-    int seat_out;
-    int seat_in;
-    String comment;
-    int wlan;
-    int glutenFree;
+    private String name;
+    private String reviewURL = "";
+    private String street = "";
+    private int cityCode;
+    private String district = "";
+    private String latCoord;
+    private String longCoord;
+    private String bvg = "";
+    private String telephone = "";
+    private String openComment = "";
+    private String website = "";
+    private String email = "";
+    private String otMon = ""; // open times monday
+    private String otTue = "";
+    private String otWed = "";
+    private String otThu = "";
+    private String otFri = "";
+    private String otSat = "";
+    private String otSun = "";
+    private int vegan;
+    private int ha; // handicapped accessible
+    private int ha_wc;
+    private int dog;
+    private int childChair;
+    private int catering;
+    private int delivery;
+    private int organic;
+    private int seat_out;
+    private int seat_in;
+    private String comment;
+    private int wlan;
+    private int glutenFree;
     private String[] tags = null;
 
     private Rating rating;

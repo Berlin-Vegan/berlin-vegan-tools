@@ -1,8 +1,8 @@
 package org.berlinvegan.generators;
 
 public class Rating {
-    float value;
-    int number;
+    private float value;
+    private int number;
 
     public Rating(float value, int number) {
         this.value = value;
