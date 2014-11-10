@@ -136,11 +136,13 @@
         <!--<module name="ImportOrder"/>-->
 
         <!-- Javadoc Comments -->
-        <!--<module name="JavadocStyle"/>-->
-        <!--<module name="NonEmptyAtclauseDescription"/>-->
-        <!--<module name="SummaryJavadocCheck"/>-->
-        <!--<module name="AtclauseOrder"/>-->
-        <!--<module name="JavadocParagraph"/>-->
+        <module name="JavadocStyle">
+            <property name="checkFirstSentence" value="false"/>
+        </module>
+        <!--<module name="NonEmptyAtclauseDescription"/> Not yet supported by maven-checkstyle-plugin -->
+        <!--<module name="SummaryJavadocCheck"/>         Not yet supported by maven-checkstyle-plugin -->
+        <!--<module name="AtclauseOrder"/>               Not yet supported by maven-checkstyle-plugin -->
+        <!--<module name="JavadocParagraph"/>            Not yet supported by maven-checkstyle-plugin -->
 
         <!-- Metrics -->
         <module name="ClassDataAbstractionCoupling"/>
