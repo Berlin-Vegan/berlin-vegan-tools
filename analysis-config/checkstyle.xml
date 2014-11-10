@@ -73,7 +73,7 @@
         <module name="ThrowsCount">
             <property name="max" value="2"/>
         </module>
-        <!--<module name="OneTopLevelClass"/>-->
+        <!--<module name="OneTopLevelClass"/> Not yet supported by maven-checkstyle-plugin-->
 
         <!-- Coding -->
         <module name="CovariantEquals"/>
