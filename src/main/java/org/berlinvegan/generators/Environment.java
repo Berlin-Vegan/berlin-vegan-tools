@@ -1,8 +1,10 @@
 package org.berlinvegan.generators;
 
-public class Environment {
+public final class Environment {
     public static final String BV_GOOGLE_USER_NAME = "BV_GOOGLE_USER_NAME";
     public static final String BV_GOOGLE_PASSWORD = "BV_GOOGLE_PASSWORD";
+    
+    private Environment() {}
     
     public static String getGoogleUserName() throws Exception {
         final String username = System.getenv(BV_GOOGLE_USER_NAME);
