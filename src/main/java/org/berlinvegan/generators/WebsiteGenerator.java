@@ -1,5 +1,7 @@
 package org.berlinvegan.generators;
 
+import net.davidashen.text.Hyphenator;
+
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.Options;
@@ -11,6 +13,8 @@ import com.google.gdata.util.AuthenticationException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetEncoder;
@@ -24,6 +28,7 @@ public class WebsiteGenerator extends Generator {
     public static final String OUTPUT_DIR_OPTION = "o";
     public static final String WEBSITE_DE = "http://www.berlin-vegan.de";
     public static final String REVIEW_BASE_LOCATION_DE = "/essen-und-trinken/kritiken/";
+    public static final String REVIEW_DE_BASE_URL = "http://www.berlin-vegan.de/essen-und-trinken/kritiken/";
     protected static String outputDir;
     private static String userName;
     private static String password;
@@ -78,5 +83,21 @@ public class WebsiteGenerator extends Generator {
         final File file = new File(filePath);
         final CharsetEncoder encoder = Charset.forName("UTF-8").newEncoder();
         return new OutputStreamWriter(new FileOutputStream(file), encoder);
+    }
+    
+    protected String hyphenate(String text, String language) throws IOException {
+        Hyphenator h = new Hyphenator();
+//        String hyphenBasePath = "generators" + File.separator + "lib" + File.separator + "hyphen" + File.separator;
+        InputStream fileInputStream;
+        if (language.equals(LANG_DE)) {
+            fileInputStream = this.getClass().getClassLoader().getResourceAsStream("org/berlinvegan/generators/dehyphx.tex");
+        } else {
+            fileInputStream = this.getClass().getClassLoader().getResourceAsStream("org/berlinvegan/generators/hyphen.tex");
+        }
+        h.loadTable(fileInputStream);
+
+        text = h.hyphenate(text, 4, 3);
+        text = text.replaceAll("\u00ad", "&shy;");
+        return text;
     }
 }

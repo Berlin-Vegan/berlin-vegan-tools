@@ -3,7 +3,6 @@ package org.berlinvegan.generators;
 import com.google.gdata.data.spreadsheet.*;
 import com.google.gdata.util.AuthenticationException;
 import com.google.gdata.util.ServiceException;
-import net.davidashen.text.Hyphenator;
 import org.apache.commons.cli.HelpFormatter;
 
 import java.io.*;
@@ -11,7 +10,6 @@ import java.util.*;
 
 public class ExtJsStoreGenerator extends WebsiteGenerator {
 
-    public static final String REVIEW_DE_BASE_URL = "http://www.berlin-vegan.de/essen-und-trinken/kritiken/";
     public static final String EXT_NAMESPACE_BVAPP = "Ext.namespace('BVApp','BVApp.data','BVApp.models');";
 
     public ExtJsStoreGenerator() throws AuthenticationException {
@@ -30,22 +28,6 @@ public class ExtJsStoreGenerator extends WebsiteGenerator {
             helpFormatter.printHelp("generateextjsstore", constructOptions());
         }
 
-    }
-
-    private String hyphenate(String text, String language) throws IOException {
-        Hyphenator h = new Hyphenator();
-//        String hyphenBasePath = "generators" + File.separator + "lib" + File.separator + "hyphen" + File.separator;
-        InputStream fileInputStream;
-        if (language.equals(LANG_DE)) {
-            fileInputStream = this.getClass().getClassLoader().getResourceAsStream("org/berlinvegan/generators/dehyphx.tex");
-        } else {
-            fileInputStream = this.getClass().getClassLoader().getResourceAsStream("org/berlinvegan/generators/hyphen.tex");
-        }
-        h.loadTable(fileInputStream);
-
-        text = h.hyphenate(text, 4, 3);
-        text = text.replaceAll("\u00ad", "&shy;");
-        return text;
     }
 
     private void generateTextfilesJS() throws Exception {
