@@ -27,9 +27,9 @@ ${branch1.getOpenTimesHTML("de")}
 <#if branch1.openComment??>
 <p>${branch1.openComment}</p>
 </#if>
-<#if branch1.vegan == 5 || branch1.dog != -1 || branch1.organic == 1 || branch1.glutenFree == 1 || branch1.ha != -1
+<#if branch1.vegan == 5 || branch1.dog != -1 || branch1.organic == 1 || branch1.glutenFree == 1 || branch1.handicappedAccessible != -1
 || branch1.childChair != -1 || branch1.catering == 1 || branch1.delivery == 1
-|| branch1.seat_in != -1 || branch1.seat_out != -1 || branch1.wlan == 1>
+|| branch1.seatsIndoor != -1 || branch1.seatsOutdoor != -1 || branch1.wlan == 1>
 <h4 class="misc">Sonstiges</h4>
 <ul>
     <#if branch1.vegan == 5>
@@ -42,10 +42,10 @@ ${branch1.getOpenTimesHTML("de")}
         <li> glutenfreie Speisen</li>
     </#if>
 
-    <#if branch1.ha != -1>
-        <#if branch1.ha == 1>
+    <#if branch1.handicappedAccessible != -1>
+        <#if branch1.handicappedAccessible == 1>
             <li> Rollstuhl geeignet</li>
-            <#if branch1.ha_wc == 1>
+            <#if branch1.handicappedAccessible_wc == 1>
                 <li> WC Rollstuhl geeignet</li>
             <#else>
                 <li> WC Rollstuhl ungeeignet</li>
@@ -79,13 +79,13 @@ ${branch1.getOpenTimesHTML("de")}
     <#if branch1.delivery == 1>
         <li> Lieferservice</li>
     </#if>
-    <#if branch1.seat_in != -1>
-        <li> Sitzpl‰tze innen: ${branch1.seat_in}</li>
+    <#if branch1.seatsIndoor != -1>
+        <li> Sitzpl‰tze innen: ${branch1.seatsIndoor}</li>
     </#if>
-    <#if branch1.seat_out != -1>
-        <li> Sitzpl‰tze auﬂen: ${branch1.seat_out}</li>
+    <#if branch1.seatsOutdoor != -1>
+        <li> Sitzpl‰tze auﬂen: ${branch1.seatsOutdoor}</li>
     </#if>
-    <#if branch1.seat_out != -1>
+    <#if branch1.seatsOutdoor != -1>
     </#if>
 </ul>
 </#if>

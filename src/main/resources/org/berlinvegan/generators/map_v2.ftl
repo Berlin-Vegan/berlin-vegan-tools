@@ -36,7 +36,7 @@
                 bv_bio: "${restaurant.organic}",
                 bv_glutenFree: "${restaurant.glutenFree}",
                 bv_wlan: "${restaurant.wlan}",
-                bv_rollstuhl: "${restaurant.ha}",
+                bv_rollstuhl: "${restaurant.handicappedAccessible}",
                 bv_vegan: "${restaurant.vegan}",
                 bv_open: ["${restaurant.otMon}", "${restaurant.otTue}", "${restaurant.otWed}", "${restaurant.otThu}", "${restaurant.otFri}", "${restaurant.otSat}", "${restaurant.otSun}"],
                 bv_district: "${restaurant.district}"
