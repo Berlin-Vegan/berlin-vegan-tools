@@ -30,15 +30,15 @@ public class Restaurant {
     private String otSat = "";
     private String otSun = "";
     private int vegan;
-    private int ha; // handicapped accessible
-    private int ha_wc;
+    private int handicappedAccessible;
+    private int handicappedAccessibleWc;
     private int dog;
     private int childChair;
     private int catering;
     private int delivery;
     private int organic;
-    private int seat_out;
-    private int seat_in;
+    private int seatsOutdoor;
+    private int seatsIndoor;
     private String comment;
     private int wlan;
     private int glutenFree;
@@ -78,15 +78,15 @@ public class Restaurant {
         website = elements.getValue("website");
         email = elements.getValue("e-mail");
         vegan = Integer.parseInt(elements.getValue("veganfreundlich"));
-        ha = getIntValue(elements, "restaurantrollstuhlgeeignet");
-        ha_wc = getIntValue(elements, "wcrollstuhlgeignet");
+        handicappedAccessible = getIntValue(elements, "restaurantrollstuhlgeeignet");
+        handicappedAccessibleWc = getIntValue(elements, "wcrollstuhlgeignet");
         dog = getIntValue(elements, "hunde");
         childChair = getIntValue(elements, "kindersitz");
         catering = getIntValue(elements, "catering");
         delivery = getIntValue(elements, "lieferservice");
         organic = getIntValue(elements, "bio");
-        seat_in = getIntValue(elements, "sitzplaetzeinnen");
-        seat_out = getIntValue(elements, "sitzplaetzeaussen");
+        seatsIndoor = getIntValue(elements, "sitzplaetzeinnen");
+        seatsOutdoor = getIntValue(elements, "sitzplaetzeaussen");
         comment = elements.getValue("zusaetzlicherkommentarfuerkarte");
         final String tagStr = elements.getValue("tagsbittenurimbisscaferestaurantundeiscafeverwenden");
         if (tagStr != null) {
@@ -307,20 +307,20 @@ public class Restaurant {
         this.vegan = vegan;
     }
 
-    public int getHa() {
-        return ha;
+    public int getHandicappedAccessible() {
+        return handicappedAccessible;
     }
 
-    public void setHa(int ha) {
-        this.ha = ha;
+    public void setHandicappedAccessible(int handicappedAccessible) {
+        this.handicappedAccessible = handicappedAccessible;
     }
 
-    public int getHa_wc() {
-        return ha_wc;
+    public int getHandicappedAccessibleWc() {
+        return handicappedAccessibleWc;
     }
 
-    public void setHa_wc(int ha_wc) {
-        this.ha_wc = ha_wc;
+    public void setHandicappedAccessibleWc(int handicappedAccessibleWc) {
+        this.handicappedAccessibleWc = handicappedAccessibleWc;
     }
 
     public int getDog() {
@@ -371,20 +371,20 @@ public class Restaurant {
         this.comment = comment;
     }
 
-    public int getSeat_out() {
-        return seat_out;
+    public int getSeatsOutdoor() {
+        return seatsOutdoor;
     }
 
-    public void setSeat_out(int seat_out) {
-        this.seat_out = seat_out;
+    public void setSeatsOutdoor(int seatsOutdoor) {
+        this.seatsOutdoor = seatsOutdoor;
     }
 
-    public int getSeat_in() {
-        return seat_in;
+    public int getSeatsIndoor() {
+        return seatsIndoor;
     }
 
-    public void setSeat_in(int seat_in) {
-        this.seat_in = seat_in;
+    public void setSeatsIndoor(int seatsIndoor) {
+        this.seatsIndoor = seatsIndoor;
     }
 
     public int getWlan() {
@@ -498,15 +498,15 @@ public class Restaurant {
             ", otSat='" + otSat + '\'' +
             ", otSun='" + otSun + '\'' +
             ", vegan=" + vegan +
-            ", ha=" + ha +
-            ", ha_wc=" + ha_wc +
+            ", ha=" + handicappedAccessible +
+            ", ha_wc=" + handicappedAccessibleWc +
             ", dog=" + dog +
             ", childChair=" + childChair +
             ", catering=" + catering +
             ", delivery=" + delivery +
             ", organic=" + organic +
-            ", seat_out=" + seat_out +
-            ", seat_in=" + seat_in +
+            ", seat_out=" + seatsOutdoor +
+            ", seat_in=" + seatsIndoor +
             ", comment='" + comment + '\'' +
             ", wlan=" + wlan +
             ", glutenFree=" + glutenFree +
