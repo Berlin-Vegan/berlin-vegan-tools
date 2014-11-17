@@ -56,7 +56,9 @@ public class Generator {
         return service.getFeed(listFeedUrl, ListFeed.class);
     }
 
-    public List<ListEntry> addEntries(List<ListEntry> entries, SpreadsheetEntry spreadsheet) throws IOException, ServiceException {
+    public List<ListEntry> addEntries(List<ListEntry> entries, SpreadsheetEntry spreadsheet) 
+        throws IOException, ServiceException {
+        
         URL listFeedUrl = spreadsheet.getDefaultWorksheet().getListFeedUrl();
         ListFeed feed = getFeed(listFeedUrl);
         if (entries == null) {
@@ -86,7 +88,8 @@ public class Generator {
             String reviewURL = restaurant.getReviewURL();
             if (reviewURL != null) {
                 for (Restaurant rest : restaurants) {
-                    if (reviewURL.equalsIgnoreCase(rest.getReviewURL()) && !districts.contains(rest.getDistrict())) {
+                    if (reviewURL.equalsIgnoreCase(rest.getReviewURL()) 
+                        && !districts.contains(rest.getDistrict())) {
                         districts.add(rest.getDistrict());
                     }
                 }

@@ -89,7 +89,8 @@ public class FactsheetGenerator extends WebsiteGenerator {
     private List<Restaurant> getBranches(String reviewURL, List<Restaurant> restaurants) {
         ArrayList<Restaurant> list = new ArrayList<Restaurant>();
         for (Restaurant restaurant : restaurants) {
-            if (StringUtils.isNotEmpty(restaurant.getReviewURL()) && restaurant.getReviewURL().equals(reviewURL)) {
+            String url = restaurant.getReviewURL();
+            if (StringUtils.isNotEmpty(url) && url.equals(reviewURL)) {
                 list.add(restaurant);
             }
         }

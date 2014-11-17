@@ -2,7 +2,6 @@ package org.berlinvegan.generators;
 
 import com.google.gdata.data.spreadsheet.*;
 import com.google.gdata.util.AuthenticationException;
-import com.google.gdata.util.ServiceException;
 import org.apache.commons.cli.HelpFormatter;
 
 import java.io.*;
@@ -61,7 +60,9 @@ public class ExtJsStoreGenerator extends WebsiteGenerator {
                     locationText = textEncode(locationText);
                     locationText = hyphenate(locationText, LANG_DE);
                     filesMap.put("reviews/de/" + reviewURL + ".html", locationText);
-                } else { // no review available, take the short comment, just set the reviewURL to restaurant name
+                } else { 
+                    // no review available, take the short comment, 
+                    // just set the reviewURL to restaurant name
                     String comment = restaurant.getComment();
                     if (comment != null) {
                         comment = textEncode(comment);
@@ -76,7 +77,11 @@ public class ExtJsStoreGenerator extends WebsiteGenerator {
         builder.append(EXT_NAMESPACE_BVAPP);
         builder.append("BVApp.models.Data= [];");
         for (String fileName : filesMap.keySet()) {
-            builder.append("\nBVApp.models.Data[\"").append(fileName).append("\"] =\"").append(filesMap.get(fileName)).append("\";");
+            builder.append("\nBVApp.models.Data[\"")
+                .append(fileName)
+                .append("\"] =\"")
+                .append(filesMap.get(fileName))
+                .append("\";");
         }
         writeTextToFile(builder.toString(), outputDir + File.separator + "Textfiles.js");
     }
@@ -111,7 +116,8 @@ public class ExtJsStoreGenerator extends WebsiteGenerator {
             }
         }
 
-        // if no review available,just set restaurant name, app will then use short comment, see generateTextfilesJS()
+        // if no review available, just set restaurant name, app will then use short comment, 
+        // see generateTextfilesJS()
         if (restaurantEntries != null) {
             for (ListEntry entry : restaurantEntries) {
                 final Restaurant restaurant = new Restaurant(entry);
@@ -125,7 +131,7 @@ public class ExtJsStoreGenerator extends WebsiteGenerator {
         generateStore(cafeEntries, "CafeStoreData", outputDir);
     }
 
-    private void generateStore(List<ListEntry> entries, String storeName, String path) throws IOException, ServiceException {
+    private void generateStore(List<ListEntry> entries, String storeName, String path) throws IOException {
         StringBuilder outStr = new StringBuilder();
         outStr.append(EXT_NAMESPACE_BVAPP);
         outStr.append("BVApp.data.").append(storeName).append("=[\n");

@@ -28,7 +28,8 @@ public class WebsiteGenerator extends Generator {
     public static final String OUTPUT_DIR_OPTION = "o";
     public static final String WEBSITE_DE = "http://www.berlin-vegan.de";
     public static final String REVIEW_BASE_LOCATION_DE = "/essen-und-trinken/kritiken/";
-    public static final String REVIEW_DE_BASE_URL = "http://www.berlin-vegan.de/essen-und-trinken/kritiken/";
+    public static final String REVIEW_DE_BASE_URL = 
+        "http://www.berlin-vegan.de/essen-und-trinken/kritiken/";
     protected static String outputDir;
     private static String userName;
     private static String password;
@@ -87,13 +88,11 @@ public class WebsiteGenerator extends Generator {
     
     protected String hyphenate(String text, String language) throws IOException {
         Hyphenator h = new Hyphenator();
-//        String hyphenBasePath = "generators" + File.separator + "lib" + File.separator + "hyphen" + File.separator;
-        InputStream fileInputStream;
-        if (language.equals(LANG_DE)) {
-            fileInputStream = this.getClass().getClassLoader().getResourceAsStream("org/berlinvegan/generators/dehyphx.tex");
-        } else {
-            fileInputStream = this.getClass().getClassLoader().getResourceAsStream("org/berlinvegan/generators/hyphen.tex");
-        }
+        
+        String resourceName = 
+            "org/berlinvegan/generators/" + (language.equals(LANG_DE) ? "dehyphx.tex" : "hyphen.tex");
+        
+        InputStream fileInputStream = this.getClass().getClassLoader().getResourceAsStream(resourceName);
         h.loadTable(fileInputStream);
 
         text = h.hyphenate(text, 4, 3);

@@ -441,31 +441,47 @@ public class Restaurant {
         openTimes[5] = otSat;
         openTimes[6] = otSun;
         StringBuilder result = new StringBuilder();
-        if (!openTimes[0].isEmpty() || !openTimes[1].isEmpty() || !openTimes[2].isEmpty() || !openTimes[3].isEmpty() || !openTimes[4].isEmpty() || !openTimes[5]
-            .isEmpty() || !openTimes[6].isEmpty()) {
+        
+        boolean openTimesAvailable = 
+            !openTimes[0].isEmpty() 
+            || !openTimes[1].isEmpty() 
+            || !openTimes[2].isEmpty() 
+            || !openTimes[3].isEmpty() 
+            || !openTimes[4].isEmpty() 
+            || !openTimes[5].isEmpty() 
+            || !openTimes[6].isEmpty();
+        
+        if (openTimesAvailable) {
             int equalStart = -1;
             for (int i = 0; i <= 6; i++) {
-                if (i < 6 && openTimes[i].equalsIgnoreCase(openTimes[i + 1])) { // nachfolger identisch, mach weiter
+                if (i < 6 && openTimes[i].equalsIgnoreCase(openTimes[i + 1])) { 
+                    // nachfolger identisch, mach weiter
                     if (equalStart == -1) {
                         equalStart = i;
                     }
                 } else {
-                    if (equalStart == -1) { // aktueller    Tag ist einmalig
-                        if (openTimes[i].isEmpty()) { // geschlossen
+                    if (equalStart == -1) { 
+                        // aktueller Tag ist einmalig
+                        if (openTimes[i].isEmpty()) { 
+                            // geschlossen
                             String str = String.format(OPEN_TIME_ONE_DAY, weekdaysNames[i], "geschlossen");
                             result.append(str);
                         } else {
-                            String str = String.format(OPEN_TIME_ONE_DAY, weekdaysNames[i], openTimes[i] + " Uhr");
+                            String str = 
+                                String.format(OPEN_TIME_ONE_DAY, weekdaysNames[i], openTimes[i] + " Uhr");
                             result.append(str);
                         }
-                    } else { // es gibt zusammenhaengende Tage
-                        if (openTimes[i].isEmpty()) {
-                            String str = String.format(OPEN_TIME_MORE_DAYS, weekdaysNames[equalStart], weekdaysNames[i], "geschlossen");
-                            result.append(str);
-                        } else {
-                            String str = String.format(OPEN_TIME_MORE_DAYS, weekdaysNames[equalStart], weekdaysNames[i], openTimes[i] + " Uhr");
-                            result.append(str);
-                        }
+                    } else { 
+                        // es gibt zusammenhaengende Tage
+                        String openTimesText = 
+                            openTimes[i].isEmpty() ? "geschlossen" : openTimes[i] + " Uhr";
+                        String str = 
+                            String.format(
+                                OPEN_TIME_MORE_DAYS, 
+                                weekdaysNames[equalStart], 
+                                weekdaysNames[i], 
+                                openTimesText);
+                        result.append(str);
                         equalStart = -1;
                     }
                 }

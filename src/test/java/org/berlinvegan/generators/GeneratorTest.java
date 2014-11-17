@@ -9,7 +9,8 @@ public class GeneratorTest {
     @Test
     @Ignore
     public void testSetRatingFromWebsite() throws Exception {
-        Rating rating = Generator.getRatingFromWebsite("http://www.berlin-vegan.de/berlin/restaurantkritiken/chay-viet");
+        final String url = "http://www.berlin-vegan.de/berlin/restaurantkritiken/chay-viet";
+        Rating rating = Generator.getRatingFromWebsite(url);
         assertTrue(rating.getNumber() > 29);
     }
 }
