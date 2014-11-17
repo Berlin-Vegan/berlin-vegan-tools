@@ -27,7 +27,7 @@
     <module name="NewlineAtEndOfFile">
         <property name="fileExtensions" value="java"/>
     </module>
-    <!--<module name="Translation"/>-->
+    <module name="Translation"/>
     <module name="UniqueProperties"/>
 
     <!-- Whitespace -->
