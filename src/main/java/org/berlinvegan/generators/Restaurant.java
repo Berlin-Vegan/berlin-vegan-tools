@@ -1,8 +1,6 @@
 package org.berlinvegan.generators;
 
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
 import com.google.gdata.data.spreadsheet.CustomElementCollection;
