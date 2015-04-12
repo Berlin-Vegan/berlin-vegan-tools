@@ -40,7 +40,7 @@ public class WebsiteGenerator extends Generator {
 
     protected static void parseOptions(String[] args) throws Exception {
         final CommandLineParser cmdLinePosixParser = new PosixParser();
-        final Options posixOptions = constructOptions();
+        final Options posixOptions = constructOptions(true);
         CommandLine commandLine;
         try {
             commandLine = cmdLinePosixParser.parse(posixOptions, args);
@@ -67,12 +67,16 @@ public class WebsiteGenerator extends Generator {
         }
 
     }
-
     public static Options constructOptions() {
+        return constructOptions(true);
+    }
+    public static Options constructOptions(boolean withOutputDir) {
         final Options options = new Options();
         options.addOption(USER_OPTION, true, "user name");
         options.addOption(PASSWORD_OPTION, true, "password");
-        options.addOption(OUTPUT_DIR_OPTION, true, "output directory");
+        if (withOutputDir) {
+            options.addOption(OUTPUT_DIR_OPTION, true, "output directory");
+        }
         return options;
     }
     

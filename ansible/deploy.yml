@@ -12,4 +12,4 @@
     - name: clone app repository
       git: repo={{app_repo}} dest={{app_root}} accept_hostkey=yes
     - name: build assemly with maven
-      command: mvn assembly:assembly -DdescriptorId=jar-with-dependencies chdir={{app_root}}
+      command: mvn clean assembly:assembly -DdescriptorId=jar-with-dependencies chdir={{app_root}}

@@ -8,8 +8,8 @@
 <h4 class='address'>Adresse</h4>
 <#list branches as branch>
 <p>${branch.street}<br/>${branch.cityCode?c} ${branch.district}
-    <#if branch.bvg??>
-        <br/>${branch.bvg}
+    <#if branch.publicTransport??>
+        <br/>${branch.publicTransport}
     </#if>
 </p>
     <#if branch.telephone??>

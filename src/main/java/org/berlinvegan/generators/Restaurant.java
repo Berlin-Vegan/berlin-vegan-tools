@@ -1,23 +1,27 @@
 package org.berlinvegan.generators;
 
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
 import com.google.gdata.data.spreadsheet.CustomElementCollection;
 import com.google.gdata.data.spreadsheet.ListEntry;
+import org.apache.commons.codec.digest.DigestUtils;
 
 public class Restaurant {
     public static final String OPEN_TIME_ONE_DAY = "<b>%s</b> %s<br/>";
     public static final String OPEN_TIME_MORE_DAYS = "<b>%s-%s</b> %s<br/>";
-
+    private String id;
     private String name;
     private String reviewURL = "";
     private String street = "";
     private int cityCode;
+    private String city = "Berlin";
     private String district = "";
-    private String latCoord;
-    private String longCoord;
-    private String bvg = "";
+    private double latCoord;
+    private double longCoord;
+    private String publicTransport = "";
     private String telephone = "";
     private String openComment = "";
     private String website = "";
@@ -44,10 +48,9 @@ public class Restaurant {
     private int glutenFree;
     private String[] tags;
 
-    private Rating rating;
     private List<String> districts;
 
-    public Restaurant(String name, String district, String latCoord, String longCoord, int vegan) {
+    public Restaurant(String name, String district, double latCoord, double longCoord, int vegan) {
         this.name = name;
         this.district = district;
         this.latCoord = latCoord;
@@ -59,13 +62,16 @@ public class Restaurant {
         final CustomElementCollection elements = entry.getCustomElements();
         //printColumnHeaderNames(elements);
         name = elements.getValue("name");
+        if (name == null) {
+            throw new IllegalArgumentException("name must be set");
+        }
         reviewURL = elements.getValue("reviewurl");
         street = Generator.textEncode(elements.getValue("strasse"));
         cityCode = Integer.parseInt(elements.getValue("postleitzahl"));
         district = elements.getValue("stadtbezirk");
-        latCoord = elements.getValue("lat");
-        longCoord = elements.getValue("long");
-        bvg = elements.getValue("bvganfahrt");
+        latCoord = Double.parseDouble(elements.getValue("lat"));
+        longCoord = Double.parseDouble(elements.getValue("long"));
+        publicTransport = elements.getValue("bvganfahrt");
         telephone = elements.getValue("telefon");
         otMon = getStringValue(elements, "mo");
         otTue = getStringValue(elements, "di");
@@ -94,11 +100,15 @@ public class Restaurant {
         }
         wlan = getIntValue(elements, "wlan");
         glutenFree = getIntValue(elements, "glutenfrei");
-        rating = new Rating(0, 0);
 
-
+        // "generate unique id
+        id = generateId();
     }
 
+    private String generateId() {
+        final String idStr = name + latCoord + longCoord;
+        return DigestUtils.md5Hex(idStr);
+    }
     private void printColumnHeaderNames(CustomElementCollection elements) {
         final Set<String> columnHeaderNames = elements.getTags();
         for (String tag : columnHeaderNames) {
@@ -187,28 +197,28 @@ public class Restaurant {
         this.district = district;
     }
 
-    public String getLatCoord() {
+    public double getLatCoord() {
         return latCoord;
     }
 
-    public void setLatCoord(String latCoord) {
+    public void setLatCoord(double latCoord) {
         this.latCoord = latCoord;
     }
 
-    public String getLongCoord() {
+    public double getLongCoord() {
         return longCoord;
     }
 
-    public void setLongCoord(String longCoord) {
+    public void setLongCoord(double longCoord) {
         this.longCoord = longCoord;
     }
 
-    public String getBvg() {
-        return bvg;
+    public String getPublicTransport() {
+        return publicTransport;
     }
 
-    public void setBvg(String bvg) {
-        this.bvg = bvg;
+    public void setPublicTransport(String publicTransport) {
+        this.publicTransport = publicTransport;
     }
 
     public String getTelephone() {
@@ -412,13 +422,19 @@ public class Restaurant {
     public void setDistricts(List<String> districts) {
         this.districts = districts;
     }
-
-    public Rating getRating() {
-        return rating;
+    public String getCity() {
+        return city;
     }
 
-    public void setRating(Rating rating) {
-        this.rating = rating;
+    public void setCity(String city) {
+        this.city = city;
+    }
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getOpenTimesHTML(String language) {
@@ -501,7 +517,7 @@ public class Restaurant {
             ", district='" + district + '\'' +
             ", latCoord='" + latCoord + '\'' +
             ", longCoord='" + longCoord + '\'' +
-            ", bvg='" + bvg + '\'' +
+            ", publicTransport='" + publicTransport + '\'' +
             ", telephone='" + telephone + '\'' +
             ", openComment='" + openComment + '\'' +
             ", website='" + website + '\'' +
@@ -529,4 +545,7 @@ public class Restaurant {
             ", tags=" + (tags == null ? null : Arrays.asList(tags)) +
             '}';
     }
+
+
+
 }

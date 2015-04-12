@@ -40,9 +40,9 @@ public class MapGeneratorTest {
         final String outputDir = tempFolder.getRoot().getAbsolutePath();
         WebsiteGenerator.setOutputDir(outputDir);
         final ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
-        Restaurant restaurant = new Restaurant("name1", "Kreuzberg", "52.49905", "13.42999", 2);
+        Restaurant restaurant = new Restaurant("name1", "Kreuzberg", 52.49905, 13.42999, 2);
         restaurants.add(restaurant);
-        restaurant = new Restaurant("name2", "Mitte/Wedding", "52.48905", "13.43999", 2);
+        restaurant = new Restaurant("name2", "Mitte/Wedding", 52.48905, 13.43999, 2);
         restaurants.add(restaurant);
         generator.generateMap("de", restaurants);
     }

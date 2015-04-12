@@ -2,6 +2,7 @@ package org.berlinvegan.generators;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.util.List;
 
 import org.apache.commons.cli.HelpFormatter;
@@ -16,13 +17,13 @@ public class JsonGenerator extends WebsiteGenerator {
     }
     
     public static void main(String[] args) throws Exception {
-        if (args.length == 6) {  // 3 options with 1 value
+        if (args.length == 4) {  // 2 options with 1 value
             parseOptions(args);
             JsonGenerator generator = new JsonGenerator();
             generator.generate();
         } else {
             final HelpFormatter helpFormatter = new HelpFormatter();
-            helpFormatter.printHelp("generatefactsheets", constructOptions());
+            helpFormatter.printHelp("generate json", constructOptions(false));
         }
     }
 
@@ -30,7 +31,8 @@ public class JsonGenerator extends WebsiteGenerator {
         final List<Restaurant> restaurants = getRestaurantsFromServer();
         augmentWithReviews(restaurants);
         String json = new Gson().toJson(restaurants);
-        writeTextToFile(json, outputDir + File.separator + "Locations.json");
+        PrintStream out = new PrintStream(System.out, true, "UTF-8");
+        out.println(json);
     }
     
     private void augmentWithReviews(List<Restaurant> restaurants) throws IOException {
