@@ -8,6 +8,7 @@ import org.apache.commons.cli.HelpFormatter;
 
 import com.google.gdata.util.AuthenticationException;
 import com.google.gson.Gson;
+import org.apache.commons.lang3.StringUtils;
 
 public class JsonGenerator extends WebsiteGenerator {
     
@@ -30,8 +31,10 @@ public class JsonGenerator extends WebsiteGenerator {
         final List<Restaurant> restaurants = getRestaurantsFromServer();
         augmentWithReviews(restaurants);
         String json = new Gson().toJson(restaurants);
-        PrintStream out = new PrintStream(System.out, true, "UTF-8");
-        out.println(json);
+        if (StringUtils.isNotEmpty(json)) {
+            PrintStream out = new PrintStream(System.out, true, "UTF-8");
+            out.println(json);
+        }
     }
     
     private void augmentWithReviews(List<Restaurant> restaurants) throws IOException {
