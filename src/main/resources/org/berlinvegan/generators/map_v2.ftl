@@ -27,7 +27,7 @@
     <#assign i=0>
     <#list restaurants as restaurant>
         <#if restaurant.latCoord??>
-            latlng = new google.maps.LatLng(${restaurant.latCoord},${restaurant.longCoord});
+            latlng = new google.maps.LatLng(${restaurant.latCoord?string["0.#######"]},${restaurant.longCoord?string["0.#######"]});
             markersArray[${i}] = new google.maps.Marker({
                 position: latlng,
                 map: map,
