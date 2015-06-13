@@ -1,17 +1,15 @@
 package org.berlinvegan.generators;
 
-import java.io.IOException;
-import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.commons.cli.HelpFormatter;
-
 import com.google.gdata.util.AuthenticationException;
 import com.google.gson.Gson;
+import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+
+import java.io.IOException;
+import java.io.PrintStream;
+import java.util.List;
 
 public class JsonGenerator extends WebsiteGenerator {
     
