@@ -48,7 +48,7 @@
                     infoStr += '<br/><a href="${reviewbase}${restaurant.reviewURL}">${restaurant.name} Restaurantkritik</a>';
                 <#else>
                     <#if restaurant.comment??>
-                        infoStr += '<br/><br/>${restaurant.comment}';
+                        infoStr += '<br/><br/>${restaurant.comment?js_string}';
                     </#if>
                 </#if>
 
