@@ -3,6 +3,8 @@ package org.berlinvegan.generators;
 import com.google.gdata.data.spreadsheet.*;
 import com.google.gdata.util.AuthenticationException;
 import org.apache.commons.cli.HelpFormatter;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 
 import java.io.*;
 import java.util.*;
@@ -56,7 +58,8 @@ public class ExtJsStoreGenerator extends WebsiteGenerator {
             for (Restaurant restaurant : restaurants) {
                 String reviewURL = restaurant.getReviewURL();
                 if (reviewURL != null && !reviewURL.isEmpty()) {
-                    String locationText = getLocationTextFromWebsite(REVIEW_DE_BASE_URL + reviewURL);
+                    Document doc = Jsoup.connect(REVIEW_DE_BASE_URL + reviewURL).get();
+                    String locationText = getLocationTextFromWebsite(doc);
                     locationText = textEncode(locationText);
                     locationText = hyphenate(locationText, LANG_DE);
                     filesMap.put("reviews/de/" + reviewURL + ".html", locationText);

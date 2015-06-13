@@ -47,6 +47,7 @@ public class Restaurant {
     private String[] tags;
 
     private List<String> districts;
+    private ArrayList<Picture> pictures;
 
     public Restaurant(String name, String district, double latCoord, double longCoord, int vegan) {
         this.name = name;
@@ -505,45 +506,54 @@ public class Restaurant {
         return result.toString();
     }
 
+    public void setPictures(ArrayList<Picture> pictures) {
+        this.pictures = pictures;
+    }
+
+    public ArrayList<Picture> getPictures() {
+        return pictures;
+    }
+
     @Override
     public String toString() {
         return "Restaurant{" +
-            "name='" + name + '\'' +
-            ", reviewURL='" + reviewURL + '\'' +
-            ", street='" + street + '\'' +
-            ", cityCode=" + cityCode +
-            ", district='" + district + '\'' +
-            ", latCoord='" + latCoord + '\'' +
-            ", longCoord='" + longCoord + '\'' +
-            ", publicTransport='" + publicTransport + '\'' +
-            ", telephone='" + telephone + '\'' +
-            ", openComment='" + openComment + '\'' +
-            ", website='" + website + '\'' +
-            ", email='" + email + '\'' +
-            ", otMon='" + otMon + '\'' +
-            ", otTue='" + otTue + '\'' +
-            ", otWed='" + otWed + '\'' +
-            ", otThu='" + otThu + '\'' +
-            ", otFri='" + otFri + '\'' +
-            ", otSat='" + otSat + '\'' +
-            ", otSun='" + otSun + '\'' +
-            ", vegan=" + vegan +
-            ", ha=" + handicappedAccessible +
-            ", ha_wc=" + handicappedAccessibleWc +
-            ", dog=" + dog +
-            ", childChair=" + childChair +
-            ", catering=" + catering +
-            ", delivery=" + delivery +
-            ", organic=" + organic +
-            ", seat_out=" + seatsOutdoor +
-            ", seat_in=" + seatsIndoor +
-            ", comment='" + comment + '\'' +
-            ", wlan=" + wlan +
-            ", glutenFree=" + glutenFree +
-            ", tags=" + (tags == null ? null : Arrays.asList(tags)) +
-            '}';
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", reviewURL='" + reviewURL + '\'' +
+                ", street='" + street + '\'' +
+                ", cityCode=" + cityCode +
+                ", city='" + city + '\'' +
+                ", district='" + district + '\'' +
+                ", latCoord=" + latCoord +
+                ", longCoord=" + longCoord +
+                ", publicTransport='" + publicTransport + '\'' +
+                ", telephone='" + telephone + '\'' +
+                ", openComment='" + openComment + '\'' +
+                ", website='" + website + '\'' +
+                ", email='" + email + '\'' +
+                ", otMon='" + otMon + '\'' +
+                ", otTue='" + otTue + '\'' +
+                ", otWed='" + otWed + '\'' +
+                ", otThu='" + otThu + '\'' +
+                ", otFri='" + otFri + '\'' +
+                ", otSat='" + otSat + '\'' +
+                ", otSun='" + otSun + '\'' +
+                ", vegan=" + vegan +
+                ", handicappedAccessible=" + handicappedAccessible +
+                ", handicappedAccessibleWc=" + handicappedAccessibleWc +
+                ", dog=" + dog +
+                ", childChair=" + childChair +
+                ", catering=" + catering +
+                ", delivery=" + delivery +
+                ", organic=" + organic +
+                ", seatsOutdoor=" + seatsOutdoor +
+                ", seatsIndoor=" + seatsIndoor +
+                ", comment='" + comment + '\'' +
+                ", wlan=" + wlan +
+                ", glutenFree=" + glutenFree +
+                ", tags=" + Arrays.toString(tags) +
+                ", districts=" + districts +
+                ", pictures=" + pictures +
+                '}';
     }
-
-
-
 }

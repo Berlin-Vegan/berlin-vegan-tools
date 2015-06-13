@@ -9,6 +9,7 @@ import com.google.gdata.data.spreadsheet.SpreadsheetFeed;
 import com.google.gdata.util.AuthenticationException;
 import com.google.gdata.util.ServiceException;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -56,9 +57,9 @@ public class Generator {
         return service.getFeed(listFeedUrl, ListFeed.class);
     }
 
-    public List<ListEntry> addEntries(List<ListEntry> entries, SpreadsheetEntry spreadsheet) 
-        throws IOException, ServiceException {
-        
+    public List<ListEntry> addEntries(List<ListEntry> entries, SpreadsheetEntry spreadsheet)
+            throws IOException, ServiceException {
+
         URL listFeedUrl = spreadsheet.getDefaultWorksheet().getListFeedUrl();
         ListFeed feed = getFeed(listFeedUrl);
         if (entries == null) {
@@ -88,8 +89,8 @@ public class Generator {
             String reviewURL = restaurant.getReviewURL();
             if (reviewURL != null) {
                 for (Restaurant rest : restaurants) {
-                    if (reviewURL.equalsIgnoreCase(rest.getReviewURL()) 
-                        && !districts.contains(rest.getDistrict())) {
+                    if (reviewURL.equalsIgnoreCase(rest.getReviewURL())
+                            && !districts.contains(rest.getDistrict())) {
                         districts.add(rest.getDistrict());
                     }
                 }
@@ -118,37 +119,45 @@ public class Generator {
         return text;
     }
 
-    protected String getLocationTextFromWebsite(String reviewUrl) throws IOException {
+    protected String getLocationTextFromWebsite(Document document) throws IOException {
         String text = "";
-        Document doc = Jsoup.connect(reviewUrl).get();
-        Elements textElements = doc.select("div.entry-content > p");
+        Elements textElements = document.select("div.entry-content > p");
         for (Element textElement : textElements) {
             text += textElement.text() + "<br/><br/>";
         }
         return text;
     }
 
-    //parse website and set value value and ranking number to restaurant
-    protected static Rating getRatingFromWebsite(String reviewURL) {
-        Pattern ratingNumberPattern = Pattern.compile(".*\\((.*) Bewertungen.*");
-
-
-        try {
-            Document doc = Jsoup.connect(reviewURL).timeout(6000).get();
-            Elements valueElem = doc.select(".ranking b");
-            float value = Float.parseFloat(valueElem.text());
-
-            Elements numberElem = doc.select(".ranking");
-            String numberStr = numberElem.text();
-            Matcher matcher = ratingNumberPattern.matcher(numberStr);
-            if (matcher.matches()) {
-                int number = Integer.parseInt(matcher.group(1));
-                return new Rating(value, number);
+    protected ArrayList<Picture> getLocationPicturesFromWebsite(Document document) {
+        final ArrayList<Picture> pictures = new ArrayList<>();
+        final Elements elements = document.select("div > a > img");
+        for (Element element : elements) {
+            final Picture picture = parsePicture(element);
+            if (picture != null) {
+                pictures.add(picture);
             }
-        } catch (Exception ignored) {
-
         }
+        return pictures;
+    }
 
+    private Picture parsePicture(Element element) {
+        final String url = element.attr("data-orig-file");
+        if (isPicture(url)) {
+            final String sizeString = element.attr("data-orig-size");
+            if (StringUtils.isNotEmpty(sizeString)) {
+                final String[] sizeArray = sizeString.split(",");
+                int width = Integer.parseInt(sizeArray[0]);
+                int height = Integer.parseInt(sizeArray[1]);
+                return new Picture(url, width, height);
+
+            }
+        }
         return null;
     }
+
+    private boolean isPicture(String url) {
+        return StringUtils.endsWithIgnoreCase(url, "jpg");
+    }
+
+
 }
