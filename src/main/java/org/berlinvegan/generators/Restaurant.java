@@ -47,7 +47,7 @@ public class Restaurant {
     private String[] tags;
 
     private List<String> districts;
-    private ArrayList<Picture> pictures;
+    private List<Picture> pictures;
 
     public Restaurant(String name, String district, double latCoord, double longCoord, int vegan) {
         this.name = name;
@@ -506,11 +506,11 @@ public class Restaurant {
         return result.toString();
     }
 
-    public void setPictures(ArrayList<Picture> pictures) {
+    public void setPictures(List<Picture> pictures) {
         this.pictures = pictures;
     }
 
-    public ArrayList<Picture> getPictures() {
+    public List<Picture> getPictures() {
         return pictures;
     }
 

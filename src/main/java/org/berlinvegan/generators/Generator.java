@@ -10,7 +10,6 @@ import com.google.gdata.util.AuthenticationException;
 import com.google.gdata.util.ServiceException;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -20,8 +19,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Date: 22.07.12
@@ -57,6 +54,7 @@ public class Generator {
         return service.getFeed(listFeedUrl, ListFeed.class);
     }
 
+    @SuppressWarnings("checkstyle:indentation")
     public List<ListEntry> addEntries(List<ListEntry> entries, SpreadsheetEntry spreadsheet)
             throws IOException, ServiceException {
 
@@ -128,7 +126,7 @@ public class Generator {
         return text;
     }
 
-    protected ArrayList<Picture> getLocationPicturesFromWebsite(Document document) {
+    protected List<Picture> getLocationPicturesFromWebsite(Document document) {
         final ArrayList<Picture> pictures = new ArrayList<>();
         final Elements elements = document.select("div > a > img");
         for (Element element : elements) {

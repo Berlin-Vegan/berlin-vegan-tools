@@ -2,9 +2,9 @@ package org.berlinvegan.generators;
 
 
 public class Picture {
-    String url;
-    int width;
-    int height;
+    private String url;
+    private int width;
+    private int height;
 
     public Picture(String url, int width, int height) {
         this.url = url;

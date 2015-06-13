@@ -57,7 +57,7 @@ public class JsonGenerator extends WebsiteGenerator {
             review = hyphenate(review, LANG_DE);
             restaurant.setComment(review);
 
-            final ArrayList<Picture> pictures = getLocationPicturesFromWebsite(doc);
+            final List<Picture> pictures = getLocationPicturesFromWebsite(doc);
             restaurant.setPictures(pictures);
         }
     }
