@@ -194,7 +194,7 @@
         <!-- Size Violations -->
         <!--<module name="ExecutableStatementCount"/>-->
         <module name="LineLength">
-            <property name="max" value="108"/>
+            <property name="max" value="120"/>
         </module>
         <module name="MethodLength"/>
         <module name="AnonInnerLength">
