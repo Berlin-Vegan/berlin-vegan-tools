@@ -1,12 +1,15 @@
 package org.berlinvegan.generators;
 
+import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
+import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
+import com.google.api.client.http.HttpTransport;
+import com.google.api.client.json.jackson.JacksonFactory;
 import com.google.gdata.client.spreadsheet.FeedURLFactory;
 import com.google.gdata.client.spreadsheet.SpreadsheetService;
 import com.google.gdata.data.spreadsheet.ListEntry;
 import com.google.gdata.data.spreadsheet.ListFeed;
 import com.google.gdata.data.spreadsheet.SpreadsheetEntry;
 import com.google.gdata.data.spreadsheet.SpreadsheetFeed;
-import com.google.gdata.util.AuthenticationException;
 import com.google.gdata.util.ServiceException;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -32,14 +35,25 @@ public class Generator {
     public static final String TABLE_BACKWAREN = "Backwaren";
     public static final String TABLE_BIO_REFORM = "BioReform";
     public static final String TABLE_CAFES = "Cafes";
+    public static final String CLIENT_ID = "163232640652-b4m9qk4crvc2ck1pug6eqlapt0b64ncp.apps.googleusercontent.com";
     protected SpreadsheetService service;
     protected FeedURLFactory factory;
 
-    public Generator(String username, String password) throws AuthenticationException {
-        if (username != null) {
+    public Generator(String refreshToken, String clientSecret) throws Exception {
+        if (refreshToken != null) {
             factory = FeedURLFactory.getDefault();
+            HttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
+            JacksonFactory jsonFactory = new JacksonFactory();
+            GoogleCredential credential = new GoogleCredential.Builder()
+                    .setTransport(httpTransport)
+                    .setJsonFactory(jsonFactory)
+                    .setClientSecrets(CLIENT_ID, clientSecret)
+                    .build();
+
+            credential.setRefreshToken(refreshToken);
+            credential.refreshToken();
             service = new SpreadsheetService("generator");
-            service.setUserCredentials(username, password);
+            service.setOAuth2Credentials(credential);
         }
 
     }

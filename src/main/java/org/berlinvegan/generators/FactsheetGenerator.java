@@ -1,6 +1,5 @@
 package org.berlinvegan.generators;
 
-import com.google.gdata.util.AuthenticationException;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import org.apache.commons.cli.HelpFormatter;
@@ -11,7 +10,7 @@ import java.io.Writer;
 import java.util.*;
 
 public class FactsheetGenerator extends WebsiteGenerator {
-    public FactsheetGenerator() throws AuthenticationException {
+    public FactsheetGenerator() throws Exception {
         super();
     }
 

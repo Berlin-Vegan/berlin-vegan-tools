@@ -1,21 +1,20 @@
 package org.berlinvegan.generators;
 
-import java.io.*;
-import java.util.*;
-
-import org.apache.commons.cli.HelpFormatter;
-
-import com.google.gdata.util.AuthenticationException;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
+import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.lang3.StringUtils;
+
+import java.io.File;
+import java.io.Writer;
+import java.util.*;
 
 /**
  * User: smeier Date: 3/30/13 Time: 10:09 PM
  */
 public class MapGenerator extends WebsiteGenerator {
 
-    public MapGenerator() throws AuthenticationException {
+    public MapGenerator() throws Exception {
         super();
     }
 

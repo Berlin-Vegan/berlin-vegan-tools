@@ -1,21 +1,9 @@
 package org.berlinvegan.generators;
 
 import net.davidashen.text.Hyphenator;
+import org.apache.commons.cli.*;
 
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.CommandLineParser;
-import org.apache.commons.cli.Options;
-import org.apache.commons.cli.ParseException;
-import org.apache.commons.cli.PosixParser;
-
-import com.google.gdata.util.AuthenticationException;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetEncoder;
 
@@ -23,7 +11,7 @@ import java.nio.charset.CharsetEncoder;
  * @author <a href="mailto:smeier@tapnic.com">Sandy Meier</a>
  */
 public class WebsiteGenerator extends Generator {
-    public static final String USER_OPTION = "u";
+    public static final String REFRESH_TOKEN_OPTION = "r";
     public static final String PASSWORD_OPTION = "p";
     public static final String OUTPUT_DIR_OPTION = "o";
     public static final String WEBSITE_DE = "http://www.berlin-vegan.de";
@@ -31,11 +19,11 @@ public class WebsiteGenerator extends Generator {
     public static final String REVIEW_DE_BASE_URL = 
         "http://www.berlin-vegan.de/essen-und-trinken/kritiken/";
     protected static String outputDir;
-    private static String userName;
-    private static String password;
+    private static String refreshToken;
+    private static String clientSecret;
 
-    public WebsiteGenerator() throws AuthenticationException {
-        super(userName, password);
+    public WebsiteGenerator() throws Exception {
+        super(refreshToken, clientSecret);
     }
 
     protected static void parseOptions(String[] args) throws Exception {
@@ -44,22 +32,22 @@ public class WebsiteGenerator extends Generator {
         CommandLine commandLine;
         try {
             commandLine = cmdLinePosixParser.parse(posixOptions, args);
-            if (commandLine.hasOption(USER_OPTION)) {
-                userName = commandLine.getOptionValue(USER_OPTION);
+            if (commandLine.hasOption(REFRESH_TOKEN_OPTION)) {
+                refreshToken = commandLine.getOptionValue(REFRESH_TOKEN_OPTION);
             }
             if (commandLine.hasOption(PASSWORD_OPTION)) {
-                password = commandLine.getOptionValue(PASSWORD_OPTION);
+                clientSecret = commandLine.getOptionValue(PASSWORD_OPTION);
             }
             if (commandLine.hasOption(OUTPUT_DIR_OPTION)) {
                 outputDir = commandLine.getOptionValue(OUTPUT_DIR_OPTION);
             }
 
-            // if username,password is not set on commandline, try to read from env vars
-            if (userName == null) {
-                userName = Environment.getGoogleUserName();
+            // if username,clientSecret is not set on commandline, try to read from env vars
+            if (refreshToken == null) {
+                refreshToken = Environment.getRefreshToken();
             }
-            if (password == null) {
-                password = Environment.getGooglePassword();
+            if (clientSecret == null) {
+                clientSecret = Environment.getClientSecret();
             }
 
         } catch (ParseException parseException) {
@@ -72,8 +60,8 @@ public class WebsiteGenerator extends Generator {
     }
     public static Options constructOptions(boolean withOutputDir) {
         final Options options = new Options();
-        options.addOption(USER_OPTION, true, "user name");
-        options.addOption(PASSWORD_OPTION, true, "password");
+        options.addOption(REFRESH_TOKEN_OPTION, true, "refresh token");
+        options.addOption(PASSWORD_OPTION, true, "clientSecret");
         if (withOutputDir) {
             options.addOption(OUTPUT_DIR_OPTION, true, "output directory");
         }

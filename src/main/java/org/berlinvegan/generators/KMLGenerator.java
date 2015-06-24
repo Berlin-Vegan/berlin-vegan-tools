@@ -2,7 +2,6 @@ package org.berlinvegan.generators;
 
 import com.google.gdata.data.spreadsheet.ListEntry;
 import com.google.gdata.data.spreadsheet.SpreadsheetEntry;
-import com.google.gdata.util.AuthenticationException;
 
 import java.util.List;
 
@@ -15,8 +14,8 @@ public class KMLGenerator extends Generator {
     public static final String KML_START = "<kml xmlns=\"http://www.opengis.net/kml/2.2\"><Document>";
     public static final String KML_END = "</Document></kml>";
 
-    public KMLGenerator(String username, String password) throws AuthenticationException {
-        super(username, password);
+    public KMLGenerator(String refreshToken, String clientSecret) throws Exception {
+        super(refreshToken, clientSecret);
     }
     
     public static void main(String[] args) throws Exception {

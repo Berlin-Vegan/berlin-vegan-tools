@@ -1,7 +1,7 @@
 package org.berlinvegan.generators;
 
-import com.google.gdata.data.spreadsheet.*;
-import com.google.gdata.util.AuthenticationException;
+import com.google.gdata.data.spreadsheet.ListEntry;
+import com.google.gdata.data.spreadsheet.SpreadsheetEntry;
 import org.apache.commons.cli.HelpFormatter;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -13,7 +13,7 @@ public class ExtJsStoreGenerator extends WebsiteGenerator {
 
     public static final String EXT_NAMESPACE_BVAPP = "Ext.namespace('BVApp','BVApp.data','BVApp.models');";
 
-    public ExtJsStoreGenerator() throws AuthenticationException {
+    public ExtJsStoreGenerator() throws Exception {
     }
 
 

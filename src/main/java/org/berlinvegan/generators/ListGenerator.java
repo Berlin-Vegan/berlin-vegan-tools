@@ -1,6 +1,5 @@
 package org.berlinvegan.generators;
 
-import com.google.gdata.util.AuthenticationException;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import org.apache.commons.cli.HelpFormatter;
@@ -16,7 +15,7 @@ import java.util.*;
  * Time: 5:45 PM
  */
 public class ListGenerator extends WebsiteGenerator {
-    public ListGenerator() throws AuthenticationException {
+    public ListGenerator() throws Exception {
         super();
     }
 

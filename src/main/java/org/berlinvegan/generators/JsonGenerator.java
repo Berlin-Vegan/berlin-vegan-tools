@@ -1,6 +1,5 @@
 package org.berlinvegan.generators;
 
-import com.google.gdata.util.AuthenticationException;
 import com.google.gson.Gson;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.lang3.StringUtils;
@@ -13,7 +12,7 @@ import java.util.List;
 
 public class JsonGenerator extends WebsiteGenerator {
     
-    public JsonGenerator() throws AuthenticationException {
+    public JsonGenerator() throws Exception {
         super();
     }
     

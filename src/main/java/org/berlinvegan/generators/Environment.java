@@ -6,7 +6,7 @@ public final class Environment {
     
     private Environment() {}
     
-    public static String getGoogleUserName() throws Exception {
+    public static String getRefreshToken() throws Exception {
         final String username = System.getenv(BV_GOOGLE_USER_NAME);
         if (username == null) {
             throw new Exception("please set the env variable '" + BV_GOOGLE_USER_NAME + "'");
@@ -14,7 +14,7 @@ public final class Environment {
         return username;
     }
 
-    public static String getGooglePassword() throws Exception {
+    public static String getClientSecret() throws Exception {
         final String password = System.getenv(BV_GOOGLE_PASSWORD);
         if (password == null) {
             throw new Exception("please set the env variable '" + BV_GOOGLE_PASSWORD + "'");
