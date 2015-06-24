@@ -26,7 +26,7 @@ public class ListGenerator extends WebsiteGenerator {
             generator.generateList("de");
         } else {
             final HelpFormatter helpFormatter = new HelpFormatter();
-            helpFormatter.printHelp("generatefactsheets", constructOptions());
+            helpFormatter.printHelp("generatelist", constructOptions());
         }
     }
 
