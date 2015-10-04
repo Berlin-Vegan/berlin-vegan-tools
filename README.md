@@ -13,7 +13,7 @@ Main Components
 FactsheetGenerator : generates the Factsheet for every restaurant
 MapGenerator: generates the Berlin Vegan Map, including JavaScript
 ListGenerator: generates the Restaurantlist
-ExtJsStoreGenerator: generates the json files for the Berlin Vegan App (phonegap)
+ExtJsStoreGenerator: generates the JavaScript files for the legacy Berlin Vegan App (phonegap)
 KMLGenerator: file to import to Google Maps
 JsonGenerator: generates json file for the new Berlin-Vegan app (android native)
 

@@ -42,6 +42,7 @@ public class Restaurant {
     private int seatsOutdoor;
     private int seatsIndoor;
     private String comment;
+    private String commentEnglish;
     private int wlan;
     private int glutenFree;
     private String[] tags;
@@ -92,7 +93,8 @@ public class Restaurant {
         organic = getIntValue(elements, "bio");
         seatsIndoor = getIntValue(elements, "sitzplaetzeinnen");
         seatsOutdoor = getIntValue(elements, "sitzplaetzeaussen");
-        comment = elements.getValue("zusaetzlicherkommentarfuerkarte");
+        comment = elements.getValue("kurzbeschreibungdeutsch");
+        commentEnglish = elements.getValue("kurzbeschreibungenglisch");
         final String tagStr = elements.getValue("tagsbittenurimbisscaferestaurantundeiscafeverwenden");
         if (tagStr != null) {
             tags = tagStr.split(",");
@@ -380,6 +382,13 @@ public class Restaurant {
         this.comment = comment;
     }
 
+    public String getCommentEnglish() {
+        return commentEnglish;
+    }
+    public void setCommentEnglish(String comment) {
+        this.commentEnglish = comment;
+    }
+
     public int getSeatsOutdoor() {
         return seatsOutdoor;
     }
@@ -549,6 +558,7 @@ public class Restaurant {
                 ", seatsOutdoor=" + seatsOutdoor +
                 ", seatsIndoor=" + seatsIndoor +
                 ", comment='" + comment + '\'' +
+                ", commentEnglish='" + commentEnglish + '\'' +
                 ", wlan=" + wlan +
                 ", glutenFree=" + glutenFree +
                 ", tags=" + Arrays.toString(tags) +

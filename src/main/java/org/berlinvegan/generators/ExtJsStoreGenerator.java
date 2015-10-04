@@ -63,7 +63,7 @@ public class ExtJsStoreGenerator extends WebsiteGenerator {
                     locationText = textEncode(locationText);
                     locationText = hyphenate(locationText, LANG_DE);
                     filesMap.put("reviews/de/" + reviewURL + ".html", locationText);
-                } else { 
+                } else {
                     // no review available, take the short comment, 
                     // just set the reviewURL to restaurant name
                     String comment = restaurant.getComment();
@@ -81,10 +81,10 @@ public class ExtJsStoreGenerator extends WebsiteGenerator {
         builder.append("BVApp.models.Data= [];");
         for (String fileName : filesMap.keySet()) {
             builder.append("\nBVApp.models.Data[\"")
-                .append(fileName)
-                .append("\"] =\"")
-                .append(filesMap.get(fileName))
-                .append("\";");
+                    .append(fileName)
+                    .append("\"] =\"")
+                    .append(filesMap.get(fileName))
+                    .append("\";");
         }
         writeTextToFile(builder.toString(), outputDir + File.separator + "Textfiles.js");
     }
@@ -100,7 +100,7 @@ public class ExtJsStoreGenerator extends WebsiteGenerator {
             buf = new char[1024];
         }
         reader.close();
-        return fileData.toString();    
+        return fileData.toString();
     }
 
     public void generateLocationDataStores() throws Exception {
@@ -145,16 +145,18 @@ public class ExtJsStoreGenerator extends WebsiteGenerator {
             Iterator iterColum = entry.getCustomElements().getTags().iterator();
             while (iterColum.hasNext()) {
                 String tag = (String) iterColum.next();
-                String value = entry.getCustomElements().getValue(tag);
-                if (value != null) {
-                    value = value.replaceAll("\\n", "\\\\n");
-                    value = value.replaceAll("\"", "'");
-                } else {
-                    value = "";
-                }
-                outStr.append("\"").append(value).append("\"");
-                if (iterColum.hasNext()) { // if not the last one, append a comma
-                    outStr.append(",");
+                if (!tag.equalsIgnoreCase("kurzbeschreibungenglisch")) { // ignore this new column
+                    String value = entry.getCustomElements().getValue(tag);
+                    if (value != null) {
+                        value = value.replaceAll("\\n", "\\\\n");
+                        value = value.replaceAll("\"", "'");
+                    } else {
+                        value = "";
+                    }
+                    outStr.append("\"").append(value).append("\"");
+                    if (iterColum.hasNext()) { // if not the last one, append a comma
+                        outStr.append(",");
+                    }
                 }
             }
             outStr.append("]");
