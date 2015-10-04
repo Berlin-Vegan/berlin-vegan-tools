@@ -385,8 +385,8 @@ public class Restaurant {
     public String getCommentEnglish() {
         return commentEnglish;
     }
-    public void setCommentEnglish(String comment) {
-        this.commentEnglish = comment;
+    public void setCommentEnglish(String commentEnglish) {
+        this.commentEnglish = commentEnglish;
     }
 
     public int getSeatsOutdoor() {

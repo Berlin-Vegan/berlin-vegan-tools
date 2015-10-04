@@ -203,7 +203,7 @@
         <module name="ParameterNumber"/>
         <module name="OuterTypeNumber"/>
         <module name="MethodCount">
-            <property name="maxTotal" value="80"/>
+            <property name="maxTotal" value="100"/>
             <property name="maxPrivate" value="80"/>
             <property name="maxPackage" value="80"/>
             <property name="maxProtected" value="80"/>
