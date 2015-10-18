@@ -4,6 +4,7 @@ import freemarker.template.Configuration;
 import freemarker.template.Template;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.lang3.StringUtils;
+import org.berlinvegan.generators.model.GastroLocation;
 
 import java.io.File;
 import java.io.Writer;
@@ -27,15 +28,15 @@ public class FactsheetGenerator extends WebsiteGenerator {
 
     private void generateFactSheets(String language) throws Exception {
         ResourceBundle bundle = ResourceBundle.getBundle("i18n", new Locale(language));
-        final List<Restaurant> restaurants = getRestaurantsFromServer();
+        final List<GastroLocation> gastroLocations = getGastroLocationFromServer();
         if (!StringUtils.isEmpty(outputDir)) {
-            generateFactSheets(language, bundle, restaurants);
+            generateFactSheets(language, bundle, gastroLocations);
         }
 
 
     }
 
-    private void generateFactSheets(String language, ResourceBundle bundle, List<Restaurant> restaurants) {
+    private void generateFactSheets(String language, ResourceBundle bundle, List<GastroLocation> gastroLocations) {
         // Configuration
         Writer fileWriter = null;
         Configuration cfg = new Configuration();
@@ -50,11 +51,11 @@ public class FactsheetGenerator extends WebsiteGenerator {
             input.put("i18n", bundle);
             input.put("language", language);
             HashSet<String> restaurantsDone = new HashSet<String>();
-            for (Restaurant restaurant : restaurants) {
-                String reviewURL = restaurant.getReviewURL();
+            for (GastroLocation gastroLocation : gastroLocations) {
+                String reviewURL = gastroLocation.getReviewURL();
                 if (!StringUtils.isEmpty(reviewURL) && !restaurantsDone.contains(reviewURL)) {
-                    List<Restaurant> restaurantBranches = getBranches(reviewURL, restaurants);
-                    input.put("branches", restaurantBranches);
+                    List<GastroLocation> gastroLocationBranches = getBranches(reviewURL, gastroLocations);
+                    input.put("branches", gastroLocationBranches);
                     // File output
                     fileWriter = getUTF8Writer(outputDir + File.separator + reviewURL + ".html");
                     template.process(input, fileWriter);
@@ -82,15 +83,15 @@ public class FactsheetGenerator extends WebsiteGenerator {
      * get branches(filialen) for restaurant
      *
      * @param reviewURL
-     * @param restaurants
+     * @param gastroLocations
      * @return
      */
-    private List<Restaurant> getBranches(String reviewURL, List<Restaurant> restaurants) {
-        ArrayList<Restaurant> list = new ArrayList<Restaurant>();
-        for (Restaurant restaurant : restaurants) {
-            String url = restaurant.getReviewURL();
+    private List<GastroLocation> getBranches(String reviewURL, List<GastroLocation> gastroLocations) {
+        ArrayList<GastroLocation> list = new ArrayList<GastroLocation>();
+        for (GastroLocation gastroLocation : gastroLocations) {
+            String url = gastroLocation.getReviewURL();
             if (StringUtils.isNotEmpty(url) && url.equals(reviewURL)) {
-                list.add(restaurant);
+                list.add(gastroLocation);
             }
         }
         return list;

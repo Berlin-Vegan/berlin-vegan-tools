@@ -1,5 +1,5 @@
 <#ftl encoding="ISO-8859-1">
-<#-- @ftlvariable name="branches" type="org.berlinvegan.generators.Restaurant[]" -->
+<#-- @ftlvariable name="branches" type="org.berlinvegan.generators.model.GastroLocation[]" -->
 <#-- @ftlvariable name="language" type="java.lang.String" -->
 
 <#assign branch1 = branches[0]>

@@ -1,4 +1,4 @@
-package org.berlinvegan.generators;
+package org.berlinvegan.generators.model;
 
 
 public class Picture {

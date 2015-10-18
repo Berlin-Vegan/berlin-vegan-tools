@@ -3,8 +3,8 @@
 <#-- @ftlvariable name="i18n" type="java.util.ResourceBundle" -->
 <#-- @ftlvariable name="openTimesI18N" type="java.lang.String" -->
 <#-- @ftlvariable name="reviewbase" type="java.lang.String" -->
-<#-- @ftlvariable name="restaurants" type="org.berlinvegan.generators.Restaurant[]" -->
-<#-- @ftlvariable name="restaurant" type="org.berlinvegan.generators.Restaurant" -->
+<#-- @ftlvariable name="restaurants" type="org.berlinvegan.generators.model.GastroLocation[]" -->
+<#-- @ftlvariable name="restaurant" type="org.berlinvegan.generators.model.GastroLocation" -->
 <#-- @ftlvariable name="districts" type="java.lang.String[]" -->
 <script type='text/javascript' src='https://maps.google.com/maps/api/js?sensor=false'></script>
 <script type="text/javascript">

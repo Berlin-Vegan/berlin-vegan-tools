@@ -2,6 +2,7 @@ package org.berlinvegan.generators;
 
 import com.google.gdata.data.spreadsheet.ListEntry;
 import com.google.gdata.data.spreadsheet.SpreadsheetEntry;
+import org.berlinvegan.generators.model.PlaceMark;
 
 import java.util.List;
 

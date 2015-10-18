@@ -3,6 +3,7 @@ package org.berlinvegan.generators;
 import com.google.gdata.data.spreadsheet.ListEntry;
 import com.google.gdata.data.spreadsheet.SpreadsheetEntry;
 import org.apache.commons.cli.HelpFormatter;
+import org.berlinvegan.generators.model.GastroLocation;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
@@ -53,10 +54,10 @@ public class ExtJsStoreGenerator extends WebsiteGenerator {
         }
         // scrape data from website for all locations
 
-        final List<Restaurant> restaurants = getRestaurantsFromServer();
-        if (restaurants != null) {
-            for (Restaurant restaurant : restaurants) {
-                String reviewURL = restaurant.getReviewURL();
+        final List<GastroLocation> gastroLocations = getGastroLocationFromServer();
+        if (gastroLocations != null) {
+            for (GastroLocation gastroLocation : gastroLocations) {
+                String reviewURL = gastroLocation.getReviewURL();
                 if (reviewURL != null && !reviewURL.isEmpty()) {
                     Document doc = Jsoup.connect(REVIEW_DE_BASE_URL + reviewURL).get();
                     String locationText = getLocationTextFromWebsite(doc);
@@ -65,11 +66,11 @@ public class ExtJsStoreGenerator extends WebsiteGenerator {
                     filesMap.put("reviews/de/" + reviewURL + ".html", locationText);
                 } else {
                     // no review available, take the short comment, 
-                    // just set the reviewURL to restaurant name
-                    String comment = restaurant.getComment();
+                    // just set the reviewURL to gastroLocation name
+                    String comment = gastroLocation.getComment();
                     if (comment != null) {
                         comment = textEncode(comment);
-                        filesMap.put("reviews/de/" + restaurant.getName() + ".html", comment);
+                        filesMap.put("reviews/de/" + gastroLocation.getName() + ".html", comment);
                     }
 
                 }
@@ -111,7 +112,7 @@ public class ExtJsStoreGenerator extends WebsiteGenerator {
             String title = spreadsheet.getTitle().getPlainText();
             if (title.equalsIgnoreCase(TABLE_RESTAURANTS)) {
                 restaurantEntries = addEntries(restaurantEntries, spreadsheet);
-            } else if (title.equalsIgnoreCase(TABLE_SHOPPING) || title.equalsIgnoreCase(TABLE_BACKWAREN)
+            } else if (title.equalsIgnoreCase(TABLE_SHOPPING_OLD) || title.equalsIgnoreCase(TABLE_BACKWAREN)
                     || title.equalsIgnoreCase(TABLE_BIO_REFORM)) {
                 shoppingEntries = addEntries(shoppingEntries, spreadsheet);
             } else if (title.equalsIgnoreCase(TABLE_CAFES)) {
@@ -123,9 +124,9 @@ public class ExtJsStoreGenerator extends WebsiteGenerator {
         // see generateTextfilesJS()
         if (restaurantEntries != null) {
             for (ListEntry entry : restaurantEntries) {
-                final Restaurant restaurant = new Restaurant(entry);
-                if (restaurant.getReviewURL() == null || restaurant.getReviewURL().isEmpty()) {
-                    entry.getCustomElements().setValueLocal("reviewurl", restaurant.getName());
+                final GastroLocation gastroLocation = new GastroLocation(entry);
+                if (gastroLocation.getReviewURL() == null || gastroLocation.getReviewURL().isEmpty()) {
+                    entry.getCustomElements().setValueLocal("reviewurl", gastroLocation.getName());
                 }
             }
         }

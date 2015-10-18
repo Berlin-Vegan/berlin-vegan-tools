@@ -13,6 +13,9 @@ import com.google.gdata.data.spreadsheet.SpreadsheetFeed;
 import com.google.gdata.util.ServiceException;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.berlinvegan.generators.model.GastroLocation;
+import org.berlinvegan.generators.model.Picture;
+import org.berlinvegan.generators.model.ShoppingLocation;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -31,7 +34,10 @@ public class Generator {
     public static final String LANG_DE = "de";
     public static final String LANG_EN = "en";
     public static final String TABLE_RESTAURANTS = "Restaurants";
-    public static final String TABLE_SHOPPING = "Shopping";
+    public static final String TABLE_SHOPPING = "Einkaufen";
+
+    // old tables, used only for old apps (phonegap)
+    public static final String TABLE_SHOPPING_OLD = "Shopping";
     public static final String TABLE_BACKWAREN = "Backwaren";
     public static final String TABLE_BIO_REFORM = "BioReform";
     public static final String TABLE_CAFES = "Cafes";
@@ -83,34 +89,48 @@ public class Generator {
     }
 
     /* search the Berlin Vegan Google Docs for Table "Restaurant", download and parse the entries*/
-    public List<Restaurant> getRestaurantsFromServer() throws Exception {
-        final ArrayList<Restaurant> restaurants = new ArrayList<Restaurant>();
+    public List<GastroLocation> getGastroLocationFromServer() throws Exception {
+        final ArrayList<GastroLocation> gastroLocations = new ArrayList<GastroLocation>();
         final List<SpreadsheetEntry> spreadsheetEntries = getSpreadsheetEntries();
         for (SpreadsheetEntry entry : spreadsheetEntries) {
             if (entry.getTitle().getPlainText().equals(Generator.TABLE_RESTAURANTS)) {
                 List<ListEntry> entryList = addEntries(null, entry);
                 for (ListEntry listEntry : entryList) {
-                    final Restaurant restaurant = new Restaurant(listEntry);
-                    restaurants.add(restaurant);
+                    final GastroLocation gastroLocation = new GastroLocation(listEntry);
+                    gastroLocations.add(gastroLocation);
                 }
             }
         }
         // init districts, a restaurant with more then one filiale is located in several districts
-        for (Restaurant restaurant : restaurants) {
+        for (GastroLocation gastroLocation : gastroLocations) {
             ArrayList<String> districts = new ArrayList<String>();
-            String reviewURL = restaurant.getReviewURL();
+            String reviewURL = gastroLocation.getReviewURL();
             if (reviewURL != null) {
-                for (Restaurant rest : restaurants) {
+                for (GastroLocation rest : gastroLocations) {
                     if (reviewURL.equalsIgnoreCase(rest.getReviewURL())
                             && !districts.contains(rest.getDistrict())) {
                         districts.add(rest.getDistrict());
                     }
                 }
-                restaurant.setDistricts(districts);
+                gastroLocation.setDistricts(districts);
             }
         }
 
-        return restaurants;
+        return gastroLocations;
+    }
+    protected List<ShoppingLocation> getShoppingLocationFromServer() throws Exception {
+        final ArrayList<ShoppingLocation> locations = new ArrayList<ShoppingLocation>();
+        final List<SpreadsheetEntry> spreadsheetEntries = getSpreadsheetEntries();
+        for (SpreadsheetEntry entry : spreadsheetEntries) {
+            if (entry.getTitle().getPlainText().equals(Generator.TABLE_SHOPPING)) {
+                List<ListEntry> entryList = addEntries(null, entry);
+                for (ListEntry listEntry : entryList) {
+                    final ShoppingLocation location = new ShoppingLocation(listEntry);
+                    locations.add(location);
+                }
+            }
+        }
+        return locations;
     }
 
     protected void writeTextToFile(String text, String filePath) throws IOException {

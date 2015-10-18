@@ -38,7 +38,7 @@
             <artifactId>jsoup</artifactId>
             <version>1.7.1</version>
         </dependency>
-        <dependency><!--to hyphenate restaurant review-->
+        <dependency><!--to hyphenate gastroLocation review-->
             <groupId>com.googlecode.texhyphj</groupId>
             <artifactId>texhyphj</artifactId>
             <version>1.2</version>

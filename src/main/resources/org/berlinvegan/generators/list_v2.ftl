@@ -1,8 +1,8 @@
 <#ftl encoding="ISO-8859-1">
 <#-- @ftlvariable name="reviewbase" type="java.lang.String" -->
 <#-- @ftlvariable name="veganStar" type="java.lang.String" -->
-<#-- @ftlvariable name="restaurants" type="org.berlinvegan.generators.Restaurant[]" -->
-<#-- @ftlvariable name="restaurant" type="org.berlinvegan.generators.Restaurant" -->
+<#-- @ftlvariable name="restaurants" type="org.berlinvegan.generators.model.GastroLocation[]" -->
+<#-- @ftlvariable name="restaurant" type="org.berlinvegan.generators.model.GastroLocation" -->
 
 <#macro listPart starvalue>
 <ul>

@@ -4,6 +4,7 @@ import freemarker.template.Configuration;
 import freemarker.template.Template;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.lang3.StringUtils;
+import org.berlinvegan.generators.model.GastroLocation;
 
 import java.io.File;
 import java.io.Writer;
@@ -33,17 +34,17 @@ public class MapGenerator extends WebsiteGenerator {
 
     public void generateMap(String language) throws Exception {
         if (!StringUtils.isEmpty(outputDir)) {
-            generateMap(language, getRestaurantsFromServer());
+            generateMap(language, getGastroLocationFromServer());
 
         }
     }
 
-    public void generateMap(String language, List<Restaurant> restaurants) {
+    public void generateMap(String language, List<GastroLocation> gastroLocations) {
         ResourceBundle bundle = ResourceBundle.getBundle("i18n", new Locale(language));
 
         final HashSet<String> districts = new HashSet<String>();
-        for (Restaurant restaurant : restaurants) {
-            final String district = restaurant.getDistrict();
+        for (GastroLocation gastroLocation : gastroLocations) {
+            final String district = gastroLocation.getDistrict();
             if (!district.equalsIgnoreCase("")) {
                 districts.add(district);
             }
@@ -58,7 +59,7 @@ public class MapGenerator extends WebsiteGenerator {
             input.put("reviewbase", REVIEW_BASE_LOCATION_DE);
             input.put("i18n", bundle);
             input.put("language", language);
-            input.put("restaurants", restaurants);
+            input.put("restaurants", gastroLocations);
             input.put("districts", districts);
 
             // Set Directory for templates

@@ -4,6 +4,7 @@ import freemarker.template.Configuration;
 import freemarker.template.Template;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.lang3.StringUtils;
+import org.berlinvegan.generators.model.GastroLocation;
 
 import java.io.File;
 import java.io.Writer;
@@ -32,15 +33,15 @@ public class ListGenerator extends WebsiteGenerator {
 
     private void generateList(String language) throws Exception {
         ResourceBundle bundle = ResourceBundle.getBundle("i18n", new Locale(language));
-        final List<Restaurant> restaurants = getRestaurantsFromServer();
+        final List<GastroLocation> gastroLocations = getGastroLocationFromServer();
         if (!StringUtils.isEmpty(outputDir)) {
-            generateListV2(language, bundle, restaurants);
+            generateListV2(language, bundle, gastroLocations);
         }
 
 
     }
 
-    private void generateListV2(String language, ResourceBundle bundle, List<Restaurant> restaurants) {
+    private void generateListV2(String language, ResourceBundle bundle, List<GastroLocation> gastroLocations) {
         // Configuration
         Writer fileWriter = null;
         try {
@@ -55,8 +56,8 @@ public class ListGenerator extends WebsiteGenerator {
             input.put("reviewbase", REVIEW_BASE_LOCATION_DE);
             input.put("i18n", bundle);
             input.put("language", language);
-            List<Restaurant> uniqueRestaurants = getUniqueRestaurants(restaurants);
-            input.put("restaurants", uniqueRestaurants);
+            List<GastroLocation> uniqueGastroLocations = getUniqueRestaurants(gastroLocations);
+            input.put("restaurants", uniqueGastroLocations);
 
             // File output
             fileWriter = getUTF8Writer(outputDir + File.separator + "list.html");
@@ -78,17 +79,17 @@ public class ListGenerator extends WebsiteGenerator {
 
 
     /***
-     * only 1 restaurant instance per name, without branches and only restaurants with review
-     * @param restaurants
+     * only 1 restaurant instance per name, without branches and only gastroLocations with review
+     * @param gastroLocations
      * @return
      */
-    private List<Restaurant> getUniqueRestaurants(List<Restaurant> restaurants) {
-        ArrayList<Restaurant> result = new ArrayList<Restaurant>();
+    private List<GastroLocation> getUniqueRestaurants(List<GastroLocation> gastroLocations) {
+        ArrayList<GastroLocation> result = new ArrayList<GastroLocation>();
         HashSet<String> restaurantsDone = new HashSet<String>();
-        for (Restaurant restaurant : restaurants) {
-            String reviewURL = restaurant.getReviewURL();
+        for (GastroLocation gastroLocation : gastroLocations) {
+            String reviewURL = gastroLocation.getReviewURL();
             if (!StringUtils.isEmpty(reviewURL) && !restaurantsDone.contains(reviewURL)) {
-                result.add(restaurant);
+                result.add(gastroLocation);
                 restaurantsDone.add(reviewURL);
             }
         }

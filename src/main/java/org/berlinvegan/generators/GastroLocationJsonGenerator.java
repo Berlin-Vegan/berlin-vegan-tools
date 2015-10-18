@@ -3,6 +3,8 @@ package org.berlinvegan.generators;
 import com.google.gson.Gson;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.lang3.StringUtils;
+import org.berlinvegan.generators.model.GastroLocation;
+import org.berlinvegan.generators.model.Picture;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
@@ -10,16 +12,16 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.util.List;
 
-public class JsonGenerator extends WebsiteGenerator {
+public class GastroLocationJsonGenerator extends WebsiteGenerator {
     
-    public JsonGenerator() throws Exception {
+    public GastroLocationJsonGenerator() throws Exception {
         super();
     }
     
     public static void main(String[] args) throws Exception {
         if (args.length == 4) {  // 2 options with 1 value
             parseOptions(args);
-            JsonGenerator generator = new JsonGenerator();
+            GastroLocationJsonGenerator generator = new GastroLocationJsonGenerator();
             generator.generate();
         } else {
             final HelpFormatter helpFormatter = new HelpFormatter();
@@ -28,34 +30,34 @@ public class JsonGenerator extends WebsiteGenerator {
     }
 
     private void generate() throws Exception {
-        final List<Restaurant> restaurants = getRestaurantsFromServer();
-        augmentWithReviewsAndPictures(restaurants);
-        String json = new Gson().toJson(restaurants);
+        final List<GastroLocation> gastroLocations = getGastroLocationFromServer();
+        augmentWithReviewsAndPictures(gastroLocations);
+        String json = new Gson().toJson(gastroLocations);
         if (StringUtils.isNotEmpty(json)) {
             PrintStream out = new PrintStream(System.out, true, "UTF-8");
             out.println(json);
         }
     }
     
-    private void augmentWithReviewsAndPictures(List<Restaurant> restaurants) throws IOException {
-        for (Restaurant restaurant : restaurants) {
-            augmentWithReviewAndPictures(restaurant);
+    private void augmentWithReviewsAndPictures(List<GastroLocation> gastroLocations) throws IOException {
+        for (GastroLocation gastroLocation : gastroLocations) {
+            augmentWithReviewAndPictures(gastroLocation);
         }
     }
     
-    private void augmentWithReviewAndPictures(Restaurant restaurant) throws IOException {
+    private void augmentWithReviewAndPictures(GastroLocation gastroLocation) throws IOException {
         
-        String reviewURL = restaurant.getReviewURL();
+        String reviewURL = gastroLocation.getReviewURL();
         
         if (reviewURL != null && !reviewURL.isEmpty()) {
             Document doc = Jsoup.connect(REVIEW_DE_BASE_URL + reviewURL).get();
             String review = getLocationTextFromWebsite(doc);
             review = textEncode(review);
             review = hyphenate(review, LANG_DE);
-            restaurant.setComment(review);
+            gastroLocation.setComment(review);
 
             final List<Picture> pictures = getLocationPicturesFromWebsite(doc);
-            restaurant.setPictures(pictures);
+            gastroLocation.setPictures(pictures);
         }
     }
 }

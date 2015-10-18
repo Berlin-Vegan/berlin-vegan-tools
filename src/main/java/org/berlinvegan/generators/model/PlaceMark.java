@@ -1,12 +1,12 @@
-package org.berlinvegan.generators;
+package org.berlinvegan.generators.model;
 
-class PlaceMark {
+public class PlaceMark {
     private String name;
     private String description;
     private String latPos;
     private String longPos;
 
-    PlaceMark(String name, String description, String latPos, String longPos) {
+    public PlaceMark(String name, String description, String latPos, String longPos) {
         this.name = name;
         this.description = description;
         this.latPos = latPos;
