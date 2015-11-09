@@ -32,9 +32,7 @@ ${branch1.getOpenTimesHTML("de")}
 || branch1.seatsIndoor != -1 || branch1.seatsOutdoor != -1 || branch1.wlan == 1>
 <h4 class="misc">Sonstiges</h4>
 <ul>
-    <#if branch1.vegan == 5>
-        <li> 100% vegan</li>
-    </#if>
+    <li>${branch1.getVeganHTML("de")}</li>
     <#if branch1.organic == 1>
         <li> Bio</li>
     </#if>

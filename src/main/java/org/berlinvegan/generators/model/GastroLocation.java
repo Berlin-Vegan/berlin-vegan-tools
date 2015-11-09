@@ -9,6 +9,7 @@ import com.google.gdata.data.spreadsheet.ListEntry;
 public class GastroLocation extends Location {
     public static final String OPEN_TIME_ONE_DAY = "<b>%s</b> %s<br/>";
     public static final String OPEN_TIME_MORE_DAYS = "<b>%s-%s</b> %s<br/>";
+    public static final int TYPE_VEGAN = 5;
     private String reviewURL = "";
     private String district = "";
     private String publicTransport = "";
@@ -212,6 +213,15 @@ public class GastroLocation extends Location {
         this.districts = districts;
     }
 
+    public String getVeganHTML(String language) {
+        ResourceBundle bundle = ResourceBundle.getBundle("i18n", new Locale(language));
+        if (vegan == TYPE_VEGAN) {
+            return bundle.getString("vegan");
+        } else if (vegan == 4) {
+            return bundle.getString("vegetarian");
+        }
+        return bundle.getString("omnivore");
+    }
     public String getOpenTimesHTML(String language) {
         ResourceBundle bundle = ResourceBundle.getBundle("i18n", new Locale(language));
         String[] weekdaysNames = new String[7];
@@ -239,7 +249,7 @@ public class GastroLocation extends Location {
             || !openTimes[2].isEmpty() 
             || !openTimes[3].isEmpty() 
             || !openTimes[4].isEmpty() 
-            || !openTimes[5].isEmpty() 
+            || !openTimes[5].isEmpty()
             || !openTimes[6].isEmpty();
         
         if (openTimesAvailable) {

@@ -44,13 +44,15 @@
             google.maps.event.addListener(markersArray[${i}], 'click', function () {
                 var infoStr = "<b>${restaurant.name}</b><br/><br/>${restaurant.street}, ${restaurant.cityCode?c} ${restaurant.district}";
                 infoStr += "<br/><br/><b>Öffnungszeiten:</b><br/><br/> ${restaurant.getOpenTimesHTML(language)}";
+                infoStr = infoStr + "<br><b>${restaurant.getVeganHTML(language)}</b>";
                 <#if restaurant.reviewURL??>
                     infoStr += '<br/><a href="${reviewbase}${restaurant.reviewURL}">${restaurant.name} Restaurantkritik</a>';
                 <#else>
                     <#if restaurant.comment??>
-                        infoStr += '<br/><br/>${restaurant.comment?js_string}';
+                        infoStr += '<br/>${restaurant.comment?js_string}';
                     </#if>
                 </#if>
+
 
                 infoStr = "<div>" + infoStr + "</div><br/>";
                 infowindow.setContent(infoStr);
@@ -67,6 +69,8 @@ Bezirk: <select id="districtselect" name="district" size="1" onChange="updateMar
     <option>${district}</option>
 </#list>
 </select>
+
+<input id="completevegancheckbox" onChange="updateMarkers(markersArray);" type="checkbox">100% vegan</input>
 <input id="opencheckbox" onChange="updateMarkers(markersArray);" type="checkbox">jetzt geöffnet</input>
 <input id="biocheckbox" onChange="updateMarkers(markersArray);" type="checkbox">Bio</input>
 <input id="glutenfreecheckbox" onChange="updateMarkers(markersArray);" type="checkbox">glutenfreie Speisen</input>

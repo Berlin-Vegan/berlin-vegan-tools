@@ -26,8 +26,8 @@ function updateMarkers(markersArray){
         if(document.getElementById("rollstuhlcheckbox").checked && marker.bv_rollstuhl !="1"){
             showMarker=false;
         }
-        if(document.getElementById("vegandeclarecheckbox")){
-            if(document.getElementById("vegandeclarecheckbox").checked && (marker.bv_vegan =="1" || marker.bv_vegan =="3" )){
+        if(document.getElementById("completevegancheckbox")){
+            if(document.getElementById("completevegancheckbox").checked && (marker.bv_vegan =="4" || marker.bv_vegan =="2" )){
                 showMarker=false;
             }
         }
