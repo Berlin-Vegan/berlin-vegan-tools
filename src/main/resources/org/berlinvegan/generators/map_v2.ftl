@@ -80,4 +80,4 @@ Bezirk: <select id="districtselect" name="district" size="1" onChange="updateMar
 
 
 <div id="map_canvas" style="margin-top:5px;line-height:1.0em; height:630px"></div>
-Die Karte umfasst <b>${restaurants?size}</b> Restaurants/Bistros/Cafes
+Die Karte umfasst insgesamt <b>${restaurants?size}</b> Restaurants/Bistros/Cafes. Die veganen Speisen sind deklariert.
