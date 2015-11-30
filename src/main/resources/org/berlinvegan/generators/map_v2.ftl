@@ -43,8 +43,12 @@
             });
             google.maps.event.addListener(markersArray[${i}], 'click', function () {
                 var infoStr = "<b>${restaurant.name}</b><br/><br/>${restaurant.street}, ${restaurant.cityCode?c} ${restaurant.district}";
+                <#if restaurant.website??>
+                    infoStr += ' ( <a target="_blank" href="http://${restaurant.website?js_string}">Webseite</a> )';
+                </#if>
                 infoStr += "<br/><br/><b>Öffnungszeiten:</b><br/><br/> ${restaurant.getOpenTimesHTML(language)}";
                 infoStr = infoStr + "<br><b>${restaurant.getVeganHTML(language)}</b>";
+
                 <#if restaurant.reviewURL??>
                     infoStr += '<br/><a href="${reviewbase}${restaurant.reviewURL}">${restaurant.name} Restaurantkritik</a>';
                 <#else>
@@ -52,7 +56,6 @@
                         infoStr += '<br/>${restaurant.comment?js_string}';
                     </#if>
                 </#if>
-
 
                 infoStr = "<div>" + infoStr + "</div><br/>";
                 infowindow.setContent(infoStr);
