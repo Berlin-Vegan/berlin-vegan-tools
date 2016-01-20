@@ -13,7 +13,9 @@ import java.io.PrintStream;
 import java.util.List;
 
 public class GastroLocationJsonGenerator extends WebsiteGenerator {
-    
+    // 30 seconds
+    public static final int TIMEOUT = 30 * 1000;
+
     public GastroLocationJsonGenerator() throws Exception {
         super();
     }
@@ -50,7 +52,7 @@ public class GastroLocationJsonGenerator extends WebsiteGenerator {
         String reviewURL = gastroLocation.getReviewURL();
         
         if (reviewURL != null && !reviewURL.isEmpty()) {
-            Document doc = Jsoup.connect(REVIEW_DE_BASE_URL + reviewURL).get();
+            Document doc = Jsoup.connect(REVIEW_DE_BASE_URL + reviewURL).timeout(TIMEOUT).get();
             String review = getLocationTextFromWebsite(doc);
             review = textEncode(review);
             review = hyphenate(review, LANG_DE);
