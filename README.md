@@ -37,8 +37,12 @@ The app use OAuth2 to access the Berlin-Vegan Sheets. See https://developers.goo
 
 ask for authorization code
 Browser: https://accounts.google.com/o/oauth2/auth?scope=https://spreadsheets.google.com/feeds&redirect_uri=urn:ietf:wg:oauth:2.0:oob&response_type=code&client_id=YOUR_CLIENT_ID
+
 ask for access code
-curl -X POST -d "AUTHORIZATION_CODE_FROM_LAST_REQUEST&client_id=YOUR_CLIENT_ID&client_secret=YOUR_CLIENT_SECRET&redirect_uri=urn:ietf:wg:oauth:2.0:oob&grant_type=authorization_code"  https://www.googleapis.com/oauth2/v3/token
+curl -X POST -d "code=AUTHORIZATION_CODE_FROM_LAST_REQUEST&client_id=YOUR_CLIENT_ID&client_secret=YOUR_CLIENT_SECRET&redirect_uri=urn:ietf:wg:oauth:2.0:oob&grant_type=authorization_code"  https://www.googleapis.com/oauth2/v3/token
+
+you should see the granted access in the app dashboard
+https://security.google.com/settings/security/permissions
 
 Used Software
 =============
