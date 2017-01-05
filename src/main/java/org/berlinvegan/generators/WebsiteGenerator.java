@@ -13,8 +13,7 @@ public class WebsiteGenerator extends Generator {
     public static final String OUTPUT_DIR_OPTION = "o";
     public static final String WEBSITE_DE = "http://www.berlin-vegan.de";
     public static final String REVIEW_BASE_LOCATION_DE = "/essen-und-trinken/kritiken/";
-    public static final String REVIEW_DE_BASE_URL = 
-        "http://www.berlin-vegan.de/essen-und-trinken/kritiken/";
+    public static final String REVIEW_DE_BASE_URL = WEBSITE_DE + REVIEW_BASE_LOCATION_DE;
     protected static String outputDir;
     private static String refreshToken;
     private static String clientSecret;
