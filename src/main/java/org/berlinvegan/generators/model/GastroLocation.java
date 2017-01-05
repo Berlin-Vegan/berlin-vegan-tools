@@ -1,7 +1,13 @@
 package org.berlinvegan.generators.model;
 
 
-import java.util.*;
+import static java.util.stream.Collectors.toList;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
+import java.util.Set;
 
 import com.google.gdata.data.spreadsheet.CustomElementCollection;
 import com.google.gdata.data.spreadsheet.ListEntry;
@@ -56,15 +62,31 @@ public class GastroLocation extends Location {
         organic = getIntValue(elements, "bio");
         seatsIndoor = getIntValue(elements, "sitzplaetzeinnen");
         seatsOutdoor = getIntValue(elements, "sitzplaetzeaussen");
-
-        final String tagStr = elements.getValue("tagsbittenurimbisscaferestaurantundeiscafeverwenden");
-        if (tagStr != null) {
-            tags = tagStr.split(",");
-        }
+        tags = getTags(elements);
         wlan = getIntValue(elements, "wlan");
         glutenFree = getIntValue(elements, "glutenfrei");
 
 
+    }
+    
+    private static String[] getTags(CustomElementCollection elements) {
+        final String value = elements.getValue("tagsbittenurimbisscaferestaurantundeiscafeverwenden");
+        if (value == null) {
+            return null;
+        }
+        List<String> tags =
+            Arrays.stream(value.split(","))
+                .map(String::trim)
+                .map(tag -> tag.equals("Café") ? "Cafe" : tag)
+                .map(tag -> tag.equals("Eiscafé") ? "Eiscafe" : tag)
+                .collect(toList());
+        List<String> allowedTags = Arrays.asList("Imbiss", "Cafe", "Restaurant", "Eiscafe");
+        for (String tag : tags) {
+            if (!allowedTags.contains(tag)) {
+                throw new RuntimeException("Found illegal tag '" + tag + "'.");
+            }
+        }
+        return tags.toArray(new String[0]);
     }
 
     private void printColumnHeaderNames(CustomElementCollection elements) {
