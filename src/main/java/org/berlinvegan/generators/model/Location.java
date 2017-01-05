@@ -63,9 +63,7 @@ public class Location {
     }
 
     /**
-     * @param elements
-     * @param headerName
-     * @return 0 = false, 1 = true, null = unknow
+     * @return 0 = false, 1 = true, null = unknown
      */
     private Boolean getBooleanValue(CustomElementCollection elements, String headerName) {
         final String value = elements.getValue(headerName);
@@ -90,9 +88,7 @@ public class Location {
     }
 
     /**
-     * @param elements
-     * @param headerName
-     * @return 0 = false, 1 = true, -1 = unknow
+     * @return 0 = false, 1 = true, -1 = unknown
      */
     protected int getIntValue(CustomElementCollection elements, String headerName) {
         final String value = elements.getValue(headerName);
