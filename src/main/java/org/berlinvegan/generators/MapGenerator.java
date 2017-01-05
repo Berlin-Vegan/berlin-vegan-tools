@@ -71,11 +71,8 @@ public class MapGenerator extends WebsiteGenerator {
             fileWriter = getUTF8Writer(outputDir + File.separator + "map.html");
             template.process(input, fileWriter);
             fileWriter.flush();
-
-
         } catch (Exception e) {
             System.out.println(e.getMessage());
-
         } finally {
             if (fileWriter != null) {
                 try {
@@ -85,7 +82,5 @@ public class MapGenerator extends WebsiteGenerator {
             }
 
         }
-
     }
-
 }

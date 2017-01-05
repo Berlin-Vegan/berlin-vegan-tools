@@ -32,8 +32,6 @@ public class FactsheetGenerator extends WebsiteGenerator {
         if (!StringUtils.isEmpty(outputDir)) {
             generateFactSheets(language, bundle, gastroLocations);
         }
-
-
     }
 
     private void generateFactSheets(String language, ResourceBundle bundle, List<GastroLocation> gastroLocations) {
@@ -78,7 +76,6 @@ public class FactsheetGenerator extends WebsiteGenerator {
 
     }
 
-
     /**
      * get branches(filialen) for restaurant
      *
@@ -96,6 +93,4 @@ public class FactsheetGenerator extends WebsiteGenerator {
         }
         return list;
     }
-
-
 }

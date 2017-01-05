@@ -61,7 +61,6 @@ public class Generator {
             service = new SpreadsheetService("generator");
             service.setOAuth2Credentials(credential);
         }
-
     }
 
     public List<SpreadsheetEntry> getSpreadsheetEntries() throws Exception {
@@ -189,6 +188,4 @@ public class Generator {
     private static boolean isPicture(String url) {
         return StringUtils.endsWithIgnoreCase(url, "jpg");
     }
-
-
 }

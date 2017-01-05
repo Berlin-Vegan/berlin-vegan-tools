@@ -39,7 +39,6 @@ public class KMLGenerator extends Generator {
     private static String getKMLDocument(List<ListEntry> entries) {
         StringBuilder builder = new StringBuilder();
         builder.append(XML_HEAD);
-
         builder.append(KML_START);
         int i = 0;
         for (ListEntry entry : entries) {
@@ -51,11 +50,9 @@ public class KMLGenerator extends Generator {
             builder.append(placeMark.toKMLFormat());
             i++;
             //}
-
         }
 
         builder.append(KML_END);
-
         return builder.toString();
     }
 
@@ -98,6 +95,4 @@ public class KMLGenerator extends Generator {
         }
         desc.append(day).append(": ").append(openTime).append(" ");
     }
-
-
 }

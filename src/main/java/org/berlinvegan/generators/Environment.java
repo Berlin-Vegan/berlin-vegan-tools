@@ -21,5 +21,4 @@ public final class Environment {
         }
         return password;
     }
-
 }

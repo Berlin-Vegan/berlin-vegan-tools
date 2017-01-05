@@ -17,7 +17,6 @@ public class ExtJsStoreGenerator extends WebsiteGenerator {
     public ExtJsStoreGenerator() throws Exception {
     }
 
-
     public static void main(String[] args) throws Exception {
 
         if (args.length == 6) {  // 3 options with 1 value -> 6 cli args
@@ -29,7 +28,6 @@ public class ExtJsStoreGenerator extends WebsiteGenerator {
             final HelpFormatter helpFormatter = new HelpFormatter();
             helpFormatter.printHelp("generateextjsstore", constructOptions());
         }
-
     }
 
     private void generateTextfilesJS() throws Exception {

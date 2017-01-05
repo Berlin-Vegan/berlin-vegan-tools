@@ -37,8 +37,6 @@ public class ListGenerator extends WebsiteGenerator {
         if (!StringUtils.isEmpty(outputDir)) {
             generateListV2(language, bundle, gastroLocations);
         }
-
-
     }
 
     private void generateListV2(String language, ResourceBundle bundle, List<GastroLocation> gastroLocations) {
@@ -74,7 +72,6 @@ public class ListGenerator extends WebsiteGenerator {
                 }
             }
         }
-
     }
 
 
@@ -95,5 +92,4 @@ public class ListGenerator extends WebsiteGenerator {
         }
         return result;
     }
-
 }

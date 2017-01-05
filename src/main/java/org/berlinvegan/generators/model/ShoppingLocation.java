@@ -17,6 +17,5 @@ public class ShoppingLocation extends Location {
         if (tagStr != null) {
             tags = tagStr.split(",");
         }
-
     }
 }

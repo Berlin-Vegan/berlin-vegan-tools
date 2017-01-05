@@ -33,6 +33,4 @@ public class ShoppingLocationJsonGenerator extends WebsiteGenerator {
             out.println(json);
         }
     }
-
-
 }

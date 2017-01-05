@@ -1,6 +1,5 @@
 package org.berlinvegan.generators.model;
 
-
 public class Picture {
     private String url;
     private int width;
