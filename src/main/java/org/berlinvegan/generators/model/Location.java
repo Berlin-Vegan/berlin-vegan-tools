@@ -1,5 +1,7 @@
 package org.berlinvegan.generators.model;
 
+import java.util.regex.Pattern;
+
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.berlinvegan.generators.Generator;
@@ -63,11 +65,26 @@ public class Location {
     }
 
     private static String getOpeningTime(CustomElementCollection elements, String headerName) {
-        String value = elements.getValue(headerName);
-        if (value == null) {
-            value = "";
+        final String value = elements.getValue(headerName);
+        if (StringUtils.isBlank(value)) {
+            return "";
         }
-        return value.replaceAll("[\r\n]+", "");
+        String simplifiedValue = removeEvenSpecialWhitespace(value); // Greatly simplifies regex.
+        final String regex = "\\d{1,2}(\\:\\d{2})?\\-(\\d{1,2}(\\:\\d{2})?)?";
+        if (!Pattern.matches(regex, simplifiedValue)) {
+            throw new RuntimeException("Found illegal opening time '" + value + "'.");
+        }
+        if (simplifiedValue.endsWith("-")) {
+            simplifiedValue += "0";
+        } else if (simplifiedValue.endsWith("-24")) {
+            simplifiedValue = simplifiedValue.replaceAll("-24", "-0");
+        }
+        return simplifiedValue.replaceAll("-", " - "); // Cause we removed the spaces when simplifying.
+    }
+    
+    private static String removeEvenSpecialWhitespace(String s) {
+        final String noBreakSpace = "\u00A0";
+        return s.replaceAll("\\s|" + noBreakSpace, "");
     }
 
     /**
