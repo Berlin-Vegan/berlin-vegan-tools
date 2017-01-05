@@ -58,7 +58,6 @@ public class ListGenerator extends WebsiteGenerator {
             fileWriter.flush();
         } catch (Exception e) {
             e.printStackTrace();
-
         } finally {
             if (fileWriter != null) {
                 try {

@@ -73,7 +73,6 @@ public class FactsheetGenerator extends WebsiteGenerator {
                 }
             }
         }
-
     }
 
     /**

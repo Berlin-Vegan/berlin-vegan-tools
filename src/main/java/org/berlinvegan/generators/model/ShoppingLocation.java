@@ -3,7 +3,6 @@ package org.berlinvegan.generators.model;
 import com.google.gdata.data.spreadsheet.CustomElementCollection;
 import com.google.gdata.data.spreadsheet.ListEntry;
 
-
 public class ShoppingLocation extends Location {
     private String[] tags;
 

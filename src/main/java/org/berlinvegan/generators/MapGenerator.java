@@ -77,7 +77,6 @@ public class MapGenerator extends WebsiteGenerator {
                 } catch (Exception ignored) {
                 }
             }
-
         }
     }
 }
