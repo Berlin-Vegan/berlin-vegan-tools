@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.berlinvegan.generators.Generator;
+import org.berlinvegan.util.StringUtil;
 
 import com.google.gdata.data.spreadsheet.CustomElementCollection;
 import com.google.gdata.data.spreadsheet.ListEntry;
@@ -69,7 +70,7 @@ public class Location {
         if (StringUtils.isBlank(value)) {
             return "";
         }
-        String simplifiedValue = removeEvenSpecialWhitespace(value); // Greatly simplifies regex.
+        String simplifiedValue = StringUtil.removeEvenSpecialWhitespace(value); // Greatly simplifies regex.
         final String regex = "\\d{1,2}(\\:\\d{2})?\\-(\\d{1,2}(\\:\\d{2})?)?";
         if (!Pattern.matches(regex, simplifiedValue)) {
             throw new RuntimeException("Found illegal opening time '" + value + "'.");
@@ -82,11 +83,6 @@ public class Location {
         return simplifiedValue.replaceAll("-", " - "); // Cause we removed the spaces when simplifying.
     }
     
-    private static String removeEvenSpecialWhitespace(String s) {
-        final String noBreakSpace = "\u00A0";
-        return s.replaceAll("\\s|" + noBreakSpace, "");
-    }
-
     /**
      * @return 0 = false, 1 = true, -1 = unknown
      */
