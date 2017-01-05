@@ -90,7 +90,7 @@ public class Location {
     /**
      * @return 0 = false, 1 = true, -1 = unknown
      */
-    protected int getIntValue(CustomElementCollection elements, String headerName) {
+    protected int getTriStateBooleanAsInt(CustomElementCollection elements, String headerName) {
         final String value = elements.getValue(headerName);
         if (value == null) {
             return -1;

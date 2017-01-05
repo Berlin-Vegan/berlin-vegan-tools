@@ -50,18 +50,18 @@ public class GastroLocation extends Location {
         publicTransport = elements.getValue("bvganfahrt");
         openComment = getTrimmedString(elements, "oeffnungszeitenkommentar");
         email = elements.getValue("e-mail");
-        handicappedAccessible = getIntValue(elements, "restaurantrollstuhlgeeignet");
-        handicappedAccessibleWc = getIntValue(elements, "wcrollstuhlgeignet");
-        dog = getIntValue(elements, "hunde");
-        childChair = getIntValue(elements, "kindersitz");
-        catering = getIntValue(elements, "catering");
-        delivery = getIntValue(elements, "lieferservice");
-        organic = getIntValue(elements, "bio");
-        seatsIndoor = getIntValue(elements, "sitzplaetzeinnen");
-        seatsOutdoor = getIntValue(elements, "sitzplaetzeaussen");
+        handicappedAccessible = getTriStateBooleanAsInt(elements, "restaurantrollstuhlgeeignet");
+        handicappedAccessibleWc = getTriStateBooleanAsInt(elements, "wcrollstuhlgeignet");
+        dog = getTriStateBooleanAsInt(elements, "hunde");
+        childChair = getTriStateBooleanAsInt(elements, "kindersitz");
+        catering = getTriStateBooleanAsInt(elements, "catering");
+        delivery = getTriStateBooleanAsInt(elements, "lieferservice");
+        organic = getTriStateBooleanAsInt(elements, "bio");
+        seatsIndoor = getTriStateBooleanAsInt(elements, "sitzplaetzeinnen");
+        seatsOutdoor = getTriStateBooleanAsInt(elements, "sitzplaetzeaussen");
         tags = getTags(elements);
-        wlan = getIntValue(elements, "wlan");
-        glutenFree = getIntValue(elements, "glutenfrei");
+        wlan = getTriStateBooleanAsInt(elements, "wlan");
+        glutenFree = getTriStateBooleanAsInt(elements, "glutenfrei");
     }
     
     private static String[] getTags(CustomElementCollection elements) {
