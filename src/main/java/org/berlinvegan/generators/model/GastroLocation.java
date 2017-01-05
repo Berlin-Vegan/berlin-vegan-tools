@@ -1,6 +1,5 @@
 package org.berlinvegan.generators.model;
 
-
 import static java.util.stream.Collectors.toList;
 
 import java.util.Arrays;
@@ -33,7 +32,6 @@ public class GastroLocation extends Location {
     private int wlan;
     private int glutenFree;
     private String[] tags;
-
     private List<String> districts;
     private List<Picture> pictures;
 
@@ -65,8 +63,6 @@ public class GastroLocation extends Location {
         tags = getTags(elements);
         wlan = getIntValue(elements, "wlan");
         glutenFree = getIntValue(elements, "glutenfrei");
-
-
     }
     
     private static String[] getTags(CustomElementCollection elements) {
@@ -95,7 +91,6 @@ public class GastroLocation extends Location {
             System.out.println(columnHeaderNames.size() + ": " + tag);
         }
     }
-
 
     public String getReviewURL() {
         return reviewURL;
@@ -225,8 +220,6 @@ public class GastroLocation extends Location {
         this.glutenFree = glutenFree;
     }
 
-
-
     public List<String> getDistricts() {
         return districts;
     }
@@ -244,6 +237,7 @@ public class GastroLocation extends Location {
         }
         return bundle.getString("omnivore");
     }
+    
     public String getOpenTimesHTML(String language) {
         ResourceBundle bundle = ResourceBundle.getBundle("i18n", new Locale(language));
         String[] weekdaysNames = new String[7];

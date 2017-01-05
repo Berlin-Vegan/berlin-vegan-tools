@@ -1,13 +1,13 @@
 package org.berlinvegan.generators.model;
 
-import com.google.gdata.data.spreadsheet.CustomElementCollection;
-import com.google.gdata.data.spreadsheet.ListEntry;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.berlinvegan.generators.Generator;
 
+import com.google.gdata.data.spreadsheet.CustomElementCollection;
+import com.google.gdata.data.spreadsheet.ListEntry;
 
-public  class Location {
+public class Location {
     protected String id;
     protected String name;
     protected String street = "";
