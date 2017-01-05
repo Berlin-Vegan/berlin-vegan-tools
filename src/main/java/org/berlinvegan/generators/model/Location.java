@@ -62,22 +62,6 @@ public class Location {
         return DigestUtils.md5Hex(idStr);
     }
 
-    /**
-     * @return 0 = false, 1 = true, null = unknown
-     */
-    private Boolean getBooleanValue(CustomElementCollection elements, String headerName) {
-        final String value = elements.getValue(headerName);
-        if (value == null) {
-            return null;
-        }
-        if (value.equals("0")) {
-            return false;
-        } else if (value.equals("1")) {
-            return true;
-        }
-        return null;
-    }
-
     private static String getOpeningTime(CustomElementCollection elements, String headerName) {
         String value = elements.getValue(headerName);
         if (value == null) {
