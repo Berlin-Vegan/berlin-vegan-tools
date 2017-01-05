@@ -43,13 +43,10 @@ public class MapGeneratorTest {
         generator.generateMap("de", gastroLocations);
     }
 
-
-
     private List<GastroLocation> getLocalGastroLocationDB() throws URISyntaxException, IOException {
         final URL url = getClass().getResource("gastrolocation_db.json");
         final Path path = Paths.get(url.toURI());
         final String json = new String(Files.readAllBytes(path));
         return new Gson().fromJson(json, new TypeToken<ArrayList<GastroLocation>>() {}.getType());
     }
-
 }

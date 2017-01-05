@@ -8,7 +8,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
-
 public class TestUtil {
     /** download the restaurant database, convert to json, and store in filesystem*/
     public void generateExampleRestaurantJsonFile() throws Exception {
@@ -23,5 +22,4 @@ public class TestUtil {
     public static String getTempDir() {
         return System.getProperty("java.io.tmpdir");
     }
-
 }
