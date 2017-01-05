@@ -90,16 +90,16 @@ public class ExtJsStoreGenerator extends WebsiteGenerator {
 
     private static String readFileAsString(String filePath) throws java.io.IOException {
         StringBuilder fileData = new StringBuilder(1000);
-        BufferedReader reader = new BufferedReader(new FileReader(filePath));
-        char[] buf = new char[1024];
-        int numRead;
-        while ((numRead = reader.read(buf)) != -1) {
-            String readData = String.valueOf(buf, 0, numRead);
-            fileData.append(readData);
-            buf = new char[1024];
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            char[] buf = new char[1024];
+            int numRead;
+            while ((numRead = reader.read(buf)) != -1) {
+                String readData = String.valueOf(buf, 0, numRead);
+                fileData.append(readData);
+                buf = new char[1024];
+            }
+            return fileData.toString();
         }
-        reader.close();
-        return fileData.toString();
     }
 
     public void generateLocationDataStores() throws Exception {
@@ -137,13 +137,13 @@ public class ExtJsStoreGenerator extends WebsiteGenerator {
         StringBuilder outStr = new StringBuilder();
         outStr.append(EXT_NAMESPACE_BVAPP);
         outStr.append("BVApp.data.").append(storeName).append("=[\n");
-        Iterator iter = entries.iterator();
+        Iterator<ListEntry> iter = entries.iterator();
         while (iter.hasNext()) {
-            ListEntry entry = (ListEntry) iter.next();
+            ListEntry entry = iter.next();
             outStr.append("[");
-            Iterator iterColum = entry.getCustomElements().getTags().iterator();
+            Iterator<String> iterColum = entry.getCustomElements().getTags().iterator();
             while (iterColum.hasNext()) {
-                String tag = (String) iterColum.next();
+                String tag = iterColum.next();
                 if (!tag.equalsIgnoreCase("kurzbeschreibungenglisch")) { // ignore this new column
                     String value = entry.getCustomElements().getValue(tag);
                     if (value != null) {

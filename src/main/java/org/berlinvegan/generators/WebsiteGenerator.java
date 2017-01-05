@@ -81,11 +81,9 @@ public class WebsiteGenerator extends Generator {
         String resourceName = 
             "org/berlinvegan/generators/" + (language.equals(LANG_DE) ? "dehyphx.tex" : "hyphen.tex");
         
-        InputStream fileInputStream = this.getClass().getClassLoader().getResourceAsStream(resourceName);
-        h.loadTable(fileInputStream);
-
-        text = h.hyphenate(text, 4, 3);
-        text = text.replaceAll("\u00ad", "&shy;");
-        return text;
+        try (InputStream fileInputStream = this.getClass().getClassLoader().getResourceAsStream(resourceName)) {
+            h.loadTable(fileInputStream);
+            return h.hyphenate(text, 4, 3).replaceAll("\u00ad", "&shy;");
+        }
     }
 }
