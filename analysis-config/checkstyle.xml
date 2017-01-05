@@ -17,12 +17,6 @@
     </module>
     <module name="SuppressWarningsFilter" />
 
-    <!-- Duplicate Code -->
-    <module name="StrictDuplicateCode">
-        <property name="severity" value="info"/>
-        <property name="fileExtensions" value="java"/>
-    </module>
-
     <!-- Miscellaneous -->
     <module name="NewlineAtEndOfFile">
         <property name="fileExtensions" value="java"/>
@@ -90,7 +84,6 @@
         </module>-->
         <!--<module name="MissingSwitchDefault"/>-->
         <module name="ModifiedControlVariable"/>
-        <module name="RedundantThrows"/>
         <module name="SimplifyBooleanExpression"/>
         <module name="SimplifyBooleanReturn"/>
         <module name="StringLiteralEquality"/>
@@ -111,7 +104,6 @@
         </module>-->
         <module name="IllegalThrows"/>
         <module name="PackageDeclaration"/>
-        <module name="JUnitTestCase"/>
         <module name="IllegalType">
             <property name="ignoredMethodNames" value=""/>
             <property name="tokens" value="PARAMETER_DEF, METHOD_DEF"/>
