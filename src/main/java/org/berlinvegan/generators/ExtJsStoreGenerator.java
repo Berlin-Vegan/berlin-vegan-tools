@@ -35,7 +35,7 @@ public class ExtJsStoreGenerator extends WebsiteGenerator {
     private void generateTextfilesJS() throws Exception {
         // first read the files from disk
         // <path,content>
-        HashMap<String, String> filesMap = new HashMap<String, String>();
+        Map<String, String> filesMap = new HashMap<String, String>();
         String textFilesBase = "data" + File.separator;
         List<File> files = getFileListing(new File(textFilesBase));
         for (File file : files) {

@@ -50,7 +50,7 @@ public class FactsheetGenerator extends WebsiteGenerator {
             Map<String, Object> input = new HashMap<String, Object>();
             input.put("i18n", bundle);
             input.put("language", language);
-            HashSet<String> restaurantsDone = new HashSet<String>();
+            Set<String> restaurantsDone = new HashSet<String>();
             for (GastroLocation gastroLocation : gastroLocations) {
                 String reviewURL = gastroLocation.getReviewURL();
                 if (!StringUtils.isEmpty(reviewURL) && !restaurantsDone.contains(reviewURL)) {

@@ -42,7 +42,7 @@ public class MapGenerator extends WebsiteGenerator {
     public void generateMap(String language, List<GastroLocation> gastroLocations) {
         ResourceBundle bundle = ResourceBundle.getBundle("i18n", new Locale(language));
 
-        final HashSet<String> districts = new HashSet<String>();
+        final Set<String> districts = new HashSet<String>();
         for (GastroLocation gastroLocation : gastroLocations) {
             final String district = gastroLocation.getDistrict();
             if (!district.equalsIgnoreCase("")) {
