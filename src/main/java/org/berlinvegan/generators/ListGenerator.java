@@ -83,7 +83,7 @@ public class ListGenerator extends WebsiteGenerator {
      * @param gastroLocations
      * @return
      */
-    private List<GastroLocation> getUniqueRestaurants(List<GastroLocation> gastroLocations) {
+    private static List<GastroLocation> getUniqueRestaurants(List<GastroLocation> gastroLocations) {
         ArrayList<GastroLocation> result = new ArrayList<GastroLocation>();
         Set<String> restaurantsDone = new HashSet<String>();
         for (GastroLocation gastroLocation : gastroLocations) {

@@ -86,7 +86,7 @@ public class FactsheetGenerator extends WebsiteGenerator {
      * @param gastroLocations
      * @return
      */
-    private List<GastroLocation> getBranches(String reviewURL, List<GastroLocation> gastroLocations) {
+    private static List<GastroLocation> getBranches(String reviewURL, List<GastroLocation> gastroLocations) {
         ArrayList<GastroLocation> list = new ArrayList<GastroLocation>();
         for (GastroLocation gastroLocation : gastroLocations) {
             String url = gastroLocation.getReviewURL();

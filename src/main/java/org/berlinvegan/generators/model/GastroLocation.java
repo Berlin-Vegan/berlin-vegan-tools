@@ -85,7 +85,7 @@ public class GastroLocation extends Location {
         return tags.toArray(new String[0]);
     }
 
-    private void printColumnHeaderNames(CustomElementCollection elements) {
+    private static void printColumnHeaderNames(CustomElementCollection elements) {
         final Set<String> columnHeaderNames = elements.getTags();
         for (String tag : columnHeaderNames) {
             System.out.println(columnHeaderNames.size() + ": " + tag);

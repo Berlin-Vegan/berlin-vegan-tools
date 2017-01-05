@@ -74,7 +74,6 @@ public class Generator {
         return service.getFeed(listFeedUrl, ListFeed.class);
     }
 
-    @SuppressWarnings("checkstyle:indentation")
     public List<ListEntry> addEntries(List<ListEntry> entries, SpreadsheetEntry spreadsheet)
             throws IOException, ServiceException {
 
@@ -151,7 +150,7 @@ public class Generator {
         return text;
     }
 
-    protected String getLocationTextFromWebsite(Document document) throws IOException {
+    protected String getLocationTextFromWebsite(Document document) {
         String text = "";
         Elements textElements = document.select("div.entry-content > p");
         for (Element textElement : textElements) {
@@ -172,7 +171,7 @@ public class Generator {
         return pictures;
     }
 
-    private Picture parsePicture(Element element) {
+    private static Picture parsePicture(Element element) {
         final String url = element.attr("data-orig-file");
         if (isPicture(url)) {
             final String sizeString = element.attr("data-orig-size");
@@ -187,7 +186,7 @@ public class Generator {
         return null;
     }
 
-    private boolean isPicture(String url) {
+    private static boolean isPicture(String url) {
         return StringUtils.endsWithIgnoreCase(url, "jpg");
     }
 

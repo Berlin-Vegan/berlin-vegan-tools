@@ -36,7 +36,7 @@ public class KMLGenerator extends Generator {
         }
     }
 
-    private String  getKMLDocument(List<ListEntry> entries) {
+    private static String getKMLDocument(List<ListEntry> entries) {
         StringBuilder builder = new StringBuilder();
         builder.append(XML_HEAD);
 
@@ -59,7 +59,7 @@ public class KMLGenerator extends Generator {
         return builder.toString();
     }
 
-    private String getDescription(ListEntry entry) {
+    private static String getDescription(ListEntry entry) {
         StringBuilder desc = new StringBuilder();
         int vegan = Integer.parseInt(entry.getCustomElements().getValue("veganfreundlich"));
         switch (vegan) {
@@ -91,7 +91,7 @@ public class KMLGenerator extends Generator {
         return desc.toString();
     }
 
-    private void addDay(ListEntry entry, String day, StringBuilder desc) {
+    private static void addDay(ListEntry entry, String day, StringBuilder desc) {
         String openTime = entry.getCustomElements().getValue(day);
         if (openTime == null) {
             openTime = "geschlossen";

@@ -23,7 +23,6 @@ import java.util.List;
  */
 public class MapGeneratorTest {
     @Rule
-    @SuppressWarnings("checkstyle:visibilitymodifier")
     public TemporaryFolder tempFolder = new TemporaryFolder();
 
     @Test
