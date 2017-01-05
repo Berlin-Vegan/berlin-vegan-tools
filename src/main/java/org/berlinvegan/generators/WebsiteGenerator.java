@@ -7,9 +7,6 @@ import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetEncoder;
 
-/**
- * @author <a href="mailto:smeier@tapnic.com">Sandy Meier</a>
- */
 public class WebsiteGenerator extends Generator {
     public static final String REFRESH_TOKEN_OPTION = "r";
     public static final String PASSWORD_OPTION = "p";

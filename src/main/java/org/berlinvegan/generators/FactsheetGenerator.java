@@ -78,10 +78,6 @@ public class FactsheetGenerator extends WebsiteGenerator {
 
     /**
      * get branches(filialen) for restaurant
-     *
-     * @param reviewURL
-     * @param gastroLocations
-     * @return
      */
     private static List<GastroLocation> getBranches(String reviewURL, List<GastroLocation> gastroLocations) {
         ArrayList<GastroLocation> list = new ArrayList<GastroLocation>();

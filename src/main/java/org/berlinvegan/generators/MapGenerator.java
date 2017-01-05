@@ -10,9 +10,6 @@ import java.io.File;
 import java.io.Writer;
 import java.util.*;
 
-/**
- * User: smeier Date: 3/30/13 Time: 10:09 PM
- */
 public class MapGenerator extends WebsiteGenerator {
 
     public MapGenerator() throws Exception {

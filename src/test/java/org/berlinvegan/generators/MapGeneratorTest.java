@@ -17,10 +17,6 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Date: 20.07.13
- * Time: 11:47
- */
 public class MapGeneratorTest {
     @Rule
     public TemporaryFolder tempFolder = new TemporaryFolder();

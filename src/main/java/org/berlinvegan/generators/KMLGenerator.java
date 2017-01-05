@@ -6,10 +6,6 @@ import org.berlinvegan.generators.model.PlaceMark;
 
 import java.util.List;
 
-/**
- * Date: 22.07.12
- * Time: 19:52
- */
 public class KMLGenerator extends Generator {
     public static final String XML_HEAD = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
     public static final String KML_START = "<kml xmlns=\"http://www.opengis.net/kml/2.2\"><Document>";

@@ -26,10 +26,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Date: 22.07.12
- * Time: 19:49
- */
 public class Generator {
     public static final String LANG_DE = "de";
     public static final String LANG_EN = "en";

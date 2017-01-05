@@ -10,11 +10,6 @@ import java.io.File;
 import java.io.Writer;
 import java.util.*;
 
-/**
- * User: smeier
- * Date: 4/13/13
- * Time: 5:45 PM
- */
 public class ListGenerator extends WebsiteGenerator {
     public ListGenerator() throws Exception {
         super();
@@ -74,11 +69,8 @@ public class ListGenerator extends WebsiteGenerator {
         }
     }
 
-
-    /***
+    /**
      * only 1 restaurant instance per name, without branches and only gastroLocations with review
-     * @param gastroLocations
-     * @return
      */
     private static List<GastroLocation> getUniqueRestaurants(List<GastroLocation> gastroLocations) {
         ArrayList<GastroLocation> result = new ArrayList<GastroLocation>();
