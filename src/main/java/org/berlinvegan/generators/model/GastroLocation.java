@@ -49,7 +49,7 @@ public class GastroLocation extends Location {
         reviewURL = elements.getValue("reviewurl");
         district = elements.getValue("stadtbezirk");
         publicTransport = elements.getValue("bvganfahrt");
-        openComment = elements.getValue("oeffnungszeitenkommentar");
+        openComment = getTrimmedString(elements, "oeffnungszeitenkommentar");
         email = elements.getValue("e-mail");
         handicappedAccessible = getIntValue(elements, "restaurantrollstuhlgeeignet");
         handicappedAccessibleWc = getIntValue(elements, "wcrollstuhlgeignet");

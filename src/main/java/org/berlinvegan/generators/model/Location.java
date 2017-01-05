@@ -102,6 +102,11 @@ public class Location {
         final String value = elements.getValue(headerName);
         return (!StringUtils.isEmpty(value) && !value.startsWith("http")) ? "http://" + value : value;
     }
+    
+    protected String getTrimmedString(CustomElementCollection elements, String headerName) {
+        final String value = elements.getValue(headerName);
+        return value == null ? null : value.trim();
+    }
 
     public String getName() {
         return name;
