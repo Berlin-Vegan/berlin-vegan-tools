@@ -3,6 +3,7 @@ package org.berlinvegan.generators.model;
 import com.google.gdata.data.spreadsheet.CustomElementCollection;
 import com.google.gdata.data.spreadsheet.ListEntry;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.berlinvegan.generators.Generator;
 
 
@@ -48,7 +49,7 @@ public  class Location {
         otFri = getStringValue(elements, "fr");
         otSat = getStringValue(elements, "sa");
         otSun = getStringValue(elements, "so");
-        website = elements.getValue("website");
+        website = getUrl(elements, "website");
         vegan = Integer.parseInt(elements.getValue("veganfreundlich"));
         comment = elements.getValue("kurzbeschreibungdeutsch");
         commentEnglish = elements.getValue("kurzbeschreibungenglisch");
@@ -99,6 +100,11 @@ public  class Location {
             return -1;
         }
         return Integer.parseInt(value);
+    }
+    
+    protected String getUrl(CustomElementCollection elements, String headerName) {
+        final String value = elements.getValue(headerName);
+        return (!StringUtils.isEmpty(value) && !value.startsWith("http")) ? "http://" + value : value;
     }
 
     public String getName() {
