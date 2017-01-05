@@ -42,13 +42,13 @@ public class Location {
         latCoord = Double.parseDouble(elements.getValue("lat"));
         longCoord = Double.parseDouble(elements.getValue("long"));
         telephone = elements.getValue("telefon");
-        otMon = getStringValue(elements, "mo");
-        otTue = getStringValue(elements, "di");
-        otWed = getStringValue(elements, "mi");
-        otThu = getStringValue(elements, "do");
-        otFri = getStringValue(elements, "fr");
-        otSat = getStringValue(elements, "sa");
-        otSun = getStringValue(elements, "so");
+        otMon = getOpeningTime(elements, "mo");
+        otTue = getOpeningTime(elements, "di");
+        otWed = getOpeningTime(elements, "mi");
+        otThu = getOpeningTime(elements, "do");
+        otFri = getOpeningTime(elements, "fr");
+        otSat = getOpeningTime(elements, "sa");
+        otSun = getOpeningTime(elements, "so");
         website = getUrl(elements, "website");
         vegan = Integer.parseInt(elements.getValue("veganfreundlich"));
         comment = elements.getValue("kurzbeschreibungdeutsch");
@@ -78,13 +78,12 @@ public class Location {
         return null;
     }
 
-    protected String getStringValue(CustomElementCollection elements, String headerName) {
+    private static String getOpeningTime(CustomElementCollection elements, String headerName) {
         String value = elements.getValue(headerName);
         if (value == null) {
             value = "";
         }
         return value.replaceAll("[\r\n]+", "");
-
     }
 
     /**
