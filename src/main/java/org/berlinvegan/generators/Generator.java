@@ -89,9 +89,17 @@ public class Generator {
         for (SpreadsheetEntry entry : spreadsheetEntries) {
             if (entry.getTitle().getPlainText().equals(Generator.TABLE_RESTAURANTS)) {
                 List<ListEntry> entryList = addEntries(null, entry);
+                GastroLocation gastroLocation = null;
                 for (ListEntry listEntry : entryList) {
-                    final GastroLocation gastroLocation = new GastroLocation(listEntry);
-                    gastroLocations.add(gastroLocation);
+                    try {
+                        gastroLocation = new GastroLocation(listEntry);
+                        gastroLocations.add(gastroLocation);
+                    } catch (Exception ex) {
+                        if (gastroLocation != null) {
+                            System.err.println("Failed to parse Gastrolocation after: " + gastroLocation.getName());
+                        }
+                        throw ex;
+                    }
                 }
             }
         }
@@ -112,6 +120,7 @@ public class Generator {
 
         return gastroLocations;
     }
+
     protected List<ShoppingLocation> getShoppingLocationFromServer() throws Exception {
         final ArrayList<ShoppingLocation> locations = new ArrayList<ShoppingLocation>();
         final List<SpreadsheetEntry> spreadsheetEntries = getSpreadsheetEntries();
