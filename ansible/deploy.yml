@@ -3,7 +3,7 @@
 - hosts: all
   remote_user: deploy
   vars:
-    app_repo: https://github.com/smeir/berlin-vegan-tools.git
+    app_repo: https://github.com/Berlin-Vegan/berlin-vegan-tools.git
     app_name: berlin-vegan-tools
     user_home: "/home/deploy"
     app_root: "{{user_home}}/{{app_name}}"
