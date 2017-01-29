@@ -19,7 +19,7 @@
 </#list>
 <#if branch1.website??>
 <h4 class="internet">Internet</h4>
-<p><a target='_blank' href='http://${branch1.website}'>${branch1.website}</a></p>
+<p><a target='_blank' href='${branch1.website}'>${branch1.website}</a></p>
 </#if>
 
 <h4 class="openingTime">Öffnungszeiten</h4>
