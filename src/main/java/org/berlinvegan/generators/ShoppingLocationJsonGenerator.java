@@ -21,7 +21,7 @@ public class ShoppingLocationJsonGenerator extends WebsiteGenerator {
             generator.generate();
         } else {
             final HelpFormatter helpFormatter = new HelpFormatter();
-            helpFormatter.printHelp("generate json", constructOptions(false));
+            helpFormatter.printHelp("generate json", constructOptions(false, false));
         }
     }
 

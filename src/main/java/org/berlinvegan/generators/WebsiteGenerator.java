@@ -11,10 +11,13 @@ public class WebsiteGenerator extends Generator {
     public static final String REFRESH_TOKEN_OPTION = "r";
     public static final String PASSWORD_OPTION = "p";
     public static final String OUTPUT_DIR_OPTION = "o";
+    public static final String INPUT_PICTURE_DIR_OPTION = "i";
     public static final String WEBSITE_DE = "http://www.berlin-vegan.de";
     public static final String REVIEW_BASE_LOCATION_DE = "/essen-und-trinken/kritiken/";
     public static final String REVIEW_DE_BASE_URL = WEBSITE_DE + REVIEW_BASE_LOCATION_DE;
     protected static String outputDir;
+    protected static String inputImageDir;
+
     private static String refreshToken;
     private static String clientSecret;
 
@@ -24,7 +27,7 @@ public class WebsiteGenerator extends Generator {
 
     protected static void parseOptions(String[] args) throws Exception {
         final CommandLineParser cmdLinePosixParser = new PosixParser();
-        final Options posixOptions = constructOptions(true);
+        final Options posixOptions = constructOptions(true, true);
         CommandLine commandLine;
         try {
             commandLine = cmdLinePosixParser.parse(posixOptions, args);
@@ -36,6 +39,9 @@ public class WebsiteGenerator extends Generator {
             }
             if (commandLine.hasOption(OUTPUT_DIR_OPTION)) {
                 outputDir = commandLine.getOptionValue(OUTPUT_DIR_OPTION);
+            }
+            if (commandLine.hasOption(INPUT_PICTURE_DIR_OPTION)) {
+                inputImageDir = commandLine.getOptionValue(INPUT_PICTURE_DIR_OPTION);
             }
 
             // if username,clientSecret is not set on commandline, try to read from env vars
@@ -52,14 +58,17 @@ public class WebsiteGenerator extends Generator {
 
     }
     public static Options constructOptions() {
-        return constructOptions(true);
+        return constructOptions(true, false);
     }
-    public static Options constructOptions(boolean withOutputDir) {
+    public static Options constructOptions(boolean withOutputDir, boolean withInputImageDir) {
         final Options options = new Options();
         options.addOption(REFRESH_TOKEN_OPTION, true, "refresh token");
         options.addOption(PASSWORD_OPTION, true, "clientSecret");
         if (withOutputDir) {
             options.addOption(OUTPUT_DIR_OPTION, true, "output directory");
+        }
+        if (withInputImageDir) {
+            options.addOption(INPUT_PICTURE_DIR_OPTION, true, "input picture directory");
         }
         return options;
     }
