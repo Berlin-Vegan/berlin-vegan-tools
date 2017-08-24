@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.net.*;
 import java.nio.file.Files;
+import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -77,21 +78,24 @@ public class GastroLocationJsonGenerator extends WebsiteGenerator {
 
     private List<Picture> getLocationPicturesFromFolder(GastroLocation gastroLocation) {
         final ArrayList<Picture> pictures = new ArrayList<>();
-        Path pictureFolder = Paths.get(inputImageDir).resolve(gastroLocation.getName());
-        if (Files.isDirectory(pictureFolder)) {
-            File[] files = new File(pictureFolder.toUri()).listFiles();
-            if (files != null) {
-                Arrays.sort(files);
-                for (File file : files) {
-                    Picture picture;
-                    if (file.isFile()) {
-                        picture = getPicture(gastroLocation, file);
-                        if (picture != null) {
-                            pictures.add(picture);
+        try {
+            Path pictureFolder = Paths.get(inputImageDir).resolve(gastroLocation.getName());
+            if (Files.isDirectory(pictureFolder)) {
+                File[] files = new File(pictureFolder.toUri()).listFiles();
+                if (files != null) {
+                    Arrays.sort(files);
+                    for (File file : files) {
+                        Picture picture;
+                        if (file.isFile()) {
+                            picture = getPicture(gastroLocation, file);
+                            if (picture != null) {
+                                pictures.add(picture);
+                            }
                         }
                     }
                 }
             }
+        } catch (InvalidPathException ignore) {
         }
         return pictures;
     }
