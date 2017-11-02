@@ -105,7 +105,8 @@ public class GastroLocationJsonGenerator extends WebsiteGenerator {
     }
 
     /**
-     * search picture folder for a restaurant, it start with the lat coordination as key, so a unique mapping is possible
+     * search picture folder for a restaurant
+     * folder  start with the lat coordination as key, so a unique mapping is possible
      */
     private String searchPictureFolder(GastroLocation gastroLocation) {
         File[] directories = new File(inputImageDir).listFiles(File::isDirectory);
