@@ -78,8 +78,12 @@ public class GastroLocationJsonGenerator extends WebsiteGenerator {
 
     private List<Picture> getLocationPicturesFromFolder(GastroLocation gastroLocation) {
         final ArrayList<Picture> pictures = new ArrayList<>();
+        String folder = searchPictureFolder(gastroLocation);
+        if (folder == null) {
+            return pictures;
+        }
         try {
-            Path pictureFolder = Paths.get(inputImageDir).resolve(gastroLocation.getName());
+            Path pictureFolder = Paths.get(inputImageDir).resolve(folder);
             if (Files.isDirectory(pictureFolder)) {
                 File[] files = new File(pictureFolder.toUri()).listFiles();
                 if (files != null) {
@@ -87,7 +91,7 @@ public class GastroLocationJsonGenerator extends WebsiteGenerator {
                     for (File file : files) {
                         Picture picture;
                         if (file.isFile()) {
-                            picture = getPicture(gastroLocation, file);
+                            picture = getPicture(folder, file);
                             if (picture != null) {
                                 pictures.add(picture);
                             }
@@ -100,8 +104,23 @@ public class GastroLocationJsonGenerator extends WebsiteGenerator {
         return pictures;
     }
 
-    private Picture getPicture(GastroLocation gastroLocation, File file) {
-        String imageURLStr = CUSTOM_PICTURE_URL + gastroLocation.getName() + "/" + file.getName();
+    /**
+     * search picture folder for a restaurant, it start with the lat coordination as key, so a unique mapping is possible
+     */
+    private String searchPictureFolder(GastroLocation gastroLocation) {
+        File[] directories = new File(inputImageDir).listFiles(File::isDirectory);
+        if (directories != null) {
+            for (File directory : directories) {
+                if (directory.getName().startsWith(String.valueOf(gastroLocation.getLatCoord()))) {
+                    return directory.getName();
+                }
+            }
+        }
+        return null;
+    }
+
+    private Picture getPicture(String folder, File file) {
+        String imageURLStr = CUSTOM_PICTURE_URL + folder + "/" + file.getName();
         try {
             BufferedImage img = ImageIO.read(file);
             URL url = new URL(imageURLStr);
