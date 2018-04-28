@@ -43,7 +43,7 @@ public class GastroLocationJsonGenerator extends WebsiteGenerator {
     }
 
     private void generate() throws Exception {
-        final List<GastroLocation> gastroLocations = getGastroLocationFromServer();
+        final List<GastroLocation> gastroLocations = getGastroLocationDataFromServer(false);
         augmentWithReviewsAndPictures(gastroLocations);
         String json = new Gson().toJson(gastroLocations);
         if (StringUtils.isNotEmpty(json)) {
@@ -52,9 +52,13 @@ public class GastroLocationJsonGenerator extends WebsiteGenerator {
         }
     }
 
-    private void augmentWithReviewsAndPictures(List<GastroLocation> gastroLocations) throws IOException {
+    private void augmentWithReviewsAndPictures(List<GastroLocation> gastroLocations) {
         for (GastroLocation gastroLocation : gastroLocations) {
-            augmentWithReviewAndPictures(gastroLocation);
+            try {
+                augmentWithReviewAndPictures(gastroLocation);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 

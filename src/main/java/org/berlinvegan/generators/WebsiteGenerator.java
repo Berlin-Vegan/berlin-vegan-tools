@@ -21,11 +21,11 @@ public class WebsiteGenerator extends Generator {
     private static String refreshToken;
     private static String clientSecret;
 
-    public WebsiteGenerator() throws Exception {
+    WebsiteGenerator() throws Exception {
         super(refreshToken, clientSecret);
     }
 
-    protected static void parseOptions(String[] args) throws Exception {
+    static void parseOptions(String[] args) throws Exception {
         final CommandLineParser cmdLinePosixParser = new PosixParser();
         final Options posixOptions = constructOptions(true, true);
         CommandLine commandLine;
@@ -57,10 +57,10 @@ public class WebsiteGenerator extends Generator {
         }
 
     }
-    public static Options constructOptions() {
+    static Options constructOptions() {
         return constructOptions(true, false);
     }
-    public static Options constructOptions(boolean withOutputDir, boolean withInputImageDir) {
+    static Options constructOptions(boolean withOutputDir, boolean withInputImageDir) {
         final Options options = new Options();
         options.addOption(REFRESH_TOKEN_OPTION, true, "refresh token");
         options.addOption(PASSWORD_OPTION, true, "clientSecret");

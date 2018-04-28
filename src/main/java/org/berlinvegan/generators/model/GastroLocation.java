@@ -15,7 +15,7 @@ public class GastroLocation extends Location {
     public static final String OPEN_TIME_MORE_DAYS = "<b>%s-%s</b> %s<br/>";
     public static final int TYPE_VEGAN = 5;
     private String reviewURL = "";
-    private String district = "";
+    private String district;
     private String publicTransport = "";
     private String openComment = "";
     private String email = "";

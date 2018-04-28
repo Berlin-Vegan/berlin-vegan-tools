@@ -28,7 +28,7 @@ public class FactsheetGenerator extends WebsiteGenerator {
 
     private void generateFactSheets(String language) throws Exception {
         ResourceBundle bundle = ResourceBundle.getBundle("i18n", new Locale(language));
-        final List<GastroLocation> gastroLocations = getGastroLocationFromServer();
+        final List<GastroLocation> gastroLocations = getGastroLocationDataFromServer(false);
         if (!StringUtils.isEmpty(outputDir)) {
             generateFactSheets(language, bundle, gastroLocations);
         }

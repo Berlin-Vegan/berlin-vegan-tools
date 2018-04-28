@@ -137,8 +137,12 @@
         <!--<module name="JavadocParagraph"/>            Not yet supported by maven-checkstyle-plugin -->
 
         <!-- Metrics -->
-        <module name="ClassDataAbstractionCoupling"/>
-        <module name="ClassFanOutComplexity"/>
+        <module name="ClassDataAbstractionCoupling">
+            <property name="max" value="12"/>
+        </module>
+        <module name="ClassFanOutComplexity">
+            <property name="max" value="28"/>
+        </module>
         <!--<module name="CyclomaticComplexity"/>-->
         <module name="NPathComplexity"/>
         <module name="JavaNCSS">

@@ -52,7 +52,7 @@ public class ExtJsStoreGenerator extends WebsiteGenerator {
         }
         // scrape data from website for all locations
 
-        final List<GastroLocation> gastroLocations = getGastroLocationFromServer();
+        final List<GastroLocation> gastroLocations = getGastroLocationDataFromServer();
         if (gastroLocations != null) {
             for (GastroLocation gastroLocation : gastroLocations) {
                 String reviewURL = gastroLocation.getReviewURL();
@@ -102,7 +102,7 @@ public class ExtJsStoreGenerator extends WebsiteGenerator {
         }
     }
 
-    public void generateLocationDataStores() throws Exception {
+    private void generateLocationDataStores() throws Exception {
         List<ListEntry> restaurantEntries = null;
         List<ListEntry> shoppingEntries = null;
         List<ListEntry> cafeEntries = null;

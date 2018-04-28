@@ -31,7 +31,7 @@ public class MapGenerator extends WebsiteGenerator {
 
     public void generateMap(String language) throws Exception {
         if (!StringUtils.isEmpty(outputDir)) {
-            generateMap(language, getGastroLocationFromServer());
+            generateMap(language, getGastroLocationDataFromServer());
 
         }
     }

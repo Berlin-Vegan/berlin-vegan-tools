@@ -16,7 +16,7 @@ public class ListGenerator extends WebsiteGenerator {
     }
 
     public static void main(String[] args) throws Exception {
-        if (args.length == 6) {  // 3 options with 1 value
+        if (args.length == 6) {  // only output dir option
             parseOptions(args);
             ListGenerator generator = new ListGenerator();
             generator.generateList("de");
@@ -28,7 +28,7 @@ public class ListGenerator extends WebsiteGenerator {
 
     private void generateList(String language) throws Exception {
         ResourceBundle bundle = ResourceBundle.getBundle("i18n", new Locale(language));
-        final List<GastroLocation> gastroLocations = getGastroLocationFromServer();
+        final List<GastroLocation> gastroLocations = getGastroLocationDataFromServer(false);
         if (!StringUtils.isEmpty(outputDir)) {
             generateListV2(language, bundle, gastroLocations);
         }

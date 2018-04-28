@@ -11,6 +11,10 @@ import com.google.gdata.data.spreadsheet.ListFeed;
 import com.google.gdata.data.spreadsheet.SpreadsheetEntry;
 import com.google.gdata.data.spreadsheet.SpreadsheetFeed;
 import com.google.gdata.util.ServiceException;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.berlinvegan.generators.model.GastroLocation;
@@ -22,6 +26,10 @@ import org.jsoup.select.Elements;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.lang.reflect.Type;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,10 +46,14 @@ public class Generator {
     public static final String TABLE_BIO_REFORM = "BioReform";
     public static final String TABLE_CAFES = "Cafes";
     public static final String CLIENT_ID = "163232640652-b4m9qk4crvc2ck1pug6eqlapt0b64ncp.apps.googleusercontent.com";
-    protected SpreadsheetService service;
-    protected FeedURLFactory factory;
 
-    public Generator(String refreshToken, String clientSecret) throws Exception {
+    // bv django backend
+    private static final String BV_DATA_URL = "https://data.berlin-vegan.de/api/GastroLocations.json";
+
+    private SpreadsheetService service;
+    private FeedURLFactory factory;
+
+    Generator(String refreshToken, String clientSecret) throws Exception {
         if (refreshToken != null) {
             factory = FeedURLFactory.getDefault();
             HttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
@@ -65,11 +77,11 @@ public class Generator {
         return feed.getEntries();
     }
 
-    protected ListFeed getFeed(URL listFeedUrl) throws IOException, ServiceException {
+    private ListFeed getFeed(URL listFeedUrl) throws IOException, ServiceException {
         return service.getFeed(listFeedUrl, ListFeed.class);
     }
 
-    public List<ListEntry> addEntries(List<ListEntry> entries, SpreadsheetEntry spreadsheet)
+    List<ListEntry> addEntries(List<ListEntry> entries, SpreadsheetEntry spreadsheet)
             throws IOException, ServiceException {
 
         URL listFeedUrl = spreadsheet.getDefaultWorksheet().getListFeedUrl();
@@ -82,8 +94,53 @@ public class Generator {
         return entries;
     }
 
-    /* search the Berlin Vegan Google Docs for Table "Restaurant", download and parse the entries*/
-    public List<GastroLocation> getGastroLocationFromServer() throws Exception {
+    List<GastroLocation> getGastroLocationDataFromServer() throws Exception {
+        return getGastroLocationDataFromServer(false);
+    }
+
+    /**
+     * search the Berlin Vegan Google Docs for Table "Restaurant", download and parse the entries
+     *
+     * @param fromGoogle if true, load from google docs, if false load from BV django app
+     * @return list of locations
+     * @throws Exception
+     */
+    List<GastroLocation> getGastroLocationDataFromServer(boolean fromGoogle) throws Exception {
+        ArrayList<GastroLocation> gastroLocations;
+        if (fromGoogle) {
+            gastroLocations = getGastroLocationDataFromGoogleServer();
+        } else {
+            gastroLocations = getGastroLocationDataFromBVServer();
+        }
+        // init districts, a restaurant with more then one filiale is located in several districts
+        for (GastroLocation gastroLocation : gastroLocations) {
+            ArrayList<String> districts = new ArrayList<String>();
+            String reviewURL = gastroLocation.getReviewURL();
+            if (reviewURL != null) {
+                for (GastroLocation rest : gastroLocations) {
+                    if (reviewURL.equalsIgnoreCase(rest.getReviewURL())
+                            && !districts.contains(rest.getDistrict())) {
+                        districts.add(rest.getDistrict());
+                    }
+                }
+                gastroLocation.setDistricts(districts);
+            }
+        }
+
+        return gastroLocations;
+    }
+
+    private ArrayList<GastroLocation> getGastroLocationDataFromBVServer() throws IOException {
+        URL url = new URL(BV_DATA_URL);
+        HttpURLConnection request = (HttpURLConnection) url.openConnection();
+        request.connect();
+        JsonElement root = new JsonParser().parse(new InputStreamReader((InputStream) request.getContent()));
+        Type collectionType = new TypeToken<ArrayList<GastroLocation>>() {}.getType();
+        return new Gson().fromJson(root, collectionType);
+    }
+
+
+    private ArrayList<GastroLocation> getGastroLocationDataFromGoogleServer() throws Exception {
         final ArrayList<GastroLocation> gastroLocations = new ArrayList<GastroLocation>();
         final List<SpreadsheetEntry> spreadsheetEntries = getSpreadsheetEntries();
         for (SpreadsheetEntry entry : spreadsheetEntries) {
@@ -103,21 +160,6 @@ public class Generator {
                 }
             }
         }
-        // init districts, a restaurant with more then one filiale is located in several districts
-        for (GastroLocation gastroLocation : gastroLocations) {
-            ArrayList<String> districts = new ArrayList<String>();
-            String reviewURL = gastroLocation.getReviewURL();
-            if (reviewURL != null) {
-                for (GastroLocation rest : gastroLocations) {
-                    if (reviewURL.equalsIgnoreCase(rest.getReviewURL())
-                            && !districts.contains(rest.getDistrict())) {
-                        districts.add(rest.getDistrict());
-                    }
-                }
-                gastroLocation.setDistricts(districts);
-            }
-        }
-
         return gastroLocations;
     }
 
