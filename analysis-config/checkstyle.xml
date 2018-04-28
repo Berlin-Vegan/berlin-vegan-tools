@@ -144,7 +144,9 @@
             <property name="max" value="28"/>
         </module>
         <!--<module name="CyclomaticComplexity"/>-->
-        <module name="NPathComplexity"/>
+        <module name="NPathComplexity">
+            <property name="max" value="300"/>
+        </module>
         <module name="JavaNCSS">
             <property name="methodMaximum" value="45"/>
             <property name="classMaximum" value="800"/>

@@ -63,18 +63,18 @@ public class GastroLocation extends Location {
         wlan = getTriStateBooleanAsInt(elements, "wlan");
         glutenFree = getTriStateBooleanAsInt(elements, "glutenfrei");
     }
-    
+
     private static String[] getTags(CustomElementCollection elements) {
         final String value = elements.getValue("tagsbittenurimbisscaferestaurantundeiscafeverwenden");
         if (value == null) {
             return null;
         }
         List<String> tags =
-            Arrays.stream(value.split(","))
-                .map(String::trim)
-                .map(tag -> tag.equals("Café") ? "Cafe" : tag)
-                .map(tag -> tag.equals("Eiscafé") ? "Eiscafe" : tag)
-                .collect(toList());
+                Arrays.stream(value.split(","))
+                        .map(String::trim)
+                        .map(tag -> tag.equals("Café") ? "Cafe" : tag)
+                        .map(tag -> tag.equals("Eiscafé") ? "Eiscafe" : tag)
+                        .collect(toList());
         List<String> allowedTags = Arrays.asList("Imbiss", "Cafe", "Restaurant", "Eiscafe");
         for (String tag : tags) {
             if (!allowedTags.contains(tag)) {
@@ -229,7 +229,7 @@ public class GastroLocation extends Location {
         }
         return bundle.getString("omnivore");
     }
-    
+
     public String getOpenTimesHTML(String language) {
         ResourceBundle bundle = ResourceBundle.getBundle("i18n", new Locale(language));
         String[] weekdaysNames = new String[7];
@@ -249,55 +249,62 @@ public class GastroLocation extends Location {
         openTimes[4] = otFri != null ? otFri : "";
         openTimes[5] = otSat != null ? otSat : "";
         openTimes[6] = otSun != null ? otSun : "";
-        StringBuilder result = new StringBuilder();
-        
-        boolean openTimesAvailable = 
-            !openTimes[0].isEmpty() 
-            || !openTimes[1].isEmpty() 
-            || !openTimes[2].isEmpty() 
-            || !openTimes[3].isEmpty() 
-            || !openTimes[4].isEmpty() 
-            || !openTimes[5].isEmpty()
-            || !openTimes[6].isEmpty();
-        
+
+        boolean openTimesAvailable = isOpenTimesAvailable(openTimes);
+
         if (openTimesAvailable) {
-            int equalStart = -1;
-            for (int i = 0; i <= 6; i++) {
-                if (i < 6 && openTimes[i].equalsIgnoreCase(openTimes[i + 1])) { 
-                    // nachfolger identisch, mach weiter
-                    if (equalStart == -1) {
-                        equalStart = i;
+            return generateOpenTimesHTML(weekdaysNames, openTimes);
+        }
+        return "";
+    }
+
+    private String generateOpenTimesHTML(String[] weekdaysNames, String[] openTimes) {
+        StringBuilder result = new StringBuilder();
+        int equalStart = -1;
+        for (int i = 0; i <= 6; i++) {
+            if (i < 6 && openTimes[i].equalsIgnoreCase(openTimes[i + 1])) {
+                // nachfolger identisch, mach weiter
+                if (equalStart == -1) {
+                    equalStart = i;
+                }
+            } else {
+                if (equalStart == -1) {
+                    // aktueller Tag ist einmalig
+                    if (openTimes[i].isEmpty()) {
+                        // geschlossen
+                        String str = String.format(OPEN_TIME_ONE_DAY, weekdaysNames[i], "geschlossen");
+                        result.append(str);
+                    } else {
+                        String str =
+                                String.format(OPEN_TIME_ONE_DAY, weekdaysNames[i], openTimes[i] + " Uhr");
+                        result.append(str);
                     }
                 } else {
-                    if (equalStart == -1) { 
-                        // aktueller Tag ist einmalig
-                        if (openTimes[i].isEmpty()) { 
-                            // geschlossen
-                            String str = String.format(OPEN_TIME_ONE_DAY, weekdaysNames[i], "geschlossen");
-                            result.append(str);
-                        } else {
-                            String str = 
-                                String.format(OPEN_TIME_ONE_DAY, weekdaysNames[i], openTimes[i] + " Uhr");
-                            result.append(str);
-                        }
-                    } else { 
-                        // es gibt zusammenhaengende Tage
-                        String openTimesText = 
+                    // es gibt zusammenhaengende Tage
+                    String openTimesText =
                             openTimes[i].isEmpty() ? "geschlossen" : openTimes[i] + " Uhr";
-                        String str = 
+                    String str =
                             String.format(
-                                OPEN_TIME_MORE_DAYS, 
-                                weekdaysNames[equalStart], 
-                                weekdaysNames[i], 
-                                openTimesText);
-                        result.append(str);
-                        equalStart = -1;
-                    }
+                                    OPEN_TIME_MORE_DAYS,
+                                    weekdaysNames[equalStart],
+                                    weekdaysNames[i],
+                                    openTimesText);
+                    result.append(str);
+                    equalStart = -1;
                 }
             }
-
         }
         return result.toString();
+    }
+
+    private boolean isOpenTimesAvailable(String[] openTimes) {
+        return !openTimes[0].isEmpty()
+                || !openTimes[1].isEmpty()
+                || !openTimes[2].isEmpty()
+                || !openTimes[3].isEmpty()
+                || !openTimes[4].isEmpty()
+                || !openTimes[5].isEmpty()
+                || !openTimes[6].isEmpty();
     }
 
     public void setPictures(List<Picture> pictures) {
