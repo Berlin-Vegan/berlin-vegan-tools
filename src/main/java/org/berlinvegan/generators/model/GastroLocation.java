@@ -242,13 +242,13 @@ public class GastroLocation extends Location {
         weekdaysNames[6] = bundle.getString("sun");
 
         String[] openTimes = new String[7];
-        openTimes[0] = otMon;
-        openTimes[1] = otTue;
-        openTimes[2] = otWed;
-        openTimes[3] = otThu;
-        openTimes[4] = otFri;
-        openTimes[5] = otSat;
-        openTimes[6] = otSun;
+        openTimes[0] = otMon != null ? otMon : ""; // if time is missing, init with empty string
+        openTimes[1] = otTue != null ? otTue : "";
+        openTimes[2] = otWed != null ? otWed : "";
+        openTimes[3] = otThu != null ? otThu : "";
+        openTimes[4] = otFri != null ? otFri : "";
+        openTimes[5] = otSat != null ? otSat : "";
+        openTimes[6] = otSun != null ? otSun : "";
         StringBuilder result = new StringBuilder();
         
         boolean openTimesAvailable = 
