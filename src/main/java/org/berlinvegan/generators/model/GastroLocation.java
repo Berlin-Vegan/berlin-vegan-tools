@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.gdata.data.spreadsheet.CustomElementCollection;
 import com.google.gdata.data.spreadsheet.ListEntry;
 
@@ -46,10 +48,22 @@ public class GastroLocation extends Location {
         super(entry);
         final CustomElementCollection elements = entry.getCustomElements();
         reviewURL = elements.getValue("reviewurl");
+        if ("".equals(reviewURL)) {
+            throw new IllegalArgumentException("reviewURL must not be empty");
+        }
         district = elements.getValue("stadtbezirk");
+        if (StringUtils.isBlank(district)) {
+            throw new IllegalArgumentException("district must be set");
+        }
         publicTransport = elements.getValue("bvganfahrt");
+        if (StringUtils.isBlank(publicTransport)) {
+            throw new IllegalArgumentException("publicTransport must be set");
+        }
         openComment = getTrimmedString(elements, "oeffnungszeitenkommentar");
         email = elements.getValue("e-mail");
+        if ("".equals(email)) {
+            throw new IllegalArgumentException("email must not be empty");
+        }
         handicappedAccessible = getTriStateBooleanAsInt(elements, "restaurantrollstuhlgeeignet");
         handicappedAccessibleWc = getTriStateBooleanAsInt(elements, "wcrollstuhlgeignet");
         dog = getTriStateBooleanAsInt(elements, "hunde");
@@ -57,8 +71,8 @@ public class GastroLocation extends Location {
         catering = getTriStateBooleanAsInt(elements, "catering");
         delivery = getTriStateBooleanAsInt(elements, "lieferservice");
         organic = getTriStateBooleanAsInt(elements, "bio");
-        seatsIndoor = getTriStateBooleanAsInt(elements, "sitzplaetzeinnen");
-        seatsOutdoor = getTriStateBooleanAsInt(elements, "sitzplaetzeaussen");
+        seatsIndoor = getNumber(elements, "sitzplaetzeinnen");
+        seatsOutdoor = getNumber(elements, "sitzplaetzeaussen");
         tags = getTags(elements);
         wlan = getTriStateBooleanAsInt(elements, "wlan");
         glutenFree = getTriStateBooleanAsInt(elements, "glutenfrei");
@@ -67,7 +81,7 @@ public class GastroLocation extends Location {
     private static String[] getTags(CustomElementCollection elements) {
         final String value = elements.getValue("tagsbittenurimbisscaferestaurantundeiscafeverwenden");
         if (value == null) {
-            return null;
+            throw new RuntimeException("Tags must be set.");
         }
         List<String> tags =
                 Arrays.stream(value.split(","))
@@ -80,6 +94,9 @@ public class GastroLocation extends Location {
             if (!allowedTags.contains(tag)) {
                 throw new RuntimeException("Found illegal tag '" + tag + "'.");
             }
+        }
+        if (tags.size() < 1 || tags.size() > 4) {
+            throw new RuntimeException("Found " + tags.size() + " tags. (expected 1 to 4)");
         }
         return tags.toArray(new String[0]);
     }

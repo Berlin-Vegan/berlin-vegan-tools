@@ -37,14 +37,24 @@ public class Location {
     public Location(ListEntry entry) {
         final CustomElementCollection elements = entry.getCustomElements();
         name = elements.getValue("name");
-        if (name == null) {
+        if (StringUtils.isBlank(name)) {
             throw new IllegalArgumentException("name must be set");
         }
         street = Generator.textEncode(elements.getValue("strasse"));
+        if (StringUtils.isBlank(street)) {
+            throw new IllegalArgumentException("street must be set");
+        }
         cityCode = Integer.parseInt(elements.getValue("postleitzahl"));
         latCoord = Double.parseDouble(elements.getValue("lat"));
         longCoord = Double.parseDouble(elements.getValue("long"));
         telephone = elements.getValue("telefon");
+        if ("".equals(telephone)) {
+            throw new IllegalArgumentException("telephone must not be empty");
+        }
+        website = getUrl(elements, "website");
+        if ("".equals(website)) {
+            throw new IllegalArgumentException("website must not be empty");
+        }
         otMon = getOpeningTime(elements, "mo");
         otTue = getOpeningTime(elements, "di");
         otWed = getOpeningTime(elements, "mi");
@@ -52,11 +62,18 @@ public class Location {
         otFri = getOpeningTime(elements, "fr");
         otSat = getOpeningTime(elements, "sa");
         otSun = getOpeningTime(elements, "so");
-        website = getUrl(elements, "website");
         vegan = Integer.parseInt(elements.getValue("veganfreundlich"));
+        if (vegan != 2 && vegan != 4 && vegan != 5) {
+            throw new IllegalArgumentException("vegan must be 2, 4 or 5");
+        }
         comment = elements.getValue("kurzbeschreibungdeutsch");
+        if ("".equals(comment)) {
+            throw new IllegalArgumentException("comment must not be empty");
+        }
         commentEnglish = elements.getValue("kurzbeschreibungenglisch");
-        // "generate unique id
+        if ("".equals(commentEnglish)) {
+            throw new IllegalArgumentException("commentEnglish must not be empty");
+        }
         id = generateId();
     }
 
@@ -82,6 +99,14 @@ public class Location {
         }
         return simplifiedValue.replaceAll("-", " - "); // Cause we removed the spaces when simplifying.
     }
+
+    protected int getNumber(CustomElementCollection elements, String headerName) {
+        final String value = elements.getValue(headerName);
+        if (value == null) {
+            return -1;
+        }
+        return Integer.parseInt(value);
+    }
     
     /**
      * @return 0 = false, 1 = true, -1 = unknown
@@ -91,7 +116,11 @@ public class Location {
         if (value == null) {
             return -1;
         }
-        return Integer.parseInt(value);
+        int i = Integer.parseInt(value);
+        if (i != -1 && i != 0 && i != 1) {
+            throw new RuntimeException("Found illegal tri-state boolean '" + value + "'.");
+        }
+        return i;
     }
     
     protected String getUrl(CustomElementCollection elements, String headerName) {
