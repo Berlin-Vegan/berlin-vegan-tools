@@ -27,9 +27,14 @@ public class Location {
     protected String otFri = "";
     protected String otSat = "";
     protected String otSun = "";
+    protected String openComment = "";
     protected int vegan;
     protected String comment;
     protected String commentEnglish;
+    protected String reviewURL = "";
+    protected int delivery;
+    protected int organic;
+    protected int handicappedAccessible;
 
     public Location() {
     }
@@ -40,14 +45,14 @@ public class Location {
         if (StringUtils.isBlank(name)) {
             throw new IllegalArgumentException("name must be set");
         }
-        street = Generator.textEncode(elements.getValue("strasse"));
+        street = Generator.textEncode(elements.getValue("street"));
         if (StringUtils.isBlank(street)) {
             throw new IllegalArgumentException("street must be set");
         }
-        cityCode = Integer.parseInt(elements.getValue("postleitzahl"));
+        cityCode = Integer.parseInt(elements.getValue("cityCode"));
         latCoord = Double.parseDouble(elements.getValue("lat"));
         longCoord = Double.parseDouble(elements.getValue("long"));
-        telephone = elements.getValue("telefon");
+        telephone = elements.getValue("telephone");
         if ("".equals(telephone)) {
             throw new IllegalArgumentException("telephone must not be empty");
         }
@@ -55,25 +60,33 @@ public class Location {
         if ("".equals(website)) {
             throw new IllegalArgumentException("website must not be empty");
         }
-        otMon = getOpeningTime(elements, "mo");
-        otTue = getOpeningTime(elements, "di");
-        otWed = getOpeningTime(elements, "mi");
-        otThu = getOpeningTime(elements, "do");
-        otFri = getOpeningTime(elements, "fr");
-        otSat = getOpeningTime(elements, "sa");
-        otSun = getOpeningTime(elements, "so");
-        vegan = Integer.parseInt(elements.getValue("veganfreundlich"));
+        otMon = getOpeningTime(elements, "otMon");
+        otTue = getOpeningTime(elements, "otTue");
+        otWed = getOpeningTime(elements, "otWed");
+        otThu = getOpeningTime(elements, "otThu");
+        otFri = getOpeningTime(elements, "otFri");
+        otSat = getOpeningTime(elements, "otSat");
+        otSun = getOpeningTime(elements, "otSun");
+        openComment = getTrimmedString(elements, "openComment");
+        vegan = Integer.parseInt(elements.getValue("vegan"));
         if (vegan != 2 && vegan != 4 && vegan != 5) {
             throw new IllegalArgumentException("vegan must be 2, 4 or 5");
         }
-        comment = elements.getValue("kurzbeschreibungdeutsch");
+        comment = elements.getValue("comment");
         if ("".equals(comment)) {
             throw new IllegalArgumentException("comment must not be empty");
         }
-        commentEnglish = elements.getValue("kurzbeschreibungenglisch");
+        commentEnglish = elements.getValue("commentEnglish");
         if ("".equals(commentEnglish)) {
             throw new IllegalArgumentException("commentEnglish must not be empty");
         }
+        reviewURL = elements.getValue("reviewURL");
+        if ("".equals(reviewURL)) {
+            throw new IllegalArgumentException("reviewURL must not be empty");
+        }
+        delivery = getTriStateBooleanAsInt(elements, "delivery");
+        organic = getTriStateBooleanAsInt(elements, "organic");
+        handicappedAccessible = getTriStateBooleanAsInt(elements, "handicappedAccessible");
         id = generateId();
     }
 
@@ -245,6 +258,14 @@ public class Location {
         this.otSun = otSun;
     }
 
+    public String getOpenComment() {
+        return openComment;
+    }
+
+    public void setOpenComment(String openComment) {
+        this.openComment = openComment;
+    }
+    
     public int getVegan() {
         return vegan;
     }
@@ -268,7 +289,39 @@ public class Location {
     public void setCommentEnglish(String commentEnglish) {
         this.commentEnglish = commentEnglish;
     }
+    
+    public String getReviewURL() {
+        return reviewURL;
+    }
 
+    public void setReviewURL(String reviewURL) {
+        this.reviewURL = reviewURL;
+    }
+
+    public int getDelivery() {
+        return delivery;
+    }
+
+    public void setDelivery(int delivery) {
+        this.delivery = delivery;
+    }
+
+    public int getOrganic() {
+        return organic;
+    }
+
+    public void setOrganic(int organic) {
+        this.organic = organic;
+    }
+
+    public int getHandicappedAccessible() {
+        return handicappedAccessible;
+    }
+
+    public void setHandicappedAccessible(int handicappedAccessible) {
+        this.handicappedAccessible = handicappedAccessible;
+    }
+    
     public String getCity() {
         return city;
     }

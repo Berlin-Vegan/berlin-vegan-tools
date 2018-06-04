@@ -21,12 +21,13 @@ public class ShoppingLocation extends Location {
     }
     
     private static String[] getTags(CustomElementCollection elements) {
-        final String value = elements.getValue("tagsbiodrogerieeisbackwarenkleidung");
+        final String value = elements.getValue("tags");
         if (value == null) {
             throw new RuntimeException("Tags must be set.");
         }
         List<String> tags = Arrays.stream(value.split(",")).map(String::trim).collect(toList());
-        List<String> allowedTags = Arrays.asList("Bio", "Backwaren", "Eis", "Drogerie", "Kleidung", "Naturkostladen");
+        List<String> allowedTags =
+            Arrays.asList("foods", "beverages", "clothing", "toiletries", "supermarket", "bakery");
         for (String tag : tags) {
             if (!allowedTags.contains(tag)) {
                 throw new RuntimeException("Found illegal tag '" + tag + "'.");
