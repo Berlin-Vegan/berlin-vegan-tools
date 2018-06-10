@@ -27,14 +27,14 @@ public class ShoppingLocation extends Location {
         }
         List<String> tags = Arrays.stream(value.split(",")).map(String::trim).collect(toList());
         List<String> allowedTags =
-            Arrays.asList("foods", "beverages", "clothing", "toiletries", "supermarket", "bakery");
+            Arrays.asList("foods", "clothing", "toiletries", "supermarket");
         for (String tag : tags) {
             if (!allowedTags.contains(tag)) {
                 throw new RuntimeException("Found illegal tag '" + tag + "'.");
             }
         }
-        if (tags.size() < 1 || tags.size() > 6) {
-            throw new RuntimeException("Found " + tags.size() + " tags. (expected 1 to 6)");
+        if (tags.size() < 1 || tags.size() > 4) {
+            throw new RuntimeException("Found " + tags.size() + " tags. (expected 1 to 4)");
         }
         return tags.toArray(new String[0]);
     }
