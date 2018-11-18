@@ -27,6 +27,8 @@ public class GastroLocation extends Location {
     private int seatsIndoor;
     private int wlan;
     private int glutenFree;
+    private int brunch;
+    private int breakfast;
     private String[] tags;
     private List<String> districts;
     private List<Picture> pictures;
@@ -279,6 +281,22 @@ public class GastroLocation extends Location {
         return pictures;
     }
 
+    public int getBrunch() {
+        return brunch;
+    }
+
+    public void setBrunch(int brunch) {
+        this.brunch = brunch;
+    }
+
+    public int getBreakfast() {
+        return breakfast;
+    }
+
+    public void setBreakfast(int breakfast) {
+        this.breakfast = breakfast;
+    }
+
     @Override
     public String toString() {
         return "Restaurant{" +
@@ -317,6 +335,8 @@ public class GastroLocation extends Location {
                 ", commentEnglish='" + commentEnglish + '\'' +
                 ", wlan=" + wlan +
                 ", glutenFree=" + glutenFree +
+                ", brunch=" + brunch +
+                ", breakfast=" + breakfast +
                 ", tags=" + Arrays.toString(tags) +
                 ", districts=" + districts +
                 ", pictures=" + pictures +
