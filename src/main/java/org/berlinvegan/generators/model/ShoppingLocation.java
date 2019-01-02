@@ -32,7 +32,6 @@ public class ShoppingLocation extends Location {
                     switch (tag) {
                         case "food": return "foods";
                         case "fashion": return "clothing";
-                        case "cosmetics": return "toiletries";
                         default: return tag;
                     }
                 })
@@ -44,7 +43,7 @@ public class ShoppingLocation extends Location {
                 "toiletries",
                 "supermarket",
                 "hairdressers",
-                "fitness",
+                "sports",
                 "tattoostudio",
                 "accommodation"
             );
