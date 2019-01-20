@@ -31,6 +31,7 @@ public class Location {
     protected int vegan;
     protected String comment;
     protected String commentEnglish;
+    protected String review;
     protected String reviewURL = "";
     protected int delivery;
     protected int organic;
@@ -336,5 +337,13 @@ public class Location {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getReview() {
+        return review;
+    }
+
+    public void setReview(String review) {
+        this.review = review;
     }
 }

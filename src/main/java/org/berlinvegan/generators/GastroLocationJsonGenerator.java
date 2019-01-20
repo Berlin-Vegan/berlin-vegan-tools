@@ -71,7 +71,7 @@ public class GastroLocationJsonGenerator extends WebsiteGenerator {
             String review = getLocationTextFromWebsite(doc);
             review = textEncode(review);
             review = hyphenate(review, LANG_DE);
-            gastroLocation.setComment(review);
+            gastroLocation.setReview(review);
             final List<Picture> pictures = getLocationPicturesFromWebsite(doc);
             gastroLocation.setPictures(pictures);
         } else {// search in local folders
