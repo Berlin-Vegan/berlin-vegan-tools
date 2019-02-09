@@ -10,13 +10,13 @@ Datasource are several Google Docs tables (https://developers.google.com/google-
 
 Main Components
 ===============
-FactsheetGenerator : generates the Factsheet for every restaurant
-MapGenerator: generates the Berlin Vegan Map, including JavaScript
-ListGenerator: generates the Restaurantlist
-ExtJsStoreGenerator: generates the JavaScript files for the legacy Berlin Vegan App (phonegap)
-KMLGenerator: file to import to Google Maps
-GastroLocationJsonGenerator: generates json file with GastroLocations for the new Berlin-Vegan app (android native)
-ShoppingLocationJsonGenerator: generates json file with ShoppingLocations for the new Berlin-Vegan app (android native)
+* FactsheetGenerator : generates the Factsheet for every restaurant
+* MapGenerator: generates the Berlin Vegan Map, including JavaScript
+* ListGenerator: generates the Restaurantlist
+* ExtJsStoreGenerator: generates the JavaScript files for the legacy Berlin Vegan App (phonegap)
+* KMLGenerator: file to import to Google Maps
+* GastroLocationJsonGenerator: generates json file with GastroLocations for the new Berlin-Vegan app (android native)
+* ShoppingLocationJsonGenerator: generates json file with ShoppingLocations for the new Berlin-Vegan app (android native)
 
 
 Build & Run
