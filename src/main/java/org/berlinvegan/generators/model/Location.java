@@ -36,6 +36,7 @@ public class Location {
     protected int delivery;
     protected int organic;
     protected int handicappedAccessible;
+    protected String created;
 
     public Location() {
     }
@@ -345,5 +346,13 @@ public class Location {
 
     public void setReview(String review) {
         this.review = review;
+    }
+
+    public String getCreated() {
+        return created;
+    }
+
+    public void setCreated(String created) {
+        this.created = created;
     }
 }
