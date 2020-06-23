@@ -16,9 +16,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.berlinvegan.generators.model.GastroLocation;
-import org.berlinvegan.generators.model.Picture;
 import org.berlinvegan.generators.model.ShoppingLocation;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -203,36 +201,5 @@ public class Generator {
             text += textElement.text() + "<br/><br/>";
         }
         return text;
-    }
-
-    protected List<Picture> getLocationPicturesFromWebsite(Document document) {
-        final ArrayList<Picture> pictures = new ArrayList<>();
-        final Elements elements = document.select("div > a > img");
-        for (Element element : elements) {
-            final Picture picture = parsePicture(element);
-            if (picture != null) {
-                pictures.add(picture);
-            }
-        }
-        return pictures;
-    }
-
-    private static Picture parsePicture(Element element) {
-        final String url = element.attr("data-orig-file");
-        if (isPicture(url)) {
-            final String sizeString = element.attr("data-orig-size");
-            if (StringUtils.isNotEmpty(sizeString)) {
-                final String[] sizeArray = sizeString.split(",");
-                int width = Integer.parseInt(sizeArray[0]);
-                int height = Integer.parseInt(sizeArray[1]);
-                return new Picture(url, width, height);
-
-            }
-        }
-        return null;
-    }
-
-    private static boolean isPicture(String url) {
-        return StringUtils.endsWithIgnoreCase(url, "jpg");
     }
 }
