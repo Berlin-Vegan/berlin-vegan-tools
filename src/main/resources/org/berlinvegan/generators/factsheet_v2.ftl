@@ -16,10 +16,8 @@
     <#if branch.telephone??>
     <p>Tel.: ${branch.telephone}</p>
     </#if>
-
 </#list>
 <#if branch1.website??>
-<h2 class="internet">Internet</h2>
 <p><a target='_blank' href='${branch1.website}'>${branch1.website}</a></p>
 </#if>
 
