@@ -24,9 +24,9 @@ public final class WebsiteParser {
         return pictures;
     }
 
-    protected static List<Picture> getLocationPicturesFromWebsiteBlockBased(Document document) {
+    private static List<Picture> getLocationPicturesFromWebsiteBlockBased(Document document) {
         final ArrayList<Picture> pictures = new ArrayList<>();
-        final Elements elements = document.select("figure > a > img");
+        final Elements elements = document.select("figure > a > img , figure > img");
         for (Element element : elements) {
             final Picture picture = parsePictureBlockBased(element);
             if (picture != null) {
@@ -36,7 +36,7 @@ public final class WebsiteParser {
         return pictures;
     }
 
-    protected static Picture parsePictureBlockBased(Element element) {
+    private static Picture parsePictureBlockBased(Element element) {
         final String src = element.attr("src");
         if (isPicture(src)) {
             try {
